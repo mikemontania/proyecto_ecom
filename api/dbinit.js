@@ -1,4 +1,5 @@
-const { Category, Product, Discount, Page } = require('./src/models');
+const { Category, Product, Discount, Page, Customer } = require('./src/models');
+const bcrypt = require('bcryptjs');
 const { sequelize } = require('./dbconfig');
 const fs = require('fs');
 const path = require('path');
@@ -132,6 +133,10 @@ async function populateDB() {
         { title_es: 'Empresa', slug: 'empresa', content_es: '<p>Sobre la empresa Cavallaro.</p>', order: 1, active: true },
         { title_es: 'Contacto', slug: 'contacto', content_es: '<p>Formulario de contacto.</p>', order: 2, active: true },
       ]);
+
+      // Demo customer for login
+      const hash = await bcrypt.hash('demo1234', 10);
+      await Customer.findOrCreate({ where: { email: 'demo@cavallaro.com.py' }, defaults: { firstName: 'Demo', lastName: 'User', email: 'demo@cavallaro.com.py', phone: '0981000000', password_hash: hash } });
     }
 
     // Descuentos: intentar importar desde data/discounts.json; si no, seed por defecto

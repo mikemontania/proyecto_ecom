@@ -1,9 +1,9 @@
 const { sequelize } = require('../../dbconfig');
-const { Order, OrderItem, Product } = require('../models');
+const { Order, OrderItem, InternalProduct, CartItem, ShoppingCart } = require('../models');
 
 async function create(req, res) {
-  const { customer_id, customer_name, customer_email, customer_phone, shipping_address, items } = req.body;
-  if (!customer_name || !customer_email || !customer_phone || !shipping_address || !Array.isArray(items) || items.length === 0) {
+  const { customer_id, customer_name, customer_email, customer_phone, shipping_address, items, cart_uuid } = req.body;
+  if (!customer_name || !customer_email || !customer_phone || !shipping_address) {
     return res.status(400).json({ message: 'Datos de pedido incompletos' });
   }
 
@@ -11,14 +11,28 @@ async function create(req, res) {
   try {
     let subtotal = 0;
     const persistedItems = [];
-    for (const line of items) {
-      const product = await Product.findByPk(line.product_id, { transaction: tx });
-      if (!product) throw new Error(`Producto ${line.product_id} inexistente`);
-      const quantity = Math.max(1, Number(line.quantity || 1));
-      const unit_price = Number(product.price);
-      const line_total = unit_price * quantity;
-      subtotal += line_total;
-      persistedItems.push({ product_id: product.id, quantity, unit_price, line_total });
+    if (Array.isArray(items) && items.length > 0) {
+      for (const line of items) {
+        const ip = await InternalProduct.findByPk(line.internal_product_id, { transaction: tx });
+        if (!ip) throw new Error(`Producto interno ${line.internal_product_id} inexistente`);
+        const quantity = Math.max(1, Number(line.quantity || 1));
+        const unit_price = Number(ip.price);
+        const line_total = unit_price * quantity;
+        subtotal += line_total;
+        persistedItems.push({ internal_product_id: ip.id, quantity, unit_price, line_total });
+      }
+    } else if (cart_uuid) {
+      const cart = await ShoppingCart.findOne({ where: { session_uuid: cart_uuid }, transaction: tx });
+      if (!cart) throw new Error('Carrito no encontrado');
+      const cartItems = await CartItem.findAll({ where: { shopping_cart_id: cart.id }, transaction: tx });
+      for (const ci of cartItems) {
+        const unit_price = Number(ci.unit_price);
+        const line_total = Number(ci.net_total);
+        subtotal += line_total;
+        persistedItems.push({ internal_product_id: ci.internal_product_id, quantity: ci.quantity, unit_price, line_total });
+      }
+    } else {
+      throw new Error('Debe enviar items o cart_uuid');
     }
 
     const importe_descuento = 0;

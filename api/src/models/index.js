@@ -15,6 +15,9 @@ const defineOrderDetail = require('./models.order_detail');
 const definePage = require('./models.page');
 const defineShoppingCart = require('./models.shopping_cart');
 const defineCartItem = require('./models.cart_item');
+const defineCustomer = require('./models.customer');
+const defineAmountDiscount = require('./models.amount_discount');
+const defineProductDiscount = require('./models.product_discount');
 
 // Initialize models
 const Category = defineCategory(sequelize, DataTypes);
@@ -30,6 +33,9 @@ const OrderDetail = defineOrderDetail(sequelize, DataTypes);
 const Page = definePage(sequelize, DataTypes);
 const ShoppingCart = defineShoppingCart(sequelize, DataTypes);
 const CartItem = defineCartItem(sequelize, DataTypes);
+const Customer = defineCustomer(sequelize, DataTypes);
+const AmountDiscount = defineAmountDiscount(sequelize, DataTypes);
+const ProductDiscount = defineProductDiscount(sequelize, DataTypes);
 
 // Associations (Rails-like)
 Category.hasMany(Subcategory, { foreignKey: { name: 'category_id', allowNull: false }, onDelete: 'RESTRICT' });
@@ -65,6 +71,10 @@ ShoppingCart.hasMany(CartItem, { foreignKey: { name: 'shopping_cart_id', allowNu
 CartItem.belongsTo(ShoppingCart, { foreignKey: { name: 'shopping_cart_id', allowNull: false } });
 CartItem.belongsTo(InternalProduct, { foreignKey: { name: 'internal_product_id', allowNull: false } });
 
+// Additional associations
+Product.hasMany(InternalProduct, { foreignKey: { name: 'product_id', allowNull: false } });
+InternalProduct.belongsTo(Product, { foreignKey: { name: 'product_id', allowNull: false } });
+
 module.exports = {
   sequelize,
   DataTypes,
@@ -81,4 +91,7 @@ module.exports = {
   Page,
   ShoppingCart,
   CartItem,
+  Customer,
+  AmountDiscount,
+  ProductDiscount,
 };

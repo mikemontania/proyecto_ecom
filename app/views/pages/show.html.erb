@@ -1,0 +1,28 @@
+<% content_for :og_fb do %>
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<%= @page.title(@lang) %> - Cavallaro S.A.C.e.I." />
+<% end %>
+
+<% content_for :page_title do %>
+<%= @page.title(@lang) %> - Cavallaro S.A.C.e.I.
+<% end %>
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="title-elements-content-wrapper bg-red no-border">
+            <%= image_tag "icono-en-blanco-04.png", class: "top-icon-title-element" %>
+            <h1 class="h2-title-elements-content text-white inline-block-vat"><%= @page.title(@lang) %></h1>
+        </div>
+        <div class="elements-grid-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-primary">
+                    <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><%= @page.title(@lang) %></li>
+                </ol>
+            </nav>
+            <div class="inner-content-wrapper align-left">
+                <%= @page.content(@lang) %>
+            </div>
+        </div>
+    </div>
+</div>

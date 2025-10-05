@@ -1,0 +1,23 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
+  username: <%= ENV['CAVALLARO_DATABASE_USERNAME'] %>
+  password: <%= ENV['CAVALLARO_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: 5432
+
+development:
+  <<: *default
+  database: web_cavallaro_dev
+
+
+test:
+  <<: *default
+  database: web_cavallaro_test
+
+
+production:
+  <<: *default
+  database: web_cavallaro

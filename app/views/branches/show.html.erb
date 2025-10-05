@@ -1,0 +1,51 @@
+<% content_for :og_fb do %>
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Sucursal <%= @branch.name(@lang) %> - Cavallaro S.A.C.e.I." />
+<% end %>
+
+<% content_for :page_title do %>
+Sucursal <%= @branch.name(@lang) %> - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="elements-grid-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-primary">
+                    <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+                    <li class="breadcrumb-item">Sucursales</li>
+                    <li class="breadcrumb-item active" aria-current="page"><%= @branch.name(@lang) %></li>
+                </ol>
+            </nav>
+            <div class="inner-content-wrapper">
+                <div class="tiendas-wrapper" id="central">
+                    <h2 class="p-content-title text-red align-left"><%= @branch.name(@lang) %></h2>
+                    <div class="info-tiendas-wrapper align-left">
+                        <p class="p-text-info-wrap">
+                            <span class="left-icon-tiendas inline-block-vat phone-icon" role="img"
+                                aria-label="timeline"></span>
+                            <span class="span-desc-text text-red"><%= @branch.address %> - Paraguay</span>
+                        </p>
+                        <p class="p-text-info-wrap">
+                            <span class="left-icon-tiendas inline-block-vat location-icon" role="img"
+                                aria-label="timeline"></span>
+                            <span class="span-desc-text text-black"><%= @branch.phone %></span>
+                        </p>
+                        <p class="p-text-info-wrap">
+                            <span class="left-icon-tiendas inline-block-vat clock-icon" role="img"
+                                aria-label="timeline"></span>
+                            <span class="span-desc-text text-black"><%= @branch.hours %></span>
+                        </p>
+                    </div>
+                    <div class="img-map-tiendas-wrapper align-left">
+                        <%= image_tag @branch.image.attached? ? @branch.image : '', class: "img-map-tienda inline-block-vat", alt: "" %>
+
+                        <%= @branch.iframe.html_safe if @branch.erp_code.present? %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

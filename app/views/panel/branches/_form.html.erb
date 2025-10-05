@@ -1,0 +1,142 @@
+<%= form_with(model: branch, local: true, :url => (branch.new_record? ? panel_branches_path : panel_branch_path(branch)), class: "form-horizontal") do |form| %>
+<% if branch.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(branch.errors.count, "error") %> prohibited this branch from being saved:</h2>
+
+  <ul>
+    <% branch.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="col-12">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#es" role="tab" aria-controls="es">
+        <i class="c-icon cif-py"></i></a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#en" role="tab" aria-controls="en">
+        <i class="c-icon cif-us"></i></a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#br" role="tab" aria-controls="br">
+        <i class="c-icon cif-br"></i></a></li>
+  </ul>
+  <br />
+  <div class="tab-content">
+    <div class="tab-pane active" id="es" role="tabpanel">
+      <div class="form-group row">
+        <%= form.label "Nombre", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :name_es, class:"form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="en" role="tabpanel">
+      <div class="form-group row">
+        <%= form.label "Nombre", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :name_en, class:"form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="br" role="tabpanel">
+      <div class="form-group row">
+        <%= form.label "Nombre", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :name_br, class:"form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="form-group row">
+      <%= form.label "Dirección", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_area :address, class:"form-control"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Imagen", class: "col-2 col-form-label" %>
+
+      <% if branch.image.attached? %>
+
+      <div class="col-3">
+        <%= image_tag branch.image.variant(resize: "100x100!") %>
+      </div>
+      <div class="col-7">
+        <div class="custom-file">
+          <%= form.file_field :image, class:"custom-file" %>
+        </div>
+      </div>
+
+      <% else %>
+      <div class="col-10">
+        <div class="custom-file">
+          <%= form.file_field :image, class:"custom-file" %>
+        </div>
+      </div>
+
+      <% end %>
+
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Teléfono", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :phone, class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Horario de Atención", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :hours, class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Latitud", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :latitude, class:"form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= form.label "Longitud", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :longitude, class:"form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= form.label "Codigo ERP", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :erp_code, class:"form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= form.label "iFrame HTML", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_area :iframe, class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Activo", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <label class="c-switch c-switch-sm c-switch-pill c-switch-success">
+          <%= form.check_box :active, class:"c-switch-input" %>
+          <span class="c-switch-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-12">
+        <%= form.submit (branch.new_record? ? "Crear" : "Actualizar" ), class: "btn btn-success m-5" %>
+        <%= link_to 'Cancelar', panel_branches_path, data: { turbolinks: false }, class: "btn btn-secondary m-5" %>
+      </div>
+    </div>
+
+  </div>
+</div>
+<% end %>

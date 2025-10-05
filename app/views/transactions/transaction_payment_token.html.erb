@@ -1,0 +1,48 @@
+<div class="col-12 col-md-11 col-xxl-10 m-0 p-0 mt-5 mb-5 mx-auto pasos_box">
+  <ul class="list-unstyled multi-steps">
+    <li>Dirección de env&iacute;o y facturación</li>
+    <li>Resumen de compra</li>
+    <li class="is-active">Realizar el pago</li>
+    <li>Confirmación de compra</li>
+  </ul>
+</div>
+
+<div class="resume-box-wrapper col-12 col-md-10 col-lg-10 pl-5 col-xxl-10 mt-5 mb-5 mx-auto">
+
+  <div class="title-button-add-card-wrapper">
+    <h3 style="margin-top: 1rem;">Tus tarjetas adheridas</h3>
+    <%= link_to "Añadir una tarjeta", transaction_payment_token_new_card_path(order: @order.id), class: "btn btn-add-card",
+      data: { turbolinks: "false" } %>
+  </div>
+  <hr>
+  <% if @cards.present? %>
+    <%= form_tag(transaction_payment_token_charge_path, method: "post") do %>
+
+      <input type="hidden" name="order_id" value="<%= @order.id %>">
+      <div class="cards-total-wrapper">
+        <% @cards.each_with_index do |card, index| %>
+
+          <div class="card-wrapper">
+            <input type="radio" name="a_token" <%= index == 0 ? "checked" : "" %> value="<%= card['alias_token'] %>">
+
+            <div class="card-information">
+              <p><%= card['card_masked_number'] %></p>
+              <p><%= card['expiration_date'] %></p>
+              <p><%= card['card_brand'] %></p>
+              <p><%= card['card_type'] == "credit" ? "Tarjeta Crédito" : "Tarjeta Débito" %></p>
+              <%= link_to "Quitar Tarjeta", transaction_payment_token_delete_card_path(ct: card['alias_token']), class: 'btn btn-delete-card', data: { confirm: "¿Está seguro/a que desea quitar su tarjeta de la lista?", disable_with: "Procesando..." } %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="btn-payment-wrapper">
+        <input type="submit" class="bg-red btn-submit-login brd0 text-white mt-5" value="Confirmar compra">
+      </div>
+    <% end %>
+
+  <% else %>
+    <p style="text-align: center; margin: 5rem 0 7rem;">No tiene tarjetas catastradas con tu usuario.</p>
+  <% end %>
+
+</div>

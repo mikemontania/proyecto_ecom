@@ -1,0 +1,180 @@
+<% content_for :og_fb do %>
+  <meta name="description" content="<%= @product.description(@lang) %>" />
+  <meta name="keywords" content="<%= @product.full_name(@lang) %> - Cavallaro S.A.C.e.I." />
+  <meta property="og:url" content="<%= request.original_url %>" />
+  <meta property="og:site_name" content="Cavallaro S.A.C.e.I.">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="<%= @product.full_name(@lang) %> - Cavallaro S.A.C.e.I." />
+  <meta property="og:description" content="<%= @product.description(@lang) %>" />
+  <meta property="og:locale" content="es_LA" />
+  <% if @product.image.attached? %>
+    <meta property="og:image" content="<%= request.host_with_port + url_for( @product.image) %>" />
+    <meta property="og:image:secure_url" content="<%= request.host_with_port + url_for( @product.image) %>" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="oog:image:height" content="1024" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="<%= @product.full_name(@lang) %>" />
+  <% end %>
+<% end %>
+
+<% content_for :page_title do %>
+  <%= @product.full_name(@lang) %> - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+  <div class="block-elements-wrap">
+    <div class="title-elements-content-wrapper bg-red no-border">
+      <% if @product.category.icon.attached? %>
+        <%= image_tag @product.category.icon, class: "top-icon-title-element", alt: @product.category.name(@lang) %>
+      <% end %>
+      <img src="" class="top-icon-title-element">
+      <h2 class="h2-title-elements-content text-white inline-block-vat"><%= @product.category.name(@lang) %></h2>
+    </div>
+
+    <div class="elements-grid-wrapper">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-primary">
+          <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="<%= category_path @product.category %>"><%= @product.category.name(@lang) %></a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page"><%= @product.full_name(@lang) %></li>
+        </ol>
+      </nav>
+
+      <%= image_tag "volver-atras.png", class: "img-back-button", alt: "Volver", id:"button-back" %>
+
+      <div class="wrapper-content-inner">
+        <div class="item-order-2 img-left-prod-wrapper float-left inline-block-vat">
+          <%= image_tag @product.image.attached? ? @product.image : "placeholder.png" , class: "img-left-prod", alt: @product.full_name(@lang) %>
+          <% if @product.properties(@lang).present? %>
+            <h2 class="h2-subtitle-inner-prod brd-top-subtitles h2-desc-right-prod text-grey">Propiedades</h2>
+            <pre class="p-props-inner-prod text-right-prod text-black"><%= @product.properties(@lang).html_safe %></pre>
+          <% end %>
+
+
+          <% if @product.uses(@lang).present? %>
+            <h2 class="h2-subtitle-inner-prod brd-top-subtitles h2-desc-right-prod text-grey">Usos Recomendados</h2>
+            <pre class="p-props-inner-prod text-right-prod text-black"><%= @product.uses(@lang) %></pre>
+          <% end %>
+        </div>
+
+        <div class="item-order-1 inline-block-vat text-right-prod-wrapper">
+          <h1 class="h1-title-inner-prod h1-title-right-prod text-red"><%= @product.parent_name(@lang) %></h1>
+          <h2 class="h2-description-inner-prod h2-desc-right-prod text-grey"><%= @product.description(@lang) %></h2>
+
+          <div class="price-prod-wrapper">
+            <span class="price-inner-prod price-prod-element m0">
+              <% if @product.has_discount %>
+                <%= number_to_currency(@product.discounted_unit_price, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+
+                <% if @product.active_discount_rate > 0 %>
+                  <span style="text-decoration: line-through; padding-left: 7px; font-size: 24px;">
+                    <%= number_to_currency(@product.price, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+                  </span>
+                <% end %>
+              <% else %>
+                <%= number_to_currency(@product.price, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+              <% end %>
+            </span>
+          </div>
+        </div>
+
+        <div class="item-order-3 text-right-prod-wrapper inline-block-vat">
+          <div class="form-prod-selects-wrapper">
+            <h2 class="h2-subtitle-inner-prod brd-top-subtitles brd-h2-desc-right-prod text-grey">Presentaciones</h2>
+
+            <fieldset id="presentaciones">
+              <% Presentation.where(id: @product.parent_childrens.distinct.pluck(:presentation_id)).order(:size).each do |presentation|  %>
+                <div class="select-item-wrap">
+
+                  <%= radio_button_tag 'presentacion',
+                    presentation.id,
+                    presentation.id == @product.presentation.id ? true : false,
+                    class: "radio_item radio_pres",
+                    data: {
+                      reflex: "click->Product#change_presentation",
+                      internal_code: @product.internal_code,
+                      product_id: @product.product_id,
+                      presentation_id: presentation.id,
+                      variety_id: @product.variety_id
+                    } %>
+
+                  <label class="label_item" for="presentacion_<%= presentation.id %>">
+                    <%= image_tag presentation.icon.attached? ? presentation.icon : "pres1.png"  , class: "img-pres-prod", alt: presentation.name(@lang) %>
+                    <%= image_tag "barra-separadora.png", class: "img-separador-pres-prod", alt: "" %>
+                    <p class="text-pres-prod text-grey"><%= presentation.name(@lang) %></p>
+                  </label>
+                </div>
+              <% end %>
+            </fieldset>
+
+            <h2 class="h2-subtitle-inner-prod brd-top-subtitles h2-desc-right-prod text-grey">Variedades</h2>
+
+            <fieldset id="variedades">
+              <% Variety.where(id: InternalProduct.where(product_id: @product.product_id)
+              .where(presentation_id: @product.presentation_id).where(active: true).distinct.pluck(:variety_id)).each do |variety|  %>
+                  <div class="select-item-wrap">
+                    <%= radio_button_tag 'variedad',
+                      variety.id,
+                      variety.id == @product.variety.id ? true : false,
+                      class: "radio_item radio_var",
+                      data: {
+                        reflex: "click->Product#change_variety",
+                        internal_code: @product.internal_code,
+                        product_id: @product.product_id,
+                        presentation_id: @product.presentation.id,
+                        variety_id: variety.id
+                      } %>
+                    <label class="label_item" for="variedad_<%= variety.id %>">
+                      <div class="variedad-color-wrap" style="background:<%= variety.color %>;">
+                      </div>
+                      <%= image_tag "barra-separadora.png", class: "img-separador-pres-prod", alt: "barra separadora" %>
+                      <p class="text-pres-prod text-grey"><%= variety.name(@lang) %></p>
+                    </label>
+                  </div>
+              <% end %>
+            </fieldset>
+
+            <div class="button-cart-wrapper">
+              <%= button_tag nil, type: 'button', id: "addCart",
+                data: {
+                  controler: "shopping_cart",
+                  reflex: "click->ShoppingCartReflex#add_item",
+                  cart_id:  (@shopping_cart.nil? ? 0 : @shopping_cart.id),
+                  internal_product_id: @product.id},
+                  class: "button-prod-submit mr-0" do %>
+                  <div class="img-submit-prod-wrap bg-red inline-block-vat">
+                    <%= image_tag "carrito-grande-en-blanco.png", class: "img-icon-submit-prod", alt: "Icono Carrito" %>
+                  </div>
+                  <span class="text-submit-button-prod inline-block-vat">AGREGAR AL CARRITO</span>
+                <% end %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<% if !@product.related_products.count.zero? %>
+  <div class="block-elements-wrap">
+    <div class="title-elements-content-wrapper bg-white brd-bottom-red-title">
+      <h2 class="h2-title-elements-content text-red inline-block-vat">TAMBI&Eacute;N PODR&Iacute;AN INTERESARTE
+      </h2>
+    </div>
+    <div class="elements-grid-wrapper">
+      <% @product.related_products.each do |related_product| %>
+        <%= render "partials/product_grid_item", product: related_product, max_elements: 4, :cart_id => (@shopping_cart.nil? ? 0 : @shopping_cart.id) %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<%= content_for :bottom_script do %>
+  <script>
+  </script>
+<% end %>

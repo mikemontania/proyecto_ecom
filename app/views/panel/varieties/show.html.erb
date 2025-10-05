@@ -1,0 +1,31 @@
+<p>
+    <strong>Nombre: <i class="c-icon cif-py"></i></strong>
+    <%= @variety.name_es %>
+</p>
+
+<p>
+    <strong>Nombre: <i class="c-icon cif-us"></i></strong>
+    <%= @variety.name_en %>
+</p>
+
+<p>
+    <strong>Nombre: <i class="c-icon cif-br"></i></strong>
+    <%= @variety.name_br %>
+</p>
+
+<p>
+    <strong>Icono:</strong>
+    <%= @variety.icon %>
+    </>
+
+<p>
+    <strong>Estado:</strong>
+    <%if @variety.active %>
+    <span class="badge badge-pill badge-success">Activo</span>
+    <%else%>
+    <span class="badge badge-pill badge-secondary">Inactivo</span>
+    <%end%>
+</p>
+
+<%= link_to 'Editar', edit_panel_variety_path(@variety), class: "btn btn-danger m-5" %>
+<%= link_to 'Volver', panel_varieties_path, class: "btn btn-secondary m-5" %>

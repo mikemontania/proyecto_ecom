@@ -1,0 +1,4 @@
+send_orders_to_service:
+  cron: "* * * * *"
+  class: "SendOrderJobWorker"
+  queue: default

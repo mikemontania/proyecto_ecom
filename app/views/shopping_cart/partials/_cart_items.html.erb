@@ -1,0 +1,76 @@
+<div class="item-cart-wrapper">
+  <div class="img-prod-cart-wrapper">
+    <a href="<%= product_path(id: item.internal_product.internal_code, p: item.internal_product.presentation_id, v: item.internal_product.variety_id) %>" title="">
+      <%= image_tag item.internal_product.image.attached? ? item.internal_product.image : "placeholder.png", class: "img-item-element", alt: item.internal_product.full_name(@lang) %>
+    </a>
+  </div>
+  <div class="desc-prod-cart-wrapper">
+    <div class="text-desc-prod-cart-wrap">
+      <a href="<%= product_path(id: item.internal_product.internal_code, p: item.internal_product.presentation_id, v: item.internal_product.variety_id) %>" title="">
+
+        <p class="p-item-cart-title text-black align-left mt-0">
+          <%= item.internal_product.parent_name(@lang) %>
+        </p>
+        <p class="p-normal-text text-grey align-left">
+          <%= item.internal_product.attributes_name(@lang) %>
+        </p>
+      </a>
+    </div>
+
+    <div class="price-prod-cart-wrap">
+      <% if false %>
+        <p class="p-text-price-cart text-red align-left mt-0">
+        <%= number_to_currency(item.net_total, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+        </p>
+      <% end %>
+
+      <%# if false %>
+        <% if item.discount_rate > 0 && item.discount_type == 'producto' %>
+          <p class="p-text-price-discount text-red align-left mt-0">
+          <span><%= number_to_currency(item.gross_total, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %></span>
+          (<%= item.discount_rate.to_i %>%)
+          </p>
+
+          <p class="p-text-price-cart text-red align-left mt-0">
+          <%= number_to_currency(item.net_total, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+          </p>
+
+        <% else %>
+          <p class="p-text-price-cart text-red align-left mt-0">
+          <%= number_to_currency(item.net_total, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+          </p>
+        <% end %>
+      <%# end %>
+    </div>
+    <div class="qty-prod-cart-wrap">
+
+      <p class="p-normal-text p-qty-text text-grey align-center">
+        <% if  item.quantity.to_i > 1 %>
+          <%= button_tag nil, type: 'button',
+            data: {
+              reflex: "click->ShoppingCartReflex#remove_item",
+              cart_id:shopping_cart.id,
+              internal_product_id: item.internal_product_id
+            },
+            class:" btn btn-light text-red mr-3" do %>
+        <h3 class="p-o m-0">-</h3>
+        <% end %>
+      <% end %>
+      <%= number_with_delimiter(item.quantity.to_i, format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+      <%= button_tag nil, type: 'button',
+        data: {
+          reflex: "click->ShoppingCartReflex#add_item",
+          cart_id:shopping_cart.id,
+          internal_product_id: item.internal_product_id},
+          class:" btn btn-light text-red ml-3" do %>
+      <h3 class="p-o m-0">+</h3>
+      <% end %>
+
+      </p>
+
+      <div class="align-right">
+        <%= link_to 'Borrar', shopping_cart_destroy_item_path(id: item.id) , method: "delete", data:{title: 'Confirmación', confirm: "¿Está seguro/a que desea borrar este item de su carrito?", commit: 'Si, eliminar', cancel: "Cancelar", disable_with: "Eliminando..."} , class:"delete-item-cart text-red" %>
+      </div>
+    </div>
+  </div>
+</div>

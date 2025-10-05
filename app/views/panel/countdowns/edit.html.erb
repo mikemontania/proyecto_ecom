@@ -1,0 +1,121 @@
+<% @internal_title="Contador promociones" %>
+<% @page_title="Contador promociones" %>
+
+<%= form_with(model: @countdown, local: true, :url=> panel_countdown_update_path, class: "form-horizontal") do
+  |form| %>
+<% if @countdown.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@countdown.errors.count, "error" ) %> prohibited this object from being saved:
+    </h2>
+
+    <ul>
+      <% @countdown.errors.full_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="form-group row">
+  <%= form.label "Título: ", class: "col-3 col-form-label" %>
+  <div class="col-4">
+    <%= form.text_field :title, class:"form-control" %>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Descripción:", class: "col-3 col-form-label" %>
+  <div class="col-4">
+    <%= form.text_field :description, class:"form-control" %>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Vínculo:", class: "col-3 col-form-label" %>
+  <div class="col-4">
+    <%= form.text_field :link, class:"form-control" %>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Fecha inicio", class: "col-3 col-form-label" %>
+  <div class="col-4">
+    <%= form.text_field :start_date, class:"form-control", id: "countdownStartDate" %>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Fecha fin", class: "col-3 col-form-label" %>
+  <div class="col-4">
+    <%= form.text_field :end_date, class:"form-control", id: "countdownEndDate" %>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Banner Desktop", class: "col-3 col-form-label" %>
+
+  <% if @countdown.image_desktop.attached? %>
+
+    <div class="col-4">
+      <%= image_tag @countdown.image_desktop.variant(resize: "300x300!") %>
+    </div>
+
+    <div class="col-4">
+      <div class="custom-file">
+        <%= form.file_field :image_desktop, class:"custom-file" %>
+      </div>
+    </div>
+
+  <% else %>
+    <div class="col-4">
+      <div class="custom-file">
+        <%= form.file_field :image_desktop, class:"custom-file" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Banner Mobile", class: "col-3 col-form-label" %>
+
+  <% if @countdown.image_mobile.attached? %>
+
+    <div class="col-4">
+      <%= image_tag @countdown.image_mobile.variant(resize: "300x300!") %>
+    </div>
+
+    <div class="col-4">
+      <div class="custom-file">
+        <%= form.file_field :image_mobile, class:"custom-file" %>
+      </div>
+    </div>
+
+  <% else %>
+    <div class="col-4">
+      <div class="custom-file">
+        <%= form.file_field :image_mobile, class:"custom-file" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Activar contador" , class: "col-3 col-form-label" %>
+  <div class="col-9">
+    <label class="c-switch c-switch-sm c-switch-pill c-switch-success">
+      <%= form.check_box :active, class:"c-switch-input" %>
+      <span class="c-switch-slider"></span>
+    </label>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-12">
+    <%= form.submit "Actualizar" , class: "btn btn-success m-5" %>
+  </div>
+</div>
+<% end %>
+

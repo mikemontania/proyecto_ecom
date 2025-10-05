@@ -1,0 +1,75 @@
+<div class="item-elements-grid">
+  <div>
+    <div class="img-desc-item-elements-wrap only-<%= defined?(max_elements) ? max_elements : "8" %>-elements">
+      <a href="<%= product_path(id: product.internal_code, p: product.presentation.id, v: product.variety.id) %>" title="">
+        <div class="img-item-elements">
+          <% if product.is_new %>
+            <%= image_tag "sello-nuevo.png", class: "img-new-element-tag", alt: "Producto Nuevo", style: "height: auto;" %>
+          <% end %>
+
+          <% if product.has_discount %>
+            <%= image_tag "sello-oferta.png", class: "img-new-element-tag", alt: "Producto en oferta", style: "height: auto;" %>
+          <% end %>
+
+          <% if product.image.attached? %>
+              <%= image_tag product.image.variant(resize_to_limit: [300,300]), class: 'img-lazy', lazy: true %>
+          <% else %>
+              <%= image_tag "placeholder.png", class: 'img-lazy', lazy: true %>
+          <% end %>
+        </div>
+
+        <div class="item-desc-elements">
+          <h2 class="item-name-element">
+            <%= "#{product.product.name(@lang)}"  %>
+            <br />
+            <%= "#{product.variety.name(@lang)} - #{product.presentation.name(@lang)}"  %>
+          </h2>
+          <% if product.has_discount %>
+            <span class="price-item-element bg-red">
+              <%= number_to_currency(product.discounted_unit_price, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+
+              <% if product.active_discount_rate > 0 %>
+                <span style="text-decoration: line-through; padding-left: 7px; font-size: 16px;">
+                  <%= number_to_currency(product.price, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+                </span>
+              <% end %>
+            </span>
+
+          <% else %>
+            <span class="price-item-element bg-red">
+              <%= number_to_currency(product.price, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+            </span>
+          <% end %>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="buttons-item-elements-wrap">
+    <div class="buttons-item-centered">
+      <a href="<%= product_path(id: product.internal_code, p: product.presentation.id, v: product.variety.id) %>" title="" class="button-item-elements inline-block-vat float-left">
+        <div class="icon-button-item-element-wrap bg-dark-grey inline-block-vat">
+          <%= image_tag "icono-lupa.png", class: "img-icon-item-element", alt: "Icono lupa" %>
+        </div>
+        <span class=" text-button-item-element inline-block-vat">VER PRODUCTO</span>
+      </a>
+
+      <%= button_tag nil, type: 'button',
+        data: {
+          reflex: "click->ShoppingCartReflex#add_item",
+          cart_id:  cart_id,
+          internal_product_id: product.id,
+          category_id: (defined?(category_id) ? category_id : 0) ,
+          selected_subcategory: (defined?(selected_subcategory) ? selected_subcategory : 0 ) ,
+          selected_brand: ( defined?(selected_brand) ? selected_brand : 0 )
+        },
+        class: "button-item-elements inline-block-vat mr-0 float-right" do %>
+        <div class="icon-button-item-element-wrap bg-red inline-block-vat">
+          <%= image_tag "icono-superior-derecho-2-mod.png", class: "img-icon-item-element", alt: "Icono comprar" %>
+        </div>
+        <span class="text-button-item-element inline-block-vat">COMPRAR</span>
+      <% end %>
+
+    </div>
+  </div>
+</div>

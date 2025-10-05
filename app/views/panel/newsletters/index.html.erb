@@ -1,0 +1,38 @@
+<% @internal_title = "Usuarios subscriptos al Newsletter" %>
+<% @page_title = "Newsletter" %>
+
+<p class="mb-1">Filtrar contenido</p>
+<%= form_with url: panel_newsletters_path, method: 'get', local: true do %>
+  <input type="search" name="q" value="<%= @search_text.present? ? @search_text : "" %>"
+  class="search-items form-control" autofocus="true" data-table="table-data"
+  placeholder="Escribe aqui para buscar...">
+<% end %>
+
+<table class="table table-responsive-sm table-striped table-sm table-data">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Correo electrónico</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @newsletters.each do |newsletter| %>
+    <tr>
+      <td><%= newsletter.name %></td>
+      <td><%= newsletter.email %></td>
+
+      <td>
+        <%= link_to panel_newsletter_destroy_path(id: newsletter.id), method: :delete,
+          data: { confirm: 'Deseas eliminar este usuario de la lista de Newsletter?' } do %>
+
+          <i class="c-icon cil-trash text-dark" data-toggle="tooltip" title="Eliminar"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagy_bootstrap_nav(@pagy).html_safe %>

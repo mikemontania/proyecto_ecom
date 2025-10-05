@@ -1,0 +1,19 @@
+<div id="slider-mobile-container-permanent" class="img-top-mobile-wrapper" data-reflex-permanent>
+    <ul class="bxslider" id='slider-mobile'>
+        <% slider_images.each do |slider| %>
+            <li class="normal-img-slider mobile">
+                <% if slider.link.present? %>
+                    <%= link_to slider.link do %>
+                        <% if slider.image_mobile.attached? %>
+                            <%= image_tag slider.image_mobile %>
+                        <% end %>
+                    <% end %>
+                <% else %>
+                    <% if slider.image_mobile.attached? %>
+                        <%= image_tag slider.image_mobile %>
+                    <% end %>
+                <% end %>
+            </li>
+        <% end %>
+    </ul>
+</div>

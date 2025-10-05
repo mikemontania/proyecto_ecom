@@ -1,0 +1,49 @@
+<div class="block-elements-wrap">
+    <div class="title-elements-content-wrapper bg-white brd-bottom-red-title">
+        <img src="{{ asset('images/estrella-sin-relleno.png') }}" alt="Icono estrella"
+            class="img-star-title inline-block-vat lazy">
+        <h2 class="h2-title-elements-content-index text-red inline-block-vat">PACKS PROMOCIONALES</h2>
+        <img src="{{ asset('images/estrella-sin-relleno.png') }}" alt="Icono estrella"
+            class="img-star-title inline-block-vat lazy">
+    </div>
+    <div class="elements-grid-wrapper">
+        {{-- 4 elementos --}}
+        @foreach($promocionales as $grupo)
+        @foreach($grupo->producto as $producto)
+        <div class="item-elements-grid">
+            <div class="img-desc-item-elements-wrap only-4-elements">
+                <a href="{{ url('producto') }}" title="">
+                    <div class="img-item-elements">
+                        <img src="{{ $producto->imagen_url }}" alt="Nombre del producto" class="lazy img-item-element">
+                    </div>
+                    <div class="item-desc-elements">
+                        <h2 class="item-name-element">{{ $grupo->nombre_es }}</h2>
+                        <span class="price-item-element bg-red">
+                            {{ number_format($producto->precio,0,".",".") }} Gs.
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <div class="buttons-item-elements-wrap">
+                <div class="buttons-item-centered">
+                    <a href="" title="" class="button-item-elements inline-block-vat float-left">
+                        <div class="icon-button-item-element-wrap bg-dark-grey inline-block-vat">
+                            <img src="{{ asset('images/icono-lupa.png') }}" alt="Icono usuario"
+                                class="img-icon-item-element lazy">
+                        </div>
+                        <span class="text-button-item-element inline-block-vat">VER PRODUCTO</span>
+                    </a>
+                    <a href="" title="" class="button-item-elements inline-block-vat mr-0 float-right">
+                        <div class="icon-button-item-element-wrap bg-red inline-block-vat">
+                            <img src="{{ asset('images/icono-superior-derecho-2-mod.png') }}" alt="Icono usuario"
+                                class="img-icon-item-element lazy">
+                        </div>
+                        <span class="text-button-item-element inline-block-vat">COMPRAR</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        @endforeach
+    </div>
+</div>

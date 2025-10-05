@@ -1,0 +1,37 @@
+<% content_for :og_fb do %>
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<%=@brand.name %> - Cavallaro S.A.C.e.I." />
+<% if @brand.logo.attached? %>
+<meta property="og:image" content="<%= request.host_with_port + url_for( @brand.logo) %>" />
+<% end %>
+<% end %>
+
+<% content_for :page_title do %>
+<%=@brand.name %> - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="title-elements-content-wrapper bg-dark-grey no-border">
+            <% if @brand.logo.attached? %>
+            <%= image_tag @brand.logo, class: "top-icon-title-element-logo" %>
+
+            <% end %>
+        </div>
+        <div class="elements-grid-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-primary">
+                    <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="<%= brands_path %>">Marcas</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><%= @brand.name %></li>
+                </ol>
+            </nav>
+
+            <% @brand.internal_products.where(active: true).each do |product| %>
+            <%= render "partials/product_grid_item",  product: product, :cart_id => (@shopping_cart.nil? ? 0 : @shopping_cart.id) %>
+            <% end %>
+
+        </div>
+    </div>
+</div>

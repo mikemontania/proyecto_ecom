@@ -1,0 +1,48 @@
+<p>
+  <strong>Nombre: <i class="c-icon cif-py"></i></strong>
+  <%= @branch.name_es %>
+</p>
+
+<p>
+  <strong>Nombre: <i class="c-icon cif-us"></i></strong>
+  <%= @branch.name_en %>
+</p>
+
+<p>
+  <strong>Nombre: <i class="c-icon cif-br"></i></strong>
+  <%= @branch.name_br %>
+</p>
+
+<p>
+  <strong>Dirección:</strong>
+  <%= @branch.address %>
+</p>
+
+<p>
+  <strong>Imagen:</strong>
+  <%= @branch.image %>
+</p>
+
+<p>
+  <strong>Teléfono:</strong>
+  <%= @branch.phone %>
+</p>
+
+<p>
+  <strong>Horario de Atención:</strong>
+  <%= @branch.hours %>
+</p>
+
+
+
+<p>
+  <strong>Estado:</strong>
+  <%if @branch.active %>
+  <span class="badge badge-pill badge-success">Activo</span>
+  <%else%>
+  <span class="badge badge-pill badge-secondary">Inactivo</span>
+  <%end%>
+</p>
+
+<%= link_to 'Editar', edit_panel_branch_path(@branch), class: "btn btn-danger m-5" %>
+<%= link_to 'Volver', panel_branches_path, class: "btn btn-secondary m-5" %>

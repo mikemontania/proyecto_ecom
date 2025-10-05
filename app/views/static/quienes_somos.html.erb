@@ -1,0 +1,66 @@
+<% content_for :og_fb do %>
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Quienes somos - Cavallaro S.A.C.e.I." />
+    <meta property="og:description"
+          content="Productos 100% paraguayos, con una marcada experiencia que asegura una excelente calidad." />
+<% end %>
+
+<% content_for :page_title do %>
+    Propósito, visión, valores - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="title-elements-content-wrapper blr-header">
+            <%= image_tag "conocenos.png", class: "top-icon-title-element" %>
+            <h1 class="h2-title-elements-content text-red inline-block-vat">PROPÓSITO, VISIÓN, VALORES</h1>
+            <%= image_tag "barra.png", class: "bar-top-title-header" %>
+        </div>
+
+        <div class="elements-grid-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-primary">
+                    <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="<%= empresa_path%>">La empresa</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Propósito, visión, valores</li>
+                </ol>
+            </nav>
+
+            <div class="inner-content-wrapper">
+                <p class="p-normal-text text-black align-left">Productos 100% paraguayos, con una marcada experiencia
+                que asegura una excelente calidad.</p>
+                <p class="p-normal-text text-black align-left">Acompañandote en las tareas de la casa desde 1906.</p>
+                <div class="text-grid-wrapper align-center">
+                    <div class="inline-block-vat element-grid-box-2">
+                        <p class="p-normal-title text-red align-left">VISIÓN</p>
+                        <p class="p-normal-text">Acompañarte en la higiene y limpieza, para tu bienestar, en todo momento.</p>
+                    </div>
+
+                    <div class="inline-block-vat element-grid-box-2">
+                        <p class="p-normal-title text-red align-left">PROPÓSITO</p>
+                        <p class="p-normal-text">Brindar soluciones de bienestar.</p>
+                    </div>
+                </div>
+
+                <div class="text-grid-wrapper align-center">
+                    <div class="inline-block-vat element-grid-box-2">
+                        <p class="p-normal-title text-red align-left">VALORES</p>
+                        <ul class="p-normal-text">
+                            <li>Compromiso y sentido de pertenencia.</li>
+                            <li>Actitud profesional.</li>
+                            <li>Sinergia Corporativa.</li>
+                            <li>Honestidad.</li>
+                            <li>Respeto a las personas y a las normas.</li>
+                            <li>Respeto a los roles de cada rango.</li>
+                            <li>Espiritu innovador y vanguardista.</li>
+                            <li>Liderar con el ejemplo.</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

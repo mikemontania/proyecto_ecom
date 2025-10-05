@@ -1,0 +1,55 @@
+<% @internal_title = "Descuentos por Producto" %>
+<% @page_title = "Descuentos por Producto" %>
+<% @action_button_path = new_panel_product_discount_path %>
+
+<p class="mb-1">Filtrar contenido</p>
+
+<%= form_with url: panel_product_discounts_path, method: 'get', local: true do %>
+  <input type="search" name="q" value="<%= @search_text.present? ? @search_text : "" %>"
+  class="search-items form-control" autofocus="true" data-table="table-data"
+  placeholder="Escribe aqui para buscar...">
+<% end %>
+
+<table class="table-data table table-responsive-sm table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Cod. Producto</th>
+      <th>Nombre</th>
+      <th>Cantidad Minima</th>
+      <th>Cantidad Maxima</th>
+      <th>Descuento %</th>
+      <th>Fecha inicio</th>
+      <th>Fecha fin</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @product_discounts.each do |product_discount| %>
+    <tr>
+      <td><%= product_discount.internal_product.internal_code %></td>
+      <td><%= product_discount.internal_product.full_name('es') %></td>
+      <td>
+        <%= number_with_delimiter(product_discount.min_quantity, format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+      </td>
+      <td>
+        <%= number_with_delimiter(product_discount.max_quantity, format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+      </td>
+      <td><%= product_discount.discount_rate %></td>
+      <td><%= product_discount.begin_date %></td>
+      <td><%= product_discount.end_date %></td>
+      <td><%= link_to edit_panel_product_discount_path(product_discount) do %>
+        <i class="c-icon cil-pencil text-dark" data-toggle="tooltip" title="Editar"></i>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to panel_product_discount_path(product_discount), method: :delete, data: { confirm: 'Deseas eliminar este descuento?' } do %>
+        <i class="c-icon cil-trash text-dark" data-toggle="tooltip" title="Eliminar"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagy_bootstrap_nav(@pagy).html_safe %>

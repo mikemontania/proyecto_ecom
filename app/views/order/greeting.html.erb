@@ -1,0 +1,123 @@
+<% content_for :event_google_manager do %>
+  <script>
+    gtag('event', 'conversion', {
+          'send_to': 'AW-10789896343/UWIvCP_YoZMDEJeBg5ko',
+          'transaction_id': "<%= j @order.id %>"
+        });
+  </script>
+<% end %>
+
+<% content_for :bottom_script do %>
+  <script>
+    var cartItems = JSON.parse("<%= j @allItems.to_json.html_safe %>");
+    var gtagData = {};
+
+    if(cartItems.length) {
+          gtagData = {
+            transaction_id: "<%= j @order.id %>",
+            value: "<%= j @order.net_total %>",
+            currency: 'PYG',
+            'coupon': "",
+            items: cartItems
+          };
+
+        gtag('event', 'purchase', gtagData);
+
+    } else {
+        console.log("Empty array for gtag.");
+    }
+
+  </script>
+<% end %>
+
+<% content_for :page_title do %>
+  Gracias por su compra - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="col-12 col-md-11 col-xxl-10 m-0 p-0 mt-5 mb-5 mx-auto pasos_box">
+  <ul class="list-unstyled multi-steps">
+    <li>Dirección de env&iacute;o y facturación</li>
+    <li>Resumen de compra</li>
+    <li>Realizar pago</li>
+    <li class="final-step">Confirmación de compra</li>
+  </ul>
+</div>
+<div id="blockEventGoogleTag">
+  <div class="global-content-box products-home pb-5">
+    <div class="row m-0 p-0">
+      <div class="col-12 col-md-12 col-xxl-6" style="margin: 0 auto; text-align: center;">
+
+        <h3 class="title-confirm" style="color: #31988c;">Pedido Finalizado</h3>
+
+        <table class="emp-sales">
+          <tbody>
+            <tr>
+              <th scope="row">Nro. Pedido</th>
+              <td><%= @order.id %></td>
+            </tr>
+            <tr>
+              <th scope="row">Fecha</th>
+              <td><%= @order.created_at.strftime('%d/%m/%Y %H:%M ') %></td>
+            </tr>
+            <tr>
+              <th scope="row">Sub Total</th>
+              <td>
+                <%= number_to_currency(@order.gross_total, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Descuento</th>
+              <td>
+                <%= number_to_currency(@order.discount_total, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Monto Total</th>
+              <td>
+                <%= number_to_currency(@order.net_total, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      <% if false %>
+        <% if @order.net_total >= 100000 %>
+          <div class="alert alert-success" role="alert">
+            ¡Gracias por tu compra, ya estas participando de un sorteo por el Dia de la Madre!
+          </div>
+        <% end %>
+      <% end %>
+
+        <% if false %>
+          <% if @order.net_total >= 100000 %>
+            <div class="alert alert-success" role="alert">
+              ¡Gracias por tu compra, ya estas participando de un sorteo por el Dia de la Madre!
+            </div>
+          <% end %>
+        <% end %>
+
+        <div class="form-group row mt-5">
+          <div class="col-12">
+
+            <% if false %>
+              <% if @first_order.zero? %>
+                <h6 class="h6-msg-greeting-lg">¡Esperamos que hayas disfrutado tu primera compra!</h6>
+              <% else %>
+              <% end %>
+            <% end %>
+
+            <h6 class="h6-msg-greeting-lg">¡Esperamos que hayas disfrutado tu compra!</h6>
+            <h6 class="h6-msg-greeting-sm">Nos ayudas a mejorar nuestro servicio con una pequeña encuesta?</h6>
+            <%= link_to "Ir a la encuesta", 'https://es.surveymonkey.com/r/DM6B3GF', class: "btn survey-button", target: "_blank" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-12">
+            <%= link_to "Volver al Inicio", root_path, class: "bg-red btn-submit-login brd0 text-white mt-5" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

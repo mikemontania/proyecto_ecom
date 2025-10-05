@@ -1,0 +1,64 @@
+<% content_for :page_title do %>
+  Detalle de pedido - Cavallaro S.A.C.e.I.
+  <% end %>
+
+    <div class="title-elements-content-wrapper blr-header brd-bottom-title" style="border: none !important;">
+      <h1 class="h2-title-elements-content text-red inline-block-vat">Pedido: #<%= @order.id %> -
+          <%= @order.created_at.strftime('%F') %>
+      </h1>
+    </div>
+
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        </thead>
+        <tbody>
+          <% @order.order_detail.each do |detail| %>
+            <tr>
+              <th scope="row">
+                <%= detail.quantity.to_i %>
+              </th>
+              <td>
+                <%= image_tag (detail.internal_product.image.attached? ? detail.internal_product.image : "placeholder.png"), class: "img-item-history" , alt: "" %>
+              </td>
+              <td>
+                <p class="p-item-title-history text-red align-left mt-0">
+                  <%= detail.internal_product.parent_name(@lang) %>
+                </p>
+                <p class="p-normal-text text-grey align-left">
+                  <%= detail.internal_product.attributes_name(@lang) %>
+                </p>
+              </td>
+              <td style="vertical-align: middle">
+
+                <p class="p-text-history-cart text-black align-center mt-0">
+                  <%= number_to_currency(detail.net_total, unit: 'GS' , format: '%n %u' , precision: 0, delimiter: '.' ,
+                    separator: ',' ) %>
+                </p>
+              </td>
+            </tr>
+            <% end %>
+
+
+
+              <tr style="background: #ffd7d7;">
+                <td colspan="3" style="padding: 0; vertical-align: middle;">
+                  <p class="p-item-total-history text-red align-center mt-0 mb-0">
+                    Total pagado
+                  </p>
+                </td>
+
+                <td style="vertical-align: middle">
+                  <p class="p-text-history-cart-total text-red align-center mt-0 mb-0">
+                    <%= number_to_currency(@order.net_total, unit: 'GS' , format: '%n %u' , precision: 0, delimiter: '.', separator: ',' ) %>
+                  </p>
+                </td>
+              </tr>
+        </tbody>
+      </table>
+
+              <div class="align-center mb-5">
+                  <%= link_to "Repetir pedido" , order_repeat_path(@order.id), method: :post, class: 'btn btn-outline-danger' %>
+              </div>
+    </div>

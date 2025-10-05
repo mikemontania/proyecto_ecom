@@ -1,0 +1,46 @@
+<p>
+  <strong>Título: <i class="c-icon cif-py"></i></strong>
+  <%= @page.title_es %>
+</p>
+
+<p>
+  <strong>Título: <i class="c-icon cif-us"></i></strong>
+  <%= @page.title_en %>
+</p>
+
+<p>
+  <strong>Título: <i class="c-icon cif-br"></i></strong>
+  <%= @page.title_br %>
+</p>
+
+<p>
+  <strong>Contenido: <i class="c-icon cif-py"></i></strong>
+  <%= @page.content_es %>
+</p>
+
+<p>
+  <strong>Contenido: <i class="c-icon cif-us"></i></strong>
+  <%= @page.content_en %>
+</p>
+
+<p>
+  <strong>Contenido: <i class="c-icon cif-br"></i></strong>
+  <%= @page.content_br %>
+</p>
+
+<p>
+  <strong>Orden:</strong>
+  <%= @page.order %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%if @page.active %>
+  <span class="badge badge-pill badge-success">Activo</span>
+  <%else%>
+  <span class="badge badge-pill badge-secondary">Inactivo</span>
+  <%end%>
+</p>
+
+<%= link_to 'Editar', edit_panel_page_path(@page), class: "btn btn-danger m-5" %>
+<%= link_to 'Volver', panel_pages_path, class: "btn btn-secondary m-5" %>

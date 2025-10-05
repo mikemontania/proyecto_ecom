@@ -1,0 +1,11 @@
+development:
+  adapter: async
+
+test:
+  adapter: test
+
+production:
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/" } %>0
+  password: <%= ENV.fetch("REDIS_PASSWORD") { "123456_abcd" } %>
+  channel_prefix: web_cavallaro_production

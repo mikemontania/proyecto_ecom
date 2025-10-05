@@ -1,0 +1,2 @@
+module Panel::CountdownsHelper
+end

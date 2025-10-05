@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base href="./panel">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%= @page_title %> | Panel de Control - Cavallaro E-Commerce</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="Cavallaro - Portal eCommerce">
+  <meta name="author" content="Creadores S.A.">
+
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'panel/filter', 'data-turbolinks-track': 'reload' %>
+
+  <%= stylesheet_link_tag 'panel/style' , media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'panel/custom' , media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'panel/icons/css/free.min' , media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'panel/icons/css/flag.min' , media: 'all', 'data-turbolinks-track': 'reload' %>
+  <link href="https://pagecdn.io/lib/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" crossorigin="anonymous">
+
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+</head>
+
+<body class="c-app">
+  <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar" data-turbolinks="false">
+    <div class="" style="display: block; background: #760607">
+      <%#= image_tag "panel/toplogo.png", class: "c-sidebar-brand-full"  %>
+      <%= image_tag "icono-en-blanco-04.png", style: "width: 30%; display: block; margin: 5px auto;"  %>
+    </div>
+
+    <ul class="c-sidebar-nav">
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_root_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-home"></use>
+          </svg> Inicio</a></li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_settings_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-settings"></use>
+          </svg> Configuración</a></li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_delivery_schedules_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-bus-alt"></use>
+          </svg> Delivery</a></li>
+
+      <% if false %>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_countdown_edit_path %>">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-bus-alt"></use>
+            </svg> Contador</a></li>
+      <% end %>
+
+      <li class="c-sidebar-nav-title">DATOS MAESTROS</li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_products_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-3d"></use>
+          </svg> Productos</a></li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_admins_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-contact"></use>
+          </svg> Administradores</a></li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_categories_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-tags"></use>
+          </svg> Categorías</a></li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_subcategories_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-tags"></use>
+          </svg> Subcategorías</a></li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_presentations_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-beaker"></use>
+          </svg> Presentaciones</a></li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_varieties_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-layers"></use>
+          </svg> Variedades</a></li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_newsletters_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-layers"></use>
+          </svg> Newsletter</a></li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_sliders_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-map"></use>
+          </svg> Slider</a></li>
+
+      <li class="c-sidebar-nav-title">E-COMMERCE</li>
+
+      <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+          <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-notes"></use>
+            </svg> Pedidos
+          </a>
+        <ul class="c-sidebar-nav-dropdown-items">
+          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_pending_orders_path %>"><span
+                class="c-sidebar-nav-icon"></span> Pendientes</a></li>
+          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_sent_orders_path %>"><span
+                class="c-sidebar-nav-icon"></span> Enviados</a></li>
+          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_canceled_orders_path %>"><span
+                class="c-sidebar-nav-icon"></span> Incompletos / Cancelados</a></li>
+        </ul>
+      </li>
+
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_customers_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-contact"></use>
+          </svg> Clientes</a></li>
+
+      <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle"
+          href="#">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-dollar"></use>
+          </svg> Descuentos</a>
+        <ul class="c-sidebar-nav-dropdown-items">
+          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_product_discounts_path %>"><span
+                class="c-sidebar-nav-icon"></span>
+              Por Producto</a></li>
+          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_amount_discounts_path %>"><span
+                class="c-sidebar-nav-icon"></span>
+              Por Importe</a></li>
+
+        </ul>
+      </li>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_price_update_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-cloud-upload"></use>
+          </svg> Actualizar Precios</a></li>
+
+      <li class="c-sidebar-nav-divider"></li>
+      <li class="c-sidebar-nav-title">INSTITUCIONAL</li>
+
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_pages_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-library"></use>
+          </svg> Páginas</a></li>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_branches_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-industry"></use>
+          </svg> Sucursales</a></li>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_representatives_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-location-pin"></use>
+          </svg> Representantes</a></li>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="<%= panel_brands_path %>">
+          <svg class="c-sidebar-nav-icon">
+            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-tags"></use>
+          </svg> Marcas</a></li>
+    </ul>
+
+    <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
+      data-class="c-sidebar-minimized"></button>
+  </div>
+  <div class="c-wrapper c-fixed-components">
+    <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+      <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar"
+        data-class="c-sidebar-show">
+        <svg class="c-icon c-icon-lg">
+          <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-menu"></use>
+        </svg>
+      </button>
+      <a class="c-header-brand d-lg-none" href="#">
+        <%= image_tag "panel/icono-cavallaro.png", class: "c-sidebar-brand-minimized"  %>
+      </a>
+      <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar"
+        data-class="c-sidebar-lg-show" responsive="true">
+        <svg class="c-icon c-icon-lg">
+          <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-menu"></use>
+        </svg>
+      </button>
+      <ul class="c-header-nav d-md-down-none">
+        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="/" target="_blank">Ir al sitio</a></li>
+      </ul>
+      <ul class="c-header-nav ml-auto mr-4">
+        <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#"
+            role="button" aria-haspopup="true" aria-expanded="false">
+            <div class="c-avatar">
+              <%= image_tag 'panel/avatar.jpg', class: "c-avatar-img", alt: "admin@cavallaro.com.py" %>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right pt-0">
+            <div class="dropdown-header bg-light py-2"><strong>Cuenta</strong></div>
+            <a class="dropdown-item" href="#">
+              <svg class="c-icon mr-2">
+                <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-user"></use>
+              </svg> Perfil</a>
+            <a class="dropdown-item" href="<%= destroy_panel_admin_session_path %>" data-method="delete">
+              <svg class="c-icon mr-2">
+                <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-account-logout"></use>
+              </svg> Salir</a>
+          </div>
+        </li>
+      </ul>
+    </header>
+    <div class="c-body">
+      <main class="c-main">
+        <div class="container-fluid">
+          <div class="fade-in">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header h4 d-flex">
+                    <div><%= @internal_title %></div>
+                    <div class="ml-auto">
+                      <% if !@action_button_path.blank? %>
+                        <%= link_to @action_button_path, data: { turbolinks: false }, class: "btn btn-sm btn-pill btn-success" do %>
+                      Nuevo Registro
+                      <% end %>
+                      <%end%>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <%= render "shared/alerts" %>
+                    <%= yield %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+      <footer class="c-footer">
+        <div>Grupo Cavallaro</a> © 2020</div>
+        <div class="ml-auto"><%= image_tag 'creadores_logo_blanco', style: "height: 2.3rem;" %></div>
+      </footer>
+    </div>
+  </div>
+  <!-- CoreUI and necessary plugins-->
+  <%= javascript_pack_tag 'panel/coreui/coreui-bundle-min', 'data-turbolinks-track': 'reload' %>
+  <!--[if IE]><!-->
+  <%= javascript_pack_tag 'panel/coreui/svgxuse-min', 'data-turbolinks-track': 'reload' %>
+  <!--<![endif]-->
+
+</body>
+
+</html>
+

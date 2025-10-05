@@ -1,0 +1,118 @@
+<% content_for :page_title do %>
+  Editar Perfil - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+  <div class="container mt-5">
+    <h3 class="text-red login-title-top">
+      Editar Perfil</h3>
+
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="row justify-content-between">
+        <div class="col-2">
+          <%= link_to 'Mis pedidos', order_history_path, class: "profile-menu-item" %><br>
+        </div>
+        <div class="col-10">
+          <% if current_user.new_sm == false %>
+            <p class="message-perfil-user"><b>Aviso importante:</b> Al actualizar datos como: Razón social o Nro. documento, tu cuenta será tomada como un usuario nuevo en nuestro sistema.
+            Estos datos serán utilizados para la facturación.</p>
+          <% end %>
+
+          <% if current_user.new_sm && current_user.from_sm && current_user.qr_link.present? && current_user.coupon_code.nil? %>
+            <p class="message-perfil-user"><b>Aviso importante:</b> Completa los campos que faltan para ganar un cupón de descuento.</p>
+          <% end %>
+
+          <div class="row">
+              <% if @coupons_list.present? && @coupons_list[0]["activo"] == true %>
+                <h5 class="cupon-text">Cupon de <%= @coupons_list[0]["descuento"].to_i %>% descuento: <b><%= @coupons_list[0]["cupon"] %></b></h5>
+              <% end %>
+            <div class="col-6">
+
+              <div class="form-group">
+                <%= f.label :firstname, 'Nombre / Razón Social:', class:"text-grey label-input-login" %>
+                <%= f.text_field :firstname, autocomplete: "name", class: "form-control input-form-normal", required: true  %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :id_type, 'Tipo Documento:', class:"text-grey label-input-login" %>
+                <%= f.select(:id_type, User::DOCUMENT_TYPES.collect {|c| [c[:name], c[:value]]}, {}, {:class => 'custom-select'}) %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :address, 'Dirección:', class:"text-grey label-input-login" %>
+                <%= f.text_field :address, autocomplete: "direccion", class: "form-control input-form-normal", required: true  %>
+              </div>
+
+            </div>
+            <div class="col-6">
+
+              <div class="form-group">
+                <%= f.label :lastname, 'Apellido:', class:"text-grey label-input-login" %>
+                <%= f.text_field :lastname, autocomplete: "lastname", class: "form-control input-form-normal", required: true  %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :id_number, 'Numero de Documento:', class:"text-grey label-input-login" %>
+                <%= f.text_field :id_number, autocomplete: "documento", class: "form-control input-form-normal", required: true  %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :phone, 'Teléfono:', class:"text-grey label-input-login" %>
+                <%= f.text_field :phone, autocomplete: "telefono", class: "form-control input-form-normal", required: true  %>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email, 'E-mail:', class:"text-grey label-input-login" %>
+            <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control input-form-normal"%>
+          </div>
+
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Aun no se ha confirmado el correo: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class="form-group">
+            <%= f.label :password, 'Nueva contraseña:', class:"text-grey label-input-login"  %> <i>(Completar solo si
+              desea
+              actualizar)</i>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control input-form-normal" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password_confirmation, 'Confirmar nueva contraseña:', class:"text-grey label-input-login"   %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control input-form-normal" %>
+          </div>
+
+
+          <%= f.hidden_field :latitude, :value => f.object.latitude %>
+          <%= f.hidden_field :longitude, :value => f.object.longitude %>
+          <div id="gmap"></div>
+
+          <div class="form-group">
+            <%= f.submit "ACTUALIZAR", class:"bg-red btn-submit-login brd0 text-white" %>
+          </div>
+        <% end %>
+
+        <% if 0 != 0 %>
+          <h3 class="text-red login-title-top mt-5">Eliminar cuenta</h3>
+          <p>Desea eliminar su cuenta de usuario?
+            <%= button_to "Eliminar", registration_path(resource_name), data: { confirm: "Esta seguro que desea eliminar la cuenta?" }, method: :delete,  'data-turbolinks':'false' %>
+          </p>
+
+        <% end %>
+        </div>
+      </div>
+  </div>
+
+  <%= javascript_pack_tag 'maps/index', 'data-turbolinks-eval': 'false' %>
+
+
+  <script type="text/javascript" data-turbolinks-eval=false>
+
+    initMapUser();
+  </script>

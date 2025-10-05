@@ -1,0 +1,29 @@
+<% @internal_title = "Actualizar Precios" %>
+<% @page_title = "Actualizar Precios" %>
+
+
+<%= link_to panel_prices_template_path, class: "btn btn-sm btn-pill btn-success" do %>
+Descargar Plantilla
+<% end %>
+
+<br />
+<br />
+<br />
+
+
+<%= form_with url: panel_prices_upload_path, method: 'post',id: "form" , local: true do |f| %>
+                                                    <div class="form-group align-left col-6">
+                                                        <label class="text-grey label-input-login"
+                                                            for="file">Seleccionar archivo:</label>
+                                                         <%= f.file_field :file, accept: '.csv', class:'form-control', html: { multiple: false, id: 'file' }%>
+                                                    </div>
+                                               
+
+                                                    <div class="form-group align-left col-6">
+                                                        <input type="submit" class="btn btn-success m-5" name="commit" value="Actualizar" />
+                                                    </div>
+                                              
+                                                <% end %>
+                  
+                    <%#= f.input :indicator_files, as: :file, input_html: { multiple: true, accept: '.csv', id: 'uploadFiles' }, label: "Subir archivo" %>
+        

@@ -1,0 +1,82 @@
+<% content_for :page_title do %>
+Registrar Usuario - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+  <div class="block-login-center">
+    <h3 class="text-red login-title-top">Formulario de registro</h3>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <% if params[:promo].present? %>
+      <%= f.hidden_field :qr_link, value: "https://www.cavallaro.com.py/promociones/#{params[:promo]}" %>
+      <%= f.hidden_field :new_user, value: true %>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :firstname, 'Nombre / Razón Social:', class:"text-grey label-input-login" %>
+      <%= f.text_field :firstname, autocomplete: "name", class: "form-control input-form-normal", required: true  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :lastname, 'Apellido:', class:"text-grey label-input-login" %>
+      <%= f.text_field :lastname, autocomplete: "lastname", class: "form-control input-form-normal", required: true  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :id_type, 'Tipo Documento:', class:"text-grey label-input-login" %>
+      <%= f.select(:id_type, User::DOCUMENT_TYPES.collect {|c| [c[:name], c[:value]]}, {}, {:class => 'custom-select'}) %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :id_number, 'Numero de Documento:', class:"text-grey label-input-login" %>
+      <%= f.text_field :id_number, autocomplete: "documento", class: "form-control input-form-normal", required: true  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :address, 'Dirección:', class:"text-grey label-input-login" %>
+      <%= f.text_field :address, autocomplete: "direccion", class: "form-control input-form-normal", required: true  %>
+    </div>
+
+
+    <div class="form-group">
+      <%= f.label :phone, 'Celular:', class:"text-grey label-input-login" %>
+      <%= f.text_field :phone, autocomplete: "telefono", class: "form-control input-form-normal", required: true  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email, 'E-mail:', class:"text-grey label-input-login" %>
+      <%= f.email_field :email, autocomplete: "email", class: "form-control input-form-normal", required: true  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password, 'Contraseña:', class:"text-grey label-input-login" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control input-form-normal", required: true  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation, 'Confirmar Contraseña:', class:"text-grey label-input-login" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control input-form-normal", required: true  %>
+    </div>
+
+    <div class="form-check">
+      <label class="form-check-label text-grey label-input-login">
+        <%= f.check_box :subscribed, class:"form-check-input" %>
+        Deseo recibir correos sobre promociones y nuevos productos.
+      </label>
+    </div>
+
+    <div class="form-group">
+      <%= recaptcha_tags %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "CREAR CUENTA", class:"bg-red btn-submit-login brd0 text-white" %>
+    </div>
+
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

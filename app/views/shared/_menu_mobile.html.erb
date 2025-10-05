@@ -1,0 +1,116 @@
+<div class="menu-sidebar-mobile bg-red">
+    <div class="content-menu-sidebar-wrapper">
+        <ul class="menu-list-mobile">
+            <li>
+                <a href="#" title="" class="list-link-mobile text-white">
+                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                            class="fa fa-home fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                    <span class="text-link-menu-mobile inline-block-vam">Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a title="Ver productos" class="list-link-mobile text-white arrow-collapse" data-toggle="collapse"
+                    href="#subMenuProductos" aria-expanded="false" aria-controls="subMenuProductos">
+                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                            class="fa fa-home fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                    <span class="text-link-menu-mobile inline-block-vam">Productos</span>
+                </a>
+                <div class="collapse" id="subMenuProductos">
+                    <ul class="sub-menu-list-mobile">
+                        <li>
+                            <a href="#" title="" class="list-link-mobile text-white">
+                                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                                        class="fa fa-home fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                                <span class="text-link-menu-mobile inline-block-vam">Limpieza del Hogar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="" class="list-link-mobile text-white">
+                                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                                        class="fa fa-home fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                                <span class="text-link-menu-mobile inline-block-vam">Lavado de Ropas</span>
+                            </a>
+                        </li>
+
+                        <li class="brd0">
+                            <a href="#" title="" class="list-link-mobile text-white">
+                                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                                        class="fa fa-home fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                                <span class="text-link-menu-mobile inline-block-vam">Higiene Personal</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="#" title="" class="list-link-mobile text-white">
+                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                            class="fa fa-home fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                    <span class="text-link-menu-mobile inline-block-vam">La Empresa</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" title="" class="list-link-mobile text-white">
+                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fas fa-book"></i></div>
+                    <span class="text-link-menu-mobile inline-block-vam">Nuestra Historia</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" title="" class="list-link-mobile text-white">
+                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                            class="fa fa-users fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                    <span class="text-link-menu-mobile inline-block-vam">Qui&eacute;nes Somos</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" title="" class="list-link-mobile text-white">
+                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                            class="fa fa-plane fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                    <span class="text-link-menu-mobile inline-block-vam">Exportaci&oacute;n</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" title="" class="list-link-mobile text-white">
+                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fas fa-envelope"></i></div>
+                    <span class="text-link-menu-mobile inline-block-vam">Contacto</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" title="" class="list-link-mobile text-white">
+                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fas fa-user-circle"></i></div>
+                    <span class="text-link-menu-mobile inline-block-vam">Ingresar</span>
+                </a>
+            </li>
+            <% if Setting.all.first.multilanguage %>
+                <li>
+                    <a title="Seleccionar idioma" class="list-link-mobile text-white arrow-collapse"
+                        data-toggle="collapse" href="#subMenuLanguage" aria-expanded="false"
+                        aria-controls="subMenuLanguage">
+                        <div class="icon-left-menu-mobile-wrap inline-block-vam"><span
+                                class="flag-icon flag-icon-py flags"></span></div>
+                        <span class="text-link-menu-mobile inline-block-vam">Español</span>
+                    </a>
+                    <div class="collapse" id="subMenuLanguage">
+                        <ul class="sub-menu-list-mobile">
+                            <li>
+                                <a title="Português" class="list-link-mobile text-white">
+                                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><span
+                                            class="flag-icon flag-icon-br flags"></span></div>
+                                    <span class="text-link-menu-mobile inline-block-vam">Português</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a title="English" class="list-link-mobile text-white">
+                                    <div class="icon-left-menu-mobile-wrap inline-block-vam"><span
+                                            class="flag-icon flag-icon-us flags"></span></div>
+                                    <span class="text-link-menu-mobile inline-block-vam">English</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <% end %>
+        </ul>
+
+    </div>
+</div>

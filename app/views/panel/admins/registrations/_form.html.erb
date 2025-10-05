@@ -1,0 +1,41 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
+<%= render "panel/admins/shared/error_messages", resource: resource %>
+
+<div class="col-12">
+
+  <br />
+  <div class="tab-content">
+    <div class="tab-pane active" role="tabpanel">
+      <div class="form-group row">
+        <%= form.label "Correo Electrónico", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :email, class:"form-control", autofocus: true, autocomplete: "email" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= form.label "Contraseña", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.password_field :password, class:"form-control", autocomplete: "new-password" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= form.label "Confirmar contraseña", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.password_field :password_confirmation, class:"form-control", autocomplete: "new-password" %>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="form-group row">
+      <div class="col-12">
+        <%= form.submit (resource.new_record? ? "Crear" : "Actualizar" ), class: "btn btn-success m-5" %>
+        <%= link_to 'Cancelar', panel_admins_path, data: { turbolinks: false }, class: "btn btn-secondary m-5" %>
+      </div>
+    </div>
+
+  </div>
+</div>
+<% end %>
+

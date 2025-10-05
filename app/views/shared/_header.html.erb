@@ -1,0 +1,333 @@
+<header id="header" class="header-desktop header-top ">
+
+  <div class="grey-bar-top-menu">
+    <div class="grey-bar-buttons-wrapper">
+
+      <div class="">
+
+        <%= form_with url: search_path, method: 'get', id: "formSearch", local: true do %>
+        <div class="input-group input-search-wrapper">
+          <input type="text" name="q" id="inputSearch" class="input-custom-search form-control"
+            placeholder="Buscar Productos..." aria-label="Recipient's username" aria-describedby="basic-addon2"
+            required>
+
+
+          <div class="input-icon-wrapper input-group-append">
+            <%= button_tag type: 'submit', class:"input-icon-span input-group-text" do %>
+            <i class="fas fa-search"></i>
+            <% end %>
+          </div>
+
+        </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+  <div class="white-bar-top-menu">
+    <div class="element-button-white-bar-wrap logo-top-wrapper">
+      <a href="<%= root_path %>" title="">
+        <%= image_tag "logo-solo.png", class: "logo-top-white-bar", alt: "Logo Cavallaro"  %>
+      </a>
+    </div>
+
+    <div class="element-button-white-bar-wrap menu-item-white-bar-wrap">
+      <a href="<%= category_path('1-cuidado-de-las-prendas') %>" data-turbolinks="false" title=""
+        class="link-menu-item-white-bar">
+        <%= image_tag "boton-2.png", class: "img-link-menu-white-bar", alt: "Cuidado de Prendas"  %>
+        <p class="p-text-menu-item-white-bar">CUIDADO DE LAS PRENDAS</p>
+      </a>
+    </div>
+
+    <div class="element-button-white-bar-wrap menu-item-white-bar-wrap">
+      <a href="<%= category_path('2-higiene-personal') %>" data-turbolinks="false" title=""
+        class="link-menu-item-white-bar">
+        <%= image_tag "boton-3.png", class: "img-link-menu-white-bar", alt: "Higiene Personal"  %>
+        <p class="p-text-menu-item-white-bar">HIGIENE PERSONAL</p>
+      </a>
+    </div>
+
+    <div class="element-button-white-bar-wrap menu-item-white-bar-wrap">
+      <a href="<%= category_path('3-limpieza-y-desinfeccion-del-hogar') %>" data-turbolinks="false" title=""
+        class="link-menu-item-white-bar">
+        <%= image_tag "boton-1.png", class: "img-link-menu-white-bar", alt: "Limpieza del Hogar"  %>
+        <p class="p-text-menu-item-white-bar">LIMPIEZA Y DESINFECCIÓN DEL HOGAR</p>
+      </a>
+    </div>
+
+    <div class="element-button-white-bar-wrap menu-item-white-bar-wrap">
+      <a href="<%= empresa_path %>" title="" class="link-menu-item-white-bar">
+        <%= image_tag "boton-4.png", class: "img-link-menu-white-bar", alt: "La Empresa"  %>
+        <p class="p-text-menu-item-white-bar">LA EMPRESA</p>
+      </a>
+    </div>
+
+    <div class="login-register-buttons-wrapper inline-block-vat">
+
+      <% if user_signed_in? %>
+      <div class="buttons-wrap align-right">
+        <a href="<%= edit_user_registration_path %>" data-turbolinks="false" title=""
+          class="button-login-register inline-block-vat mr-0">
+          <div class="img-left-button-wrap bg-dark-grey inline-block-vat">
+
+            <i class="fas fa-user"></i>
+          </div>
+          <span class="text-button-login inline-block-vat">MI PERFIL</span>
+        </a>
+
+      </div>
+      <div class="buttons-wrap align-right">
+        <%= link_to destroy_user_session_path, method: "delete", class:"button-login-register inline-block-vat mr-0" do %>
+        <div class="img-left-button-wrap bg-dark-grey inline-block-vat">
+
+          <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <span class="text-button-login inline-block-vat">SALIR</span>
+        <% end %>
+
+      </div>
+      <% else %>
+      <div class="buttons-wrap align-right">
+        <a href="<%= new_user_session_path %>" title="" class="button-login-register inline-block-vat mr-0">
+          <div class="img-left-button-wrap bg-dark-grey inline-block-vat">
+
+            <i class="fas fa-user"></i>
+          </div>
+          <span class="text-button-login inline-block-vat">INGRESAR</span>
+        </a>
+
+      </div>
+      <% end %>
+
+      <div class="buttons-wrap align-right">
+        <a href="<%= shopping_cart_show_path %>" data-turbolinks="false" title=""
+          class="button-login-register inline-block-vat mr-0">
+          <div class="img-left-button-wrap bg-red inline-block-vat">
+            <span
+              class="badge badge-pill badge-cart"><%= @shopping_cart.present? ? @shopping_cart.cart_items.count : "0" %></span>
+
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+          <span class="text-button-login inline-block-vat">CARRITO</span>
+        </a>
+      </div>
+
+      <div class="align-right">
+        <div class="select-country-wrapper">
+
+                <% if false %>
+                <% if Setting.all.first.multilanguage %>
+                  <form action="" method="get" accept-charset="utf-8">
+                    <div class="selec-country-wrap">
+                      <span class="flag-icon flag-icon-py inline-block-vat img-flag"></span>
+                      <div class="dropdown inline-block-vat">
+                        <button class="btn btn-country dropdown-toggle" type="button" id="dropdownMenuButton"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= @lang.capitalize %></button>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-country"
+                          aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item item-country-select" href="<%= set_language_path('es') %>"><span class="c-icon cif-es"></span>
+                            Español</a>
+                          <a class="dropdown-item item-country-select" href="<%= set_language_path('pt') %>"><span class="c-icon cif-br"></span>
+                            Português</a>
+                          <a class="dropdown-item item-country-select" href="<%= set_language_path('en') %>"><span class="c-icon cif-us"></span>
+                            English</a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <% end %>
+                <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="effect6-large" style="background: white;">
+    <%= image_tag "costura-grande-sinsombra.png", class: "costura-bottom-white-bar-full", alt: "Imagen separado costura"  %>
+
+  </div>
+</header><!-- /header -->
+
+<!-- Mobile Version -->
+<header id="header" class="header-mobile header-top">
+  <div class="grey-bar-mobile">
+    <div class="logo-left-mobile-wrap float-left">
+      <div class="button-mobile-menu-wrap inline-block-vat">
+        <div id="menuToggle">
+          <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <ul id="menu" class="menu-list-mobile">
+            <li>
+              <a href="<%= root_path %>" title="" class="list-link-mobile text-white">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                    class="fa fa-home fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">Inicio</p>
+              </a>
+            </li>
+            <li>
+              <a title="Ver productos" class="list-link-mobile text-white arrow-collapse" data-toggle="collapse"
+                href="#subMenuProductos" aria-expanded="false" aria-controls="subMenuProductos">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fa fa-th fa-md icon-left-menu-mobile"
+                    aria-hidden="true"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">Productos</p>
+              </a>
+              <div class="collapse" id="subMenuProductos">
+                <ul class="sub-menu-list-mobile">
+                  <li>
+                    <a href="<%= category_path('1-cuidado-de-las-prendas') %>" title=""
+                      class="list-link-mobile text-white">
+                      <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                          class="fa fa-arrow-right fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                      <p class="text-link-menu-mobile inline-block-vam">Cuidado de las Prendas</p>
+                    </a>
+                  </li>
+                  <li class="brd0">
+                    <a href="<%= category_path('2-higiene-personal') %>" title="" class="list-link-mobile text-white">
+                      <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                          class="fa fa-arrow-right fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                      <p class="text-link-menu-mobile inline-block-vam">Higiene Personal</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<%= category_path('3-limpieza-y-desinfeccion-del-hogar') %>" title=""
+                      class="list-link-mobile text-white">
+                      <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                          class="fa fa-arrow-right fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                      <p class="text-link-menu-mobile inline-block-vam">Limpieza del Hogar</p>
+                    </a>
+                  </li>
+
+
+
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="<%= empresa_path %>" title="" class="list-link-mobile text-white">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                    class="fa fa-industry fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">La Empresa</p>
+              </a>
+            </li>
+            <li>
+              <a href="<%= quienes_somos_path %>" title="" class="list-link-mobile text-white">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                    class="fa fa-users fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">Misión, Visión, Valores</p>
+              </a>
+            </li>
+            <li>
+              <a href="<%= export_path %>" title="" class="list-link-mobile text-white">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i
+                    class="fa fa-plane fa-md icon-left-menu-mobile" aria-hidden="true"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">Exportaci&oacute;n</p>
+              </a>
+            </li>
+            <li>
+              <a href="<%= historia_path %>" title="" class="list-link-mobile text-white">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fas fa-book"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">Nuestra Historia</p>
+              </a>
+            </li>
+            <li>
+              <a href="<%= contacto_path %>" title="" class="list-link-mobile text-white">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fas fa-envelope"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">Contactenos</p>
+              </a>
+            </li>
+
+            <% if user_signed_in? %>
+            <li>
+              <a href="<%= edit_user_registration_path %>" title="" class="list-link-mobile text-white">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fas fa-user-circle"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">MI PERFIL</p>
+              </a>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, method: "delete", class:"list-link-mobile text-white" do %>
+
+              <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fas fa-sign-out-alt"></i></div>
+              <p class="text-link-menu-mobile inline-block-vam">SALIR</p>
+              <% end %>
+            </li>
+            <% else %>
+            <li>
+              <a href="<%= new_user_session_path %>" title="" class="list-link-mobile text-white">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fas fa-user-circle"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">Ingresar</p>
+              </a>
+            </li>
+            <% end %>
+            <% if Setting.all.first.multilanguage %>
+            <li>
+              <a title="Seleccionar idioma" class="list-link-mobile text-white arrow-collapse" data-toggle="collapse"
+                href="#subMenuLanguage" aria-expanded="false" aria-controls="subMenuLanguage">
+                <div class="icon-left-menu-mobile-wrap inline-block-vam"><i class="fas fa-language"></i></div>
+                <p class="text-link-menu-mobile inline-block-vam">Español</p>
+              </a>
+              <div class="collapse" id="subMenuLanguage">
+                <ul class="sub-menu-list-mobile">
+                  <li>
+                    <a title="Português" class="list-link-mobile text-white">
+                      <div class="icon-left-menu-mobile-wrap inline-block-vam"><span
+                          class="flag-icon flag-icon-br flags"></span></div>
+                      <p class="text-link-menu-mobile inline-block-vam">Português</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a title="English" class="list-link-mobile text-white">
+                      <div class="icon-left-menu-mobile-wrap inline-block-vam"><span
+                          class="flag-icon flag-icon-us flags"></span></div>
+                      <p class="text-link-menu-mobile inline-block-vam">English</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+
+        </div>
+      </div>
+      <div class="inline-block-vat">
+        <a href="<%= root_path %>" class="dblock">
+          <%= image_tag "boton-4.png", class: "img-logo-top", alt: "Logo Cavallaro"  %>
+        </a>
+      </div>
+    </div>
+    <div class="float-right">
+      <div class="inline-block-vat icons-right-menu-mobile" id="buttonSearch"><i class="fas fa-search"></i></div>
+      <div class="inline-block-vat icons-right-menu-mobile" style="position: relative;">
+        <span class="badge badge-light badge-cart-mobile">
+          <%= @shopping_cart.present? ? @shopping_cart.cart_items.count : "0" %>
+        </span>
+        <a href="<%= shopping_cart_show_path %>" data-turbolinks="false" class="dblock link-class-menu-mobile">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+</header><!-- /header -->
+
+<div class="search-form-wrap" id="formSearchWrap">
+  <%= form_with url: search_path, method: 'get', local: true do %>
+  <span class="back-button-search float-left" id="backButtonSearch">
+    <i class="fas fa-arrow-left"></i>
+  </span>
+  <%= text_field_tag 'q', nil, class:" input-text-search" %>
+  <%= button_tag type: 'submit', class:"btn btn-search-top" do  %>
+  <div class="inline-block-vat icons-right-menu-mobile" id="buttonSearch">
+    <i class="fas fa-search"></i>
+  </div>
+  <% end %>
+
+
+
+  <% end %>
+
+</div>

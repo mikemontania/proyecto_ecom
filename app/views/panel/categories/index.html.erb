@@ -1,0 +1,53 @@
+<% @internal_title = "Categorías" %>
+<% @page_title = "Categorías" %>
+<% @action_button_path = new_panel_category_path %>
+
+<p class="mb-1">Filtrar contenido</p>
+
+<%= form_with url: panel_categories_path, method: 'get', local: true do %>
+  <input type="search" name="q" value="<%= @search_text.present? ? @search_text : "" %>"
+  class="search-items form-control" autofocus="true" data-table="table-data"
+  placeholder="Escribe aqui para buscar...">
+<% end %>
+
+<table class="table table-responsive-sm table-striped table-sm table-data">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Estado</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td>
+        <%if category.active %>
+        <span class="badge badge-pill badge-success">Activo</span>
+        <%else%>
+        <span class="badge badge-pill badge-secondary">Inactivo</span>
+        <%end%>
+      </td>
+      <td>
+        <%= link_to  panel_category_path(category) do %>
+        <i class="c-icon cil-magnifying-glass text-dark" data-placement="top" data-toggle="tooltip" title="Ver"></i>
+        <% end %>
+      </td>
+      <td><%= link_to edit_panel_category_path(category) do %>
+        <i class="c-icon cil-pencil text-dark" data-toggle="tooltip" title="Editar"></i>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to panel_category_path(category), method: :delete, data: { confirm: 'Deseas eliminar esta categoría?' } do %>
+        <i class="c-icon cil-trash text-dark" data-toggle="tooltip" title="Eliminar"></i>
+        <% end %>
+      </td>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= pagy_bootstrap_nav(@pagy).html_safe %>

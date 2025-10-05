@@ -1,0 +1,43 @@
+<% content_for :og_fb do %>
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Area de Cobertura - Cavallaro S.A.C.e.I." />
+<meta property="og:description"
+    content="Cavallaro ha sabido mantener desde sus inicios, y pasando por varias generaciones, la disciplina y la idoneidad en los procesos de elaboración industrial." />
+<% end %>
+
+<% content_for :page_title do %>
+Area de Cobertura - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="title-elements-content-wrapper blr-header">
+            <%= image_tag "boton-4.png", class: "top-icon-title-element" %>
+            <h1 class="h2-title-elements-content text-red inline-block-vat">AREA DE COBERTURA</h1>
+            <%= image_tag "barra.png", class: "bar-top-title-header" %>
+        </div>
+        <div class="elements-grid-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-primary">
+                    <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="<%= empresa_path %>">La empresa</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Área de Cobertura</li>
+                </ol>
+            </nav>
+            <div class="inner-content-wrapper">
+
+                <div id="gmap_cobertura" class="map-wrapper"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= javascript_pack_tag 'maps/index', 'data-turbolinks-eval': 'false' %>
+
+
+<script type="text/javascript" data-turbolinks-eval=false>
+
+    initMapCobertura();
+</script>

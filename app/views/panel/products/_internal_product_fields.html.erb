@@ -1,0 +1,72 @@
+<tr class="nested-fields">
+
+    <td class="field">
+        <%= f.number_field :internal_code, class:"form-control validation", required: true %>
+    </td>
+
+    <td class="field">
+        <%= f.select(:measurement_unit_code, MeasurementUnit.all.order(name: :asc).collect {|c| [c.name, c.id]}, {}, {:class => 'custom-select'}) %>
+    </td>
+
+    <td class="field">
+        <%= f.select(:presentation_id, Presentation.all.order(name_es: :asc).collect {|c| [c.name, c.id]}, {}, {:class => 'custom-select'}) %>
+    </td>
+
+    <td class="field">
+        <%= f.select(:variety_id, Variety.all.order(name_es: :asc).collect {|c| [c.name, c.id]}, {}, {:class => 'custom-select'}) %>
+    </td>
+
+    <td class="field">
+        <%= f.number_field :price,  class: "form-control validation", min: "0", required: true %>
+    </td>
+
+    <td class="field">
+        <label class="c-switch c-switch-sm c-switch-pill c-switch-success">
+            <%= f.check_box :active, class:"c-switch-input" %>
+            <span class="c-switch-slider"></span>
+        </label>
+    </td>
+
+    <td class="field">
+        <label class="c-switch c-switch-sm c-switch-pill c-switch-warning">
+            <%= f.check_box :featured, class:"c-switch-input" %>
+            <span class="c-switch-slider"></span>
+        </label>
+    </td>
+
+    <td class="field">
+        <label class="c-switch c-switch-sm c-switch-pill c-switch-info">
+            <%= f.check_box :main, class:"c-switch-input" %>
+            <span class="c-switch-slider"></span>
+        </label>
+    </td>
+
+    <td class="field">
+        <label class="c-switch c-switch-sm c-switch-pill c-switch-primary">
+            <%= f.check_box :is_new, class:"c-switch-input" %>
+            <span class="c-switch-slider"></span>
+        </label>
+    </td>
+
+    <td class="field">
+        <% if f.object.image.attached? %>
+        <div class="row">
+            <div class="col-4">
+                <%= image_tag f.object.image.variant(resize: "70x70!") %>
+            </div>
+            <div class="col-8">
+                <%= f.file_field :image, class:"custom-file" %>
+
+            </div>
+        </div>
+
+
+        <% else %>
+        <%= f.file_field :image, class:"custom-file" %>
+        <% end %>
+
+    </td>
+    <td class="field">
+        <%= link_to_remove_association "<i class='c-icon cil-trash' data-toggle='tooltip' title='Eliminar'></i>".html_safe, f,class: "btn btn-danger" %>
+    </td>
+</tr>

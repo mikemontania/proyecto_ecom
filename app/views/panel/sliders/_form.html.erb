@@ -1,0 +1,101 @@
+<%= form_with(model: slider, local: true, :url => (slider.new_record? ? panel_sliders_path : panel_slider_path(slider)), class: "form-horizontal") do |form| %>
+  <% if slider.errors.any? %>
+    <div id="error_explanation" style="background: #5e0000b3; border-radius: 10px; color: white; padding: 20px; margin-bottom: 2rem;">
+      <h2><%= pluralize(slider.errors.count, "") %> error/es encontrado/s, favor corregir:</h2>
+
+      <ul>
+        <% slider.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-12">
+    <div class="form-group row">
+      <%= form.label "Nombre", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :name, class:"form-control"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Link", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.url_field :link, class:"form-control"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Orden", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.number_field :order, class:"form-control", min: "0"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Activo", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <label class="c-switch c-switch-sm c-switch-pill c-switch-success">
+          <%= form.check_box :active, class:"c-switch-input" %>
+          <span class="c-switch-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Imagen Desktop", class: "col-2 col-form-label" %>
+
+      <% if slider.image_desktop.attached? %>
+
+        <div class="col-5">
+          <%= image_tag slider.image_desktop.variant(resize: "300x300!") %>
+        </div>
+
+        <div class="col-5">
+          <div class="custom-file">
+            <%= form.file_field :image_desktop, class:"custom-file" %>
+          </div>
+        </div>
+
+      <% else %>
+        <div class="col-10">
+          <div class="custom-file">
+            <%= form.file_field :image_desktop, class:"custom-file" %>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+    <div class="form-group row">
+      <%= form.label "Imagen Mobile", class: "col-2 col-form-label" %>
+
+      <% if slider.image_mobile.attached? %>
+
+        <div class="col-5">
+          <%= image_tag slider.image_mobile.variant(resize: "300x300!") %>
+        </div>
+
+        <div class="col-5">
+          <div class="custom-file">
+            <%= form.file_field :image_mobile, class:"custom-file" %>
+          </div>
+        </div>
+
+      <% else %>
+        <div class="col-10">
+          <div class="custom-file">
+            <%= form.file_field :image_mobile, class:"custom-file" %>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="form-group row">
+      <div class="col-12">
+        <%= form.submit (slider.new_record? ? "Crear" : "Actualizar" ), class: "btn btn-success m-5" %>
+        <%= link_to 'Cancelar', panel_sliders_path, data: { turbolinks: false }, class: "btn btn-secondary m-5" %>
+      </div>
+    </div>
+  <% end %>

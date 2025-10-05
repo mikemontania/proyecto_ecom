@@ -1,0 +1,78 @@
+<% content_for :og_fb do %>
+    <meta name="description" content="Cavallaro S.A.C.e.I." />
+    <meta name="keywords" content="Cavallaro S.A.C.e.I." />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:site_name" content="Cavallaro S.A.C.e.I.">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Cavallaro S.A.C.e.I." />
+    <meta property="og:description" content="Cavallaro, brinda la mejor calidad en productos de limpieza e higiene para el cuidado de tu familia y hogar. Cavallaro te hace brillar" />
+    <meta property="og:locale" content="es_LA" />
+    <meta property="og:image" content="<%= request.host_with_port + image_url("logo-solo.png") %>" />
+    <meta property="og:image:secure_url" content="<%= request.host_with_port + image_url("logo-solo.png") %>" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="oog:image:height" content="1024" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="Cavallaro S.A.C.e.I." />
+<% end %>
+
+<% content_for :page_title do %>
+    Cavallaro S.A.C.e.I. - Pagina Principal
+<% end %>
+
+<% content_for :slider do %>
+    <% if @slider_images.present? && !@slider_images.count.zero? %>
+        <%= render "shared/slider_top_mobile", slider_images: @slider_images %>
+    <% end %>
+<% end %>
+
+<div class="elements-content-wrapper">
+    <% if @featured_products.present? %>
+        <%= render "home/partials/destacados" %>
+    <% end %>
+
+    <% if @promotional_products.present? %>
+        <%= render "home/partials/promocionales" %>
+    <% end %>
+
+    <% @category_list.each do |category| %>
+
+        <div class="block-elements-wrap">
+            <div class="title-elements-content-wrapper bg-red no-border">
+                <h2 class="h2-title-elements-content text-white inline-block-vat"><%= category.name(@lang) %></h2>
+            </div>
+            <div class="elements-grid-wrapper">
+                <div>
+                    <% category.internal_products.where('price > 0').where(active: true).order(featured: :desc).limit(8).each do |product| %>
+                        <%= render "partials/product_grid_item", product: product, :cart_id => (@shopping_cart.nil? ? 0 : @shopping_cart.id) %>
+                    <% end %>
+                </div>
+
+            </div>
+            <%= link_to 'Ver más', category_path(category), class:"bg-red btn-submit-login brd0 text-white" %>
+        </div>
+
+    <% end %>
+
+    <% if 0 != 0 %>
+        <!-- Brands section temporarly disabled -->
+        <div class="block-elements-wrap">
+            <div class="title-elements-content-wrapper bg-grey no-border">
+                <a href="<%= brands_path %>" title="" class="title-content-anchor">
+                    <h2 class="h2-title-elements-content text-white inline-block-vat">MARCAS</h2>
+                </a>
+            </div>
+            <div class="elements-grid-wrapper text-centered">
+                <% @brand_list.each do |brand| %>
+                    <% if brand.logo.attached? %>
+                        <div class="img-brands-wrap inline-block-vat">
+                            <a href="<%= brand_path brand %>" title="">
+                                <%= image_tag brand.logo, alt: brand.name(@lang) %>
+                            </a>
+                        </div>
+                    <% end %>
+
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>

@@ -1,0 +1,102 @@
+<% content_for :og_fb do %>
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="La Empresa - Cavallaro S.A.C.e.I." />
+    <meta property="og:description"
+          content="Productos 100% paraguayos, con una marcada experiencia que asegura una excelente calidad." />
+<% end %>
+
+<% content_for :page_title do %>
+    La Empresa - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="title-elements-content-wrapper bg-red no-border">
+            <%= image_tag "icono-en-blanco-04.png", class: "top-icon-title-element" %>
+            <h1 class="h2-title-elements-content text-white inline-block-vat">LA EMPRESA</h1>
+        </div>
+        <div class="elements-grid-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-primary">
+                    <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">La empresa</li>
+                </ol>
+            </nav>
+            <div class="empresa-content-wrapper">
+                <div class="text-content-empresa">
+                    <p class="text-description-content text-black">
+                        Somos una empresa paraguaya de origen familiar especializada en la fabricación y
+                        comercialización
+                        de productos de rubro Domisanitario y de Cosmética. Contamos con una amplia gama de productos
+                        con
+                        formatos, características y funcionalidades diferentes, ricos en ingredientes
+                        naturales, principalmente el Aceite de Almendra de Coco.
+                    </p>
+                    <p class="text-description-content text-black">
+                        Desde hace 14 años somos también desarrolladores de productos con marcas blancas o de terceros,
+                        trabajando de forma continua para varias empresas extranjeras que comprobaron la calidad de sus
+                        productos y servicios.
+                    </p>
+                    <p class="text-description-content text-black">
+                        En la actualidad el Grupo Cavallaro exporta sus productos con marcas propias a diversos países,
+                        entre ellos: Estados Unidos, Brasil, Argentina, Bolivia, Uruguay, Chile, Cuba, Centro América,
+                        Albania y Corea del Sur.
+                    </p>
+                    <p class="text-description-content text-black">
+                        Nuestro objetivo principal es seguir fortaleciendo el liderazgo, mediante la Innovación y
+                        desarrollo de nuevos productos para beneficio de las familias paraguayas y del mundo con
+                        nuestras marcas: Coco Cavallaro, Cavallaro, Guaira Deluxe, Guaira Extra, Insuperable, Pixol, C,
+                        C2, IO, Tropical, Agricultor, Obrero y Cacique.
+                    </p>
+                </div>
+
+                <div class="links-content-empresa">
+                    <ul class="list-link-icons">
+                        <li>
+                            <span class="left-icon-list-link inline-block-vam"
+                                style="background-image: url('<%= image_path("conocenos.png") %>');" role="img"
+                                aria-label="quienes somos"></span>
+                            <a href="<%= quienes_somos_path %>" title="Quienes Somos"
+                                class="list-link-text text-red inline-block-vam">
+                                PRÓPOSITO, VISI&Oacute;N, VALORES
+                            </a>
+                        </li>
+                        <li>
+                            <span class="left-icon-list-link inline-block-vam"
+                                style="background-image: url('<%= image_path( "exportacion.png") %>');" role="img"
+                                aria-label="exportacion"></span>
+                            <a href="<%= export_path %>" title="Exportacion"
+                                class="list-link-text text-red inline-block-vam">
+                                EXPORTACI&Oacute;N
+                            </a>
+                        </li>
+                        <li>
+                            <span class="left-icon-list-link inline-block-vam"
+                                style="background-image: url('<%= image_path("historia.png") %>');" role="img"
+                                aria-label="timeline"></span>
+                            <a href="<%= historia_path %>" title="Nuestra Historia"
+                                class="list-link-text text-red inline-block-vam">
+                                NUESTRA HISTORIA
+                            </a>
+                        </li>
+
+                        <li>
+                            <span class="left-icon-list-link inline-block-vam"
+                                style="background-image: url('<%= image_path("contacto.png") %>');" role="img"
+                                aria-label="contacto"></span>
+                            <a href="<%= contacto_path %>" title="Contacto"
+                                class="list-link-text text-red inline-block-vam">
+                                CONTACTO
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="video-iframe-wrapper">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/8WWh5zJQ0zM?showinfo=0&controls=0&rel=0" title="SOMOS CAVALLARO - Conocé más sobre nuestra industria" frameborder="0" allow="" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>

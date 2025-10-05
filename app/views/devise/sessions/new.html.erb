@@ -1,0 +1,28 @@
+<% content_for :page_title do %>
+Ingresar - Cavallaro S.A.C.e.I.
+<% end %>
+
+
+<div class="elements-content-wrapper">
+  <div class="block-login-center">
+    <h3 class="text-red login-title-top">Ingresa tu cuenta</h3>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :email, class:"text-grey label-input-login" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control input-form-normal", id:"input-email", required: true  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password, class:"text-grey label-input-login" %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class:"form-control input-form-normal", id:"input-password", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "INGRESAR", class:"bg-red btn-submit-login brd0 text-white" %>
+    </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

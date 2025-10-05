@@ -1,0 +1,29 @@
+<div class="col-12 col-md-11 col-xxl-10 m-0 p-0 mt-5 mb-5 mx-auto pasos_box">
+  <ul class="list-unstyled multi-steps">
+    <li>Dirección de env&iacute;o y facturación</li>
+    <li>Resumen de compra</li>
+    <li class="is-active">Realizar pago</li>
+    <li>Confirmación de compra</li>
+  </ul>
+</div>
+
+<h3 class="text-red login-title-top">Realizar pago</h3>
+<div class="iframeBancard" id="iframe-container" style="width: 65%; margin: 0 auto 5rem;"></div>
+
+<%= content_for :top_script do %>
+<script src="<%= ENV['BANCARD_URL'] %>/checkout/javascript/dist/bancard-checkout-2.1.0.js"></script>
+<script>
+  styles = {
+    "form-background-color": "#001b60",
+    "button-background-color": "#4faed1",
+    "button-text-color": "#fcfcfc",
+    "button-border-color": "#dddddd",
+    "input-background-color": "#fcfcfc",
+    "input-text-color": "#111111",
+    "input-placeholder-color": "#111111"
+  };
+  window.onload = function () {
+    Bancard.Checkout.createForm('iframe-container', '<%= @transaction.process_id %>', styles);
+  };
+</script>
+<% end %>

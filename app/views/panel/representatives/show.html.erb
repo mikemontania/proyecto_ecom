@@ -1,0 +1,37 @@
+<p>
+  <strong>Nombre:</strong>
+  <%= @representative.name %>
+</p>
+
+<p>
+  <strong>Dirección:</strong>
+  <%= @representative.address %>
+</p>
+
+<p>
+  <strong>Teléfono:</strong>
+  <%= @representative.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @representative.email %>
+</p>
+
+<p>
+  <strong>Sitio Web:</strong>
+  <%= @representative.website %>
+</p>
+
+<p>
+  <strong>Latitud:</strong>
+  <%= @representative.latitude %>
+</p>
+
+<p>
+  <strong>Longitud:</strong>
+  <%= @representative.longitude %>
+</p>
+
+<%= link_to 'Editar', edit_panel_representative_path(@representative), class: "btn btn-danger m-5" %>
+<%= link_to 'Volver', panel_representatives_path, class: "btn btn-secondary m-5" %>

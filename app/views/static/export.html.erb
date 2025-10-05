@@ -1,0 +1,158 @@
+<% content_for :og_fb do %>
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Exportacion - Cavallaro S.A.C.e.I." />
+<meta property="og:description"
+    content="Cavallaro ha sabido mantener desde sus inicios, y pasando por varias generaciones, la disciplina y la idoneidad en los procesos de elaboración industrial." />
+<% end %>
+
+<% content_for :page_title do %>
+Exportacion - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="title-elements-content-wrapper blr-header">
+            <%= image_tag "exportacion.png", class: "top-icon-title-element" %>
+            <h1 class="h2-title-elements-content text-red inline-block-vat">EXPORTACIÓN</h1>
+            <%= image_tag "barra.png", class: "bar-top-title-header" %>
+        </div>
+        <div class="elements-grid-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-primary">
+                    <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="<%= empresa_path %>">La empresa</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Exportación</li>
+                </ol>
+            </nav>
+            <div class="inner-content-wrapper">
+                <p class="p-normal-text text-black align-left">El Grupo Cavallaro ha sabido mantener desde sus inicios,
+                    y pasando por varias generaciones, la disciplina y la idoneidad en los procesos de elaboración
+                    Industrial. Esto generó varios reconocimientos en América Latina y Europa, identificando al Grupo
+                    Cavallaro como una empresa seria que impone calidad y economía sobre la base de políticas
+                    productivas sumamente rigurosas. La calidad de la materia prima sumada a la capacidad de los
+                    recursos humanos de la compañía hicieron que mercados internacionales se interesen en el portafolio
+                    de productos del Grupo Cavallaro. Hoy día el Grupo Cavallaro exporta regularmente a 10 países, con
+                    marcas propias y marcas de terceros.</p>
+                <p class="p-normal-title text-red align-left mt20">REPRESENTANTES DE LA REGIÓN</p>
+
+                <div id="map" class="map-wrapper"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% content_for :scripts do %>
+
+
+<script>
+    function initMap() {
+        var markers = [];
+        var mapCenter = new google.maps.LatLng(-18.409259, -61.816839)
+
+        // Custom options for the map.
+        var myOptions = {
+            scrollwheel: false,
+            zoom: 4,
+            center: mapCenter,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: [{ "featureType": "all", "stylers": [{ "saturation": -100 }, { "gamma": 0.5 }] }]
+        };
+
+        // Create Google maps object.
+        var map = new google.maps.Map(document.getElementById('map'), myOptions);
+
+        var data = [
+            //Paraguay
+            {
+                'id': 1,
+                'title': 'Grupo Cavallaro',
+                'content': '<div class="infowindow-wrapper">' +
+                    '<h4 class="title-text-infowindow text-red">Grupo Cavallaro</h4>' +
+                    '<p class="p-text-infowindow text-black align-left"><i class="fas fa-map-marker-alt text-red mrb5"></i> Ruta 1 Km 18 - Capiatá - Paraguay.</p>' +
+                    '<p class="p-text-infowindow text-black align-left"><i class="fas fa-phone text-red mrb5"></i>+59521 579 717 / 579 648</p>' +
+                    '<p class="p-text-infowindow text-black align-left"><i class="fas fa-envelope text-red mrb5"></i> seleccion@cavallaro.com.py</p>' +
+                    '</div>',
+                'position': {
+                    'lat': -25.375994,
+                    'lng': -57.476645
+                }
+            },
+            <% @representatives.each do | representative | %>
+        {
+            'id': <%= representative.id + 1 %>,
+            'title': '<%= representative.name %>',
+            'content': '<div class="infowindow-wrapper">' +
+                '<h4 class="title-text-infowindow text-red"><%= representative.name %></h4>' +
+                `<p class="p-text-infowindow text-black align-left"><i class="fas fa-map-marker-alt text-red mrb5"></i> <%= representative.address.html_safe %></p>` +
+                '<p class="p-text-infowindow text-black align-left"><i class="fas fa-phone text-red mrb5"></i> <%= representative.phone %></p>' +
+                '<p class="p-text-infowindow text-black align-left"><i class="fas fa-envelope text-red mrb5"></i> <%= representative.email %></p>' +
+                '<p class="p-text-infowindow text-black align-left"><i class="fas fa-link text-red mrb5"></i> <%= representative.website %></p>' +
+                '</div>',
+            'position': {
+                'lat': <%= representative.latitude.present? ? representative.latitude : "-25.375994" %>,
+                'lng': <%= representative.longitude.present? ? representative.longitude : "-57.476645" %>
+            }
+        },
+            <% end %>
+
+
+        ]
+
+        var infoWindowWidth = 150;
+
+        // Mobile portrait.
+        if (window.matchMedia("(max-width: 567px)").matches) {
+            infoWindowWidth = 220;
+        }
+
+        // Mobile mid portrait.
+        if (window.matchMedia("(min-width: 568px) and (max-width: 739px)").matches) {
+            infoWindowWidth = 270;
+        }
+
+        // Tablet portrait.
+        if (window.matchMedia("(min-width: 740px) and (max-width: 999px)").matches) {
+            infoWindowWidth = 390;
+        }
+
+        // Tablet mid portrait and so on.
+        if (window.matchMedia("(min-width: 1000px").matches) {
+            infoWindowWidth = 500;
+        }
+
+        // Create infowindow Object.
+        var infowindow = new google.maps.InfoWindow({
+            maxWidth: infoWindowWidth
+        });
+
+        // Assign infowindow close event when the user clicks on the map.
+        google.maps.event.addListener(map, 'click', function () {
+            infowindow.close();
+        });
+
+        for (var i = 0; i < data.length; i++) {
+
+            var current = data[i];
+            var marker = new google.maps.Marker({
+                position: { 'lat': current.position.lat, 'lng': current.position.lng },
+                map: map,
+                title: current.title
+            });
+
+            google.maps.event.addListener(marker, 'click',
+                (function (marker, content, infowindow) {
+                    return function () {
+                        infowindow.setContent(content);
+                        infowindow.open(map, marker);
+                    };
+                })(marker, current.content, infowindow)); //All the parameters needed in the closure.
+        }
+    }
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7UyYk-ADZCCrsQ55cYDJyzILfJCPafQM&callback=initMap"></script>
+
+<% end %>

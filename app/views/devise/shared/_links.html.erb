@@ -1,0 +1,68 @@
+<%#- if controller_name != 'sessions' %>
+<%#= link_to "INGRESAR", new_session_path(resource_name) %><br />
+<%# end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+
+<%- if devise_mapping.omniauthable? %>
+<div class="form-group align-center">
+  <span class="text-grey span-text-form-input">Ingresar con: </span>
+
+
+  <%= link_to omniauth_authorize_path('user', 'facebook'), style: 'display: inline-block; margin-left: 20px;' do %>
+  <div style="display: flex;
+  background-color: #4267b2;
+  color: #fff;
+  font-weight: 900;
+  font-size: 15px;
+  height: 40px;
+  width: 130px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;">
+    <i class="fab fa-facebook-f mr-3"></i>
+    <p class="text-white m-0">Facebook</p>
+  </div>
+  <% end %>
+
+  <%= link_to omniauth_authorize_path('user', 'google_oauth2'), style: 'display: inline-block; margin-left: 20px;' do %>
+  <div style="display: flex;
+  background-color: #b24242;
+  color: #fff;
+  font-weight: 900;
+  font-size: 15px;
+  height: 40px;
+  width: 130px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;">
+    <i class="fab fa-google mr-3"></i>
+    <p class="text-white m-0">Google</p>
+  </div>
+  <% end %>
+
+</div>
+
+<div class="form-group align-center">
+  <span class="text-grey span-text-form-input">¿No tenés una cuenta?</span>
+  <%= link_to "Registrate", new_registration_path(resource_name), class:"inline-text link-text-form-input text-dark-grey" %>
+</div>
+<% end %>
+
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+<div class="form-group align-center">
+  <span class="text-grey span-text-form-input">¿No recuerdas tu contrase&ntilde;a?</span>
+  <%= link_to "Recuperar", new_password_path(resource_name), class:"inline-text link-text-form-input text-dark-grey" %>
+</div>
+<% end %>
+
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+<%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+<% end %>
+
+<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+<%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+<% end %>
+
+
+<% end %>

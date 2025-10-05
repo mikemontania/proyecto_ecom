@@ -1,0 +1,63 @@
+<% @internal_title="Configuración" %>
+<% @page_title="Configuración" %>
+
+
+<%= form_with(model: @settings, local: true, :url=> panel_settings_update_path, class: "form-horizontal") do
+  |form| %>
+<% if @settings.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@settings.errors.count, "error" ) %> prohibited this object from being saved:
+    </h2>
+
+    <ul>
+      <% @settings.errors.full_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<div class="form-group row">
+  <%= form.label "Mínimo de compra:" , class: "col-3 col-form-label" %>
+  <div class="col-4">
+    <%= form.number_field :minimum_purchase, class:"form-control", min: 0%>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Enviar pedidos a servicio:" , class: "col-3 col-form-label" %>
+  <div class="col-9">
+    <label class="c-switch c-switch-sm c-switch-pill c-switch-success">
+      <%= form.check_box :send_orders_to_service, class:"c-switch-input" %>
+      <span class="c-switch-slider"></span>
+    </label>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Habilitar traducción del sitio:" , class: "col-3 col-form-label" %>
+  <div class="col-9">
+    <label class="c-switch c-switch-sm c-switch-pill c-switch-success">
+      <%= form.check_box :multilanguage, class:"c-switch-input" %>
+      <span class="c-switch-slider"></span>
+    </label>
+  </div>
+</div>
+
+<div class="form-group row">
+  <%= form.label "Email de contacto:" , class: "col-3 col-form-label" %>
+  <div class="col-4">
+    <%= form.email_field :contact_email, class:"form-control" %>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-12">
+    <%= form.submit "Actualizar" , class: "btn btn-success m-5" %>
+  </div>
+</div>
+<% end %>

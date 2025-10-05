@@ -1,0 +1,54 @@
+<div class="global-content-box secc_cart mb-5 pb-5">
+    <div class="col-12 col-md-12 col-xl-11 col-xxl-9 m-0 p-0 mx-auto">
+        <div class="row m-0 p-0">
+            <div class="col-12 m-0 p-0 list-top-box mt-5">
+                <i class="far fa-shopping-cart fa-3x mx-auto"></i>
+                <div class="list-title-text-token"><span>Catastrar tarjeta con Bancard</span></div>
+            </div>
+        </div>
+
+        <div class="information-bancard-wrapper">
+          <p>
+            Estimado usuario, <br>A continuación usted pasará por única vez por un proceso de validación con preguntas de seguridad. Para iniciar favor tener en cuenta las siguientes recomendaciones:
+          </p>
+
+          <ol>
+            <li>Verifique su número de cédula de identidad</li>
+            <li>Tenga a mano sus tarjetas de crédito y débito activas</li>
+            <li>Verifique el monto y lugar de sus últimas compras en comercios o extracciones en cajeros</li>
+          </ol>
+        </div>
+
+        <div class="col-12 col-md-10 col-xl-9 col-xxl-7 m-0 p-0 mx-auto mb-5">
+            <div class="iframeBancard" id="iframe-container" style="width: 100%; margin: auto;"></div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .home-newslett-box {
+        display: none;
+    }
+</style>
+
+<%= content_for :top_script do %>
+
+  <script src="<%= ENV['BANCARD_URL'] %>/checkout/javascript/dist/bancard-checkout-3.0.0.js"></script>
+
+  <script>
+    styles = {
+          "form-background-color": "#001b60",
+          "button-background-color": "#4faed1",
+          "button-text-color": "#fcfcfc",
+          "button-border-color": "#dddddd",
+          "input-background-color": "#fcfcfc",
+          "input-text-color": "#111111",
+          "input-placeholder-color": "#111111"
+        };
+
+      window.onload = function () {
+          Bancard.Cards.createForm('iframe-container', '<%= @process_id %>', styles);
+      };
+  </script>
+
+<% end %>

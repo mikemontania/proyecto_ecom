@@ -1,0 +1,84 @@
+<%= form_with(model: product_discount, local: true,
+:url => (product_discount.new_record? ? panel_product_discounts_path : panel_product_discount_path(product_discount)),
+class: "form-horizontal") do |form| %>
+<% if product_discount.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(product_discount.errors.count, "error") %> prohibited this product_discount from being saved:</h2>
+
+  <ul>
+    <% product_discount.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="form-group row">
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Fecha inicio", class: "col-5 col-form-label" %>
+      <div class="col-7">
+        <%= form.date_select :begin_date,
+        {:order => [:day, :month, :year], :start_year => 2020, :end_year => 2050},
+        {:class => 'custom_select'}%>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Fecha fin", class: "col-5 col-form-label" %>
+      <div class="col-7">
+        <%= form.date_select :end_date,
+        {:order => [:day, :month, :year], :start_year => 2020, :end_year => 2050},
+        {:class => 'custom_select'}%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Cantidad minima", class: "col-6 col-form-label" %>
+      <div class="col-6">
+        <%= form.number_field :min_quantity, class:"form-control", min: 0%>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Cantidad maxima", class: "col-6 col-form-label" %>
+      <div class="col-6">
+        <%= form.number_field :max_quantity, class:"form-control", min: 1%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Producto", class: "col-5 col-form-label" %>
+      <div class="col-7">
+        <%= form.select(:internal_product_id, InternalProduct.where(active: :true).collect {|c| ["#{c.internal_code} - #{c.full_name("es")}", c.id]}, {}, {:class => 'custom-select'}) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Descuento %", class: "col-6 col-form-label" %>
+      <div class="col-6">
+        <%= form.number_field :discount_rate, class:"form-control", min: 0%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group row">
+  <div class="col-12">
+    <%= form.submit (product_discount.new_record? ? "Crear" : "Actualizar" ), class: "btn btn-success m-5" %>
+    <%= link_to 'Cancelar', panel_product_discounts_path, data: { turbolinks: false }, class: "btn btn-secondary m-5" %>
+  </div>
+</div>
+
+<% end %>

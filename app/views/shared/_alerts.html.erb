@@ -1,0 +1,23 @@
+<% if !notice.blank? %>
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <%= notice %>
+    <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span
+                                                             aria-hidden="true">×</span></button>
+  </div>
+<% end %>
+
+<% if !alert.blank? %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= alert %>
+    <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span
+                                                             aria-hidden="true">×</span></button>
+  </div>
+<% end %>
+
+<% if flash[:warning].present? %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= flash[:warning] %>
+    <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span
+                                                             aria-hidden="true">×</span></button>
+  </div>
+<% end %>

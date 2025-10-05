@@ -1,0 +1,124 @@
+<%= form_with(model: page, local: true, :url => (page.new_record? ? panel_pages_path : panel_page_path(page)), class: "form-horizontal") do |form| %>
+<% if page.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(page.errors.count, "error") %> prohibited this page from being saved:</h2>
+
+  <ul>
+    <% page.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="col-12">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#es" role="tab" aria-controls="es">
+        <i class="c-icon cif-py"></i></a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#en" role="tab" aria-controls="en">
+        <i class="c-icon cif-us"></i></a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#br" role="tab" aria-controls="br">
+        <i class="c-icon cif-br"></i></a></li>
+  </ul>
+  <br />
+  <div class="tab-content">
+
+    <div class="tab-pane active" id="es" role="tabpanel">
+      <div class="form-group row">
+        <%= form.label "Título", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :title_es, class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= form.label "Contenido", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.rich_text_area :content_es %>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="en" role="tabpanel">
+      <div class="form-group row">
+        <%= form.label "Título", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :title_en, class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= form.label "Contenido", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.rich_text_area :content_en, class:"form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="br" role="tabpanel">
+      <div class="form-group row">
+        <%= form.label "Título", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :title_br, class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= form.label "Contenido", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.rich_text_area :content_br, class:"form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="form-group row">
+      <%= form.label "Orden", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :order, class:"form-control"%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Icono", class: "col-2 col-form-label" %>
+
+      <% if page.icon.attached? %>
+
+      <div class="col-3">
+        <%= image_tag page.icon.variant(resize: "75x75!") %>
+      </div>
+      <div class="col-7">
+        <div class="custom-file">
+          <%= form.file_field :icon, class:"custom-file" %>
+        </div>
+      </div>
+
+      <% else %>
+      <div class="col-10">
+        <div class="custom-file">
+          <%= form.file_field :icon, class:"custom-file" %>
+        </div>
+      </div>
+
+      <% end %>
+
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Activo", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <label class="c-switch c-switch-sm c-switch-pill c-switch-success">
+          <%= form.check_box :active, class:"c-switch-input" %>
+          <span class="c-switch-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-12">
+        <%= form.submit (page.new_record? ? "Crear" : "Actualizar" ), class: "btn btn-success m-5" %>
+        <%= link_to 'Cancelar', panel_pages_path, data: { turbolinks: false }, class: "btn btn-secondary m-5" %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<% end %>

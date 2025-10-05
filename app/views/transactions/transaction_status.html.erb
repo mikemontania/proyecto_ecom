@@ -1,0 +1,98 @@
+<% content_for :page_title do %>
+  Gracias por su compra - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="col-12 col-md-11 col-xxl-10 m-0 p-0 mt-5 mb-5 mx-auto pasos_box">
+  <ul class="list-unstyled multi-steps">
+    <li>Dirección de env&iacute;o y facturación</li>
+    <li>Resumen de compra</li>
+    <li>Realizar pago</li>
+    <li class="final-step">Confirmación de compra</li>
+  </ul>
+</div>
+
+<div class="global-content-box products-home pb-5">
+  <div class="row m-0 p-0">
+    <div class="col-12 col-md-12 col-xxl-6" style="margin: 0 auto; text-align: center;">
+
+
+      <% if @transaction.transaction_status == 'confirmed' %>
+        <h3 class="title-confirm" style="color: #31988c;">Transacción Aprobada</h3>
+      <% else %>
+        <h3 class="title-confirm" style="color: #CE0003;">Transaccción rechazada</h3>
+      <% end %>
+
+      <table class="emp-sales">
+        <tbody>
+          <tr>
+            <th scope="row">Transacción Bancard</th>
+            <td><%= @transaction.id %></td>
+          </tr>
+          <tr>
+            <th scope="row">Proceso de compra</th>
+            <td><%= @transaction.shop_process_id %></td>
+          </tr>
+          <tr>
+            <th scope="row">Monto</th>
+            <td>
+              <%= number_to_currency(@transaction.total_amount, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Procesadora</th>
+            <td>Bancard</td>
+          </tr>
+          <tr>
+            <th scope="row">Fecha</th>
+            <td><%= @transaction.transaction_date.strftime('%d/%m/%Y %H:%M ') %></td>
+          </tr>
+          <tr>
+            <th scope="row">Ticket</th>
+            <td><%= @transaction.ticket_number.nil? ? "N/A" : @transaction.ticket_number %></td>
+          </tr>
+
+          <% if @transaction.response_description.nil? %>
+            <tr>
+              <th scope="row">Descripción</th>
+              <td>N/A</td>
+            </tr>
+          <% else %>
+            <tr>
+              <th scope="row">Descripción</th>
+              <td><%= @transaction.response_description.capitalize.html_safe %></td>
+            </tr>
+          <% end %>
+
+          <tr>
+            <th scope="row">Número de Autorización</th>
+            <td><%= @transaction.auth_number.nil? ? "N/A" : @transaction.auth_number %></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <% if @transaction.transaction_status == 'confirmed' %>
+        <div class="form-group row mt-5">
+          <div class="col-12">
+            <% if false %>
+              <% if @first_order.zero? %>
+                <h6 class="h6-msg-greeting-lg">¡Esperamos que hayas disfrutado tu primera compra!</h6>
+              <% else %>
+              <% end %>
+            <% end %>
+
+            <h6 class="h6-msg-greeting-lg">¡Esperamos que hayas disfrutado tu compra!</h6>
+            <h6 class="h6-msg-greeting-sm">Nos ayudas a mejorar nuestro servicio con una pequeña encuesta?</h6>
+            <%= link_to "Ir a la encuesta", 'https://es.surveymonkey.com/r/DM6B3GF', class: "btn survey-button", target: "_blank" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-group row">
+        <div class="col-12">
+          <%= link_to "Volver al Inicio", root_path, class: "bg-red btn-submit-login brd0 text-white mt-5" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

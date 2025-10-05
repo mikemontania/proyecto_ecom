@@ -1,0 +1,33 @@
+//Custom sass classes for Panel layout.
+
+.pagination {
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 1.3rem;
+}
+
+.page-item.active .page-link {
+    border-color: #930809;
+    background: #930809;
+    color: white;
+}
+
+.page-link {
+    color: #930809;
+    &:hover {
+        color: #930809;
+        text-decoration: underline;
+        background: white;
+    }
+}
+
+.search-items {
+    margin-bottom: 1.5rem;
+}
+
+.c-sidebar-nav-title {
+    color: white !important;
+    font-size: 13px !important;
+    border-bottom: 1px solid #ffffff63;
+    margin-top: 2rem;
+}

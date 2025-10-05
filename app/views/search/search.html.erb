@@ -1,0 +1,27 @@
+<% content_for :og_fb do %>
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Resultados de busqueda - Cavallaro S.A.C.e.I." />
+<meta property="og:description" content="Resultados de busqueda" />
+<!-- <meta property="og:image" content="{{ asset('images/fb17.jpg') }}" /> -->
+<% end %>
+
+<% content_for :page_title do %>
+Resultados de búsqueda: <%= @q %> - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="title-elements-content-wrapper bg-red no-border">
+            <h2 class="h2-title-elements-content text-white inline-block-vat">Resultados de búsqueda: <%= @q %> |
+                <%= @product_list.count %> productos.</h2>
+        </div>
+        <div class="elements-grid-wrapper">
+
+            <% @product_list.each do |product| %>
+            <%= render "partials/product_grid_item",  product: product, :cart_id => (@shopping_cart.nil? ? 0 : @shopping_cart.id)  %>
+            <% end %>
+
+        </div>
+    </div>
+</div>

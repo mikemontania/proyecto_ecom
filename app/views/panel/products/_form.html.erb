@@ -1,0 +1,250 @@
+<%= form_with(model: product, local: true, :url => (product.new_record? ? panel_products_path : panel_product_path(product)), class: "form-horizontal") do |form| %>
+<% if product.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+  <ul>
+    <% product.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="col-12">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#es" role="tab" aria-controls="es">
+        <i class="c-icon cif-py"></i></a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#en" role="tab" aria-controls="en">
+        <i class="c-icon cif-us"></i></a></li>
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#br" role="tab" aria-controls="br">
+        <i class="c-icon cif-br"></i></a></li>
+  </ul>
+  <br />
+  <div class="tab-content">
+    <div class="tab-pane active" id="es" role="tabpanel">
+
+      <div class="form-group row">
+        <%= form.label "Nombre", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :name_es, class:"form-control", required: true %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label "Descripción", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_area :description_es, class:"form-control", required: true %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label "Propiedades", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_area :properties_es, class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label "Usos recomendados", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_area :uses_es, class:"form-control" %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tab-pane" id="en" role="tabpanel">
+
+      <div class="form-group row">
+        <%= form.label "Nombre", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :name_en, class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label "Descripción", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_area :description_en, class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label "Propiedades", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_area :properties_en, class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label "Usos recomendados", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_area :uses_en, class:"form-control" %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tab-pane" id="br" role="tabpanel">
+
+      <div class="form-group row">
+        <%= form.label "Nombre", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_field :name_br, class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label "Descripción", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_area :description_br, class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label "Propiedades", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_area :properties_br, class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label "Usos recomendados", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.text_area :uses_br, class:"form-control" %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-2">
+      <div class="form-group row">
+        <%= form.label "Orden", class: "col-5 col-form-label" %>
+        <div class="col-7">
+          <%= form.text_field :order, class:"form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group row">
+        <%= form.label "Activo", class: "col-5 col-form-label" %>
+        <div class="col-7 align-self-center">
+          <label class="c-switch c-switch-sm c-switch-pill c-switch-success">
+            <%= form.check_box :active, class:"c-switch-input" %>
+            <span class="c-switch-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group row">
+        <%= form.label "Destacado", class: "col-5 col-form-label" %>
+        <div class="col-7 align-self-center">
+          <label class="c-switch c-switch-sm c-switch-pill c-switch-warning">
+            <%= form.check_box :featured, class:"c-switch-input" %>
+            <span class="c-switch-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group row">
+        <%= form.label "Marca", class: "col-3 col-form-label" %>
+        <div class="col-9">
+          <%= form.select(:brand_id, Brand.where(active: :true).collect {|c| [c.name, c.id]}, {}, {:class => 'custom-select'}) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group row">
+        <%= form.label "Categoría", class: "col-3 col-form-label" %>
+        <div class="col-9">
+          <%= form.select(:category_id, Category.where(active: :true).collect {|c| [c.name, c.id]}, {}, {:class => 'custom-select'}) %>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group row">
+        <%= form.label "Subcategoría", class: "col-3 col-form-label" %>
+        <div class="col-9">
+          <%= form.select(:subcategory_id, Subcategory.where(active: :true).collect {|c| [c.name, c.id]}, {}, {:class => 'custom-select'}) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-12">
+    <button type="button" class="btn btn-danger m-5 text-white" data-toggle="modal"
+      data-target="#internal-products-modal">Productos
+      Internos</button>
+
+    <%= form.submit (product.new_record? ? "Crear" : "Actualizar" ), class: "btn btn-success m-5" %>
+
+    <%= link_to 'Cancelar', panel_products_path, class: "btn btn-secondary m-5", data: { turbolinks: false } %>
+  </div>
+</div>
+
+<div class="modal fade internal-products-modal" id="internal-products-modal" tabindex="-1" role="dialog"
+  aria-labelledby="internal-products-modal" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= product.name %>: Productos Internos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="internal_products" class="modal-body">
+        <%= link_to_add_association "<span class='cil-plus btn-icon mr-2'></span> Agregar".html_safe,
+        form,
+        :internal_products,
+        class: "btn btn-success",
+        data: {
+          "association-insertion-method" => :prepend,
+          "association-insertion-node" => "#internal_products_list"
+           } %>
+
+
+        <table class="table table-responsive-sm table-striped table-sm mt-2" id="tableProducts">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>UM</th>
+              <th>Presentación</th>
+              <th>Variedad</th>
+              <th>Precio</th>
+              <th>Activo</th>
+              <th>Destacado</th>
+              <th>Principal</th>
+              <th>Nuevo</th>
+              <th>Imagen</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody id="internal_products_list">
+            <%= form.fields_for :internal_products do |ip| %>
+              <%= render 'internal_product_fields', f: ip %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="buttonTableProducts">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>

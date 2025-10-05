@@ -1,0 +1,4 @@
+<% @internal_title = "Visualizar Pedido" %>
+<% @page_title = "Visualizar Pedido" %>
+
+<pre><%= JSON.pretty_generate(@order.to_json_for_service) %></pre>

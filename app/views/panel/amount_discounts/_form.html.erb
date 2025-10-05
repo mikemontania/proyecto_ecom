@@ -1,0 +1,75 @@
+<%= form_with(model: amount_discount, local: true,
+:url => (amount_discount.new_record? ? panel_amount_discounts_path : panel_amount_discount_path(amount_discount)),
+class: "form-horizontal") do |form| %>
+<% if amount_discount.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(amount_discount.errors.count, "error") %> prohibited this amount_discount from being saved:</h2>
+
+  <ul>
+    <% amount_discount.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="form-group row">
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Importe minimo", class: "col-6 col-form-label" %>
+      <div class="col-6">
+        <%= form.number_field :min_amount, class:"form-control", min: 0%>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Importe maximo", class: "col-6 col-form-label" %>
+      <div class="col-6">
+        <%= form.number_field :max_amount, class:"form-control", min: 1%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Fecha inicio", class: "col-5 col-form-label" %>
+      <div class="col-7">
+        <%= form.date_select :begin_date,
+        {:order => [:day, :month, :year], :start_year => 2020, :end_year => 2050},
+        {:class => 'custom_select'}%>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Fecha fin", class: "col-5 col-form-label" %>
+      <div class="col-7">
+        <%= form.date_select :end_date,
+        {:order => [:day, :month, :year], :start_year => 2020, :end_year => 2050},
+        {:class => 'custom_select'}%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-6">
+    <div class="form-group row">
+      <%= form.label "Descuento %", class: "col-6 col-form-label" %>
+      <div class="col-6">
+        <%= form.number_field :discount_rate, class:"form-control", min: 0%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group row">
+  <div class="col-12">
+    <%= form.submit (amount_discount.new_record? ? "Crear" : "Actualizar" ), class: "btn btn-success m-5" %>
+    <%= link_to 'Cancelar', panel_amount_discounts_path, data: { turbolinks: false }, class: "btn btn-secondary m-5" %>
+  </div>
+</div>
+<% end %>

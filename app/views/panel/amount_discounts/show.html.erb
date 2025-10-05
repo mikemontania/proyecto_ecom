@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Min amount:</strong>
+  <%= @amount_discount.min_amount %>
+</p>
+
+<p>
+  <strong>Max amount:</strong>
+  <%= @amount_discount.max_amount %>
+</p>
+
+<p>
+  <strong>Discount rate:</strong>
+  <%= @amount_discount.discount_rate %>
+</p>
+
+<p>
+  <strong>Begin date:</strong>
+  <%= @amount_discount.begin_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @amount_discount.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_amount_discount_path(@amount_discount) %> |
+<%= link_to 'Back', amount_discounts_path %>

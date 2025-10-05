@@ -1,0 +1,14 @@
+<div class="global-content-box products-home">
+    <div class="row m-0 p-0">
+        <div class="col-12 col-md-12 col-xxl-12">
+            <h3>Transacci&oacute;n cancelada.</h3>
+            <ul>
+                <li>Proceso de compra: <%= @transaction.shop_process_id %></li>
+                <li>Total compra: GS. <%= number_with_delimiter(@transaction.total_amount, :delimiter => '.') %></li>
+                <li>Fecha: <%= @transaction.transaction_date %></li>
+                <li>Hora: <%= @transaction.transaction_time %></li>
+                <li>Detalle: Operación cancelada por el usuario.</li>
+            </ul>
+        </div>
+    </div>
+</div>

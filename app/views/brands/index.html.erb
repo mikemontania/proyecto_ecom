@@ -1,0 +1,56 @@
+<% content_for :og_fb do %>
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Nuestras Marcas - Cavallaro S.A.C.e.I." />
+<% end %>
+
+<% content_for :page_title do %>
+Nuestras Marcas - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="title-elements-content-wrapper blr-header">
+            <h1 class="h2-title-elements-content text-red inline-block-vat">NUESTRAS MARCAS</h1>
+            <%= image_tag "barra.png", class: "bar-top-title-header" %>
+        </div>
+        <div class="elements-grid-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-primary">
+                    <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Marcas</li>
+                </ol>
+            </nav>
+
+            <% @brands.each do |brand| %>
+
+            <div class="item-elements-grid">
+                <div class="img-desc-item-elements-wrap only-8-elements">
+                    <a href="<%= brand_path brand %>" title="<%= brand.name %>">
+                        <div class="img-item-elements-brands">
+                            <% if brand.logo.attached? %>
+                            <%= image_tag brand.logo, class: "img-item-element", alt: "Logo #{brand.name}" %>
+                            <% end %>
+                        </div>
+                        <div class="item-desc-elements">
+                            <h2 class="item-name-element"><%= brand.name %></h2>
+                        </div>
+                    </a>
+                </div>
+                <div class="buttons-item-elements-wrap">
+                    <div class="buttons-item-centered">
+                        <a href="<%= brand_path brand %>" title="" class="button-item-elements inline-block-vat">
+                            <div class="icon-button-item-element-wrap bg-dark-grey inline-block-vat">
+                                <%= image_tag "icono-lupa.png", class: "img-icon-item-element" %>
+                            </div>
+                            <span class="text-button-item-element inline-block-vat">VER PRODUCTOS</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <% end %>
+
+        </div>
+    </div>
+</div>

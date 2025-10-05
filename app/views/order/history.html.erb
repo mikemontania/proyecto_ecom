@@ -1,0 +1,33 @@
+<% content_for :page_title do %>
+Mis Pedidos - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="title-elements-content-wrapper blr-header brd-bottom-title">
+  <h1 class="h2-title-elements-content text-red inline-block-vat">Mis pedidos</h1>
+</div>
+
+<div class="orders-wrapper">
+  <div class="order-list-wrapper">
+    <% @orders.each do |order| %>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h4 class='total-resume-text-cart text-center'>#<%= order.id %></h4>
+        <h5 class="card-title font-weight-bold text-center">
+          <%= order.created_at.strftime('%F') %></h5>
+        <p class="card-text text-center" style="font-family: 'Qregular';">
+          Total pagado: <br />
+          <b>
+            <%= number_to_currency(order.net_total, unit: 'GS', format: '%n %u', precision: 0, delimiter: '.', separator: ',' ) %>
+          </b>
+        </p>
+        <div class="align-center">
+          <%= link_to "Ver detalle", order_history_detail_path(order.id), class: 'btn btn-outline-danger' %>
+        </div>
+
+      </div>
+    </div>
+    <% end %>
+
+
+  </div>
+</div>

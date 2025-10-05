@@ -1,0 +1,130 @@
+<% content_for :og_fb do %>
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Historia - Cavallaro S.A.C.e.I." />
+<meta property="og:description"
+    content="Una empresa con tanta trayectoria y tradición tiene siempre una historia de trabajo y pasión. El camino recorrido es el que hace que Cavallaro sea la empresa que es hoy." />
+<meta property="og:image" content="<%= request.host_with_port + url_for( image_path "1902.jpg") %>" />
+<% end %>
+
+<% content_for :page_title do %>
+Nuestra Historia - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="block-elements-wrap">
+        <div class="title-elements-content-wrapper blr-header">
+            <%= image_tag "historia.png", class: "top-icon-title-element" %>
+            <h1 class="h2-title-elements-content text-red inline-block-vat">NUESTRA HISTORIA</h1>
+            <%= image_tag "barra.png", class: "bar-top-title-header" %>
+        </div>
+        <div class="elements-grid-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-primary">
+                    <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="<%= empresa_path%>">La empresa</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Historia</li>
+                </ol>
+            </nav>
+            <div class="inner-content-wrapper">
+                <div class="text-top-img-wrapper">
+                    <div class="text-top-historia-wrapper">
+                        <p class="p-text-desc text-black">Una empresa con tanta trayectoria y tradición tiene siempre
+                            una historia de trabajo y pasión. El camino recorrido es el que hace que Cavallaro sea la
+                            empresa que es hoy.</p>
+                    </div>
+                    <div class="img-top-historia-wrapper">
+                        <%= image_tag "donmariano.png", alt: "Don Mariano" %>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-content-wrapper left">
+                        <div class="content">
+                            <h2 class="h2-year-timeline text-red">1902</h2>
+                            <%= image_tag "1902.jpg", class: "img-timeline" %>
+                            <p class="p-title-timeline text-red">La llegada de Don Mariano a Paraguay</p>
+                            <p class="p-normal-text align-left">Proveniente del sur de Italia, Don Mariano Cavallaro
+                                Prestti llega a Asunción y monta su primera fábrica de jabones elaborados de manera
+                                totalmente artesanal.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content-wrapper right">
+                        <div class="content">
+                            <h2 class="h2-year-timeline text-red">1906</h2>
+                            <%= image_tag "1906.png", class: "img-timeline" %>
+                            <p class="p-title-timeline text-red">El inicio de una gran historia</p>
+                            <p class="p-normal-text align-left">Don Mariano abre su fábrica de jabones en un rústico
+                                galpón en un barrio asunceno, trabajando con una vieja prensa manejada de forma manual.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline-content-wrapper left">
+                        <div class="content">
+                            <h2 class="h2-year-timeline text-red">1942</h2>
+                            <%= image_tag "1942.png", class: "img-timeline" %>
+                            <p class="p-title-timeline text-red">El Legado</p>
+                            <p class="p-normal-text align-left">Sus Hijos Ignacio y José asumen la responsabilidad de
+                                continuar con el legado de la Familia.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content-wrapper right">
+                        <div class="content">
+                            <h2 class="h2-year-timeline text-red">1960</h2>
+                            <%= image_tag "1960.jpg", class: "img-timeline" %>
+                            <p class="p-title-timeline text-red">Cavallaro Hnos. S.A.C.e.I.</p>
+                            <p class="p-normal-text align-left">La empresa finalmente se constituye bajo el nombre de
+                                Cavallaro Hnos. S.A.C.e.I.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content-wrapper left">
+                        <div class="content">
+                            <h2 class="h2-year-timeline text-red">1982</h2>
+                            <%= image_tag "1982.png", class: "img-timeline" %>
+                            <p class="p-title-timeline text-red">De generación en generación</p>
+                            <p class="p-normal-text align-left">El legado de Don Mariano Cavallaro perdura bajo la
+                                conducción de la tercera generación de los Cavallaro.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content-wrapper right">
+                        <div class="content">
+                            <h2 class="h2-year-timeline text-red">1985</h2>
+                            <%= image_tag "1985.png", class: "img-timeline" %>
+                            <p class="p-title-timeline text-red">El crecimiento como fruto de un buen trabajo</p>
+                            <p class="p-normal-text align-left">Ante su crecimiento vertiginoso, la fábrica se traslada
+                                a su nueva y moderna sede en el Km. 18 de la Ruta I, jurisdicción de Capiata.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content-wrapper left">
+                        <div class="content">
+                            <h2 class="h2-year-timeline text-red">1997</h2>
+                            <%= image_tag "1997.png", class: "img-timeline" %>
+                            <p class="p-title-timeline text-red">Apuesta al desarrollo</p>
+                            <p class="p-normal-text align-left">Cavallaro apuesta al desarrollo y realiza una fuerte
+                                inversión en maquinarias que ayuden a aumentar su producción.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content-wrapper right">
+                        <div class="content">
+                            <h2 class="h2-year-timeline text-red">1999</h2>
+                            <%= image_tag "1999.jpg", class: "img-timeline" %>
+                            <p class="p-title-timeline text-red">Ampliación del mercado</p>
+                            <p class="p-normal-text align-left">Con el objetivo de ampliar el mercado, se inician los
+                                planes para la fabricación de jabones de tocador.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-content-wrapper left">
+                        <div class="content">
+                            <h2 class="h2-year-timeline text-red">2015</h2>
+                            <%= image_tag "2015.jpg", class: "img-timeline" %>
+                            <p class="p-title-timeline text-red">La historia continúa</p>
+                            <p class="p-normal-text align-left">En la actualidad, Cavallaro Hnos. S.A.C.e.I. es una
+                                marca
+                                totalmente posicionada, haciendo honor a la tradición familiar y al concepto de calidad
+                                que fue y será siempre su mayor motivo de orgullo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

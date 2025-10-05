@@ -1,0 +1,36 @@
+FROM ruby:2.7.1
+
+RUN apt update && apt install -y nodejs npm
+
+# set /app as application folder inside the container
+RUN mkdir /app
+WORKDIR /app
+
+RUN gem install bundler -v 2.2.24
+ENV BUNDLER_VERSION=2.2.24
+
+RUN npm install -g yarn
+
+# copy gemfiles to application folder
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+
+
+# install all app dependencies
+RUN bundle install
+
+COPY package.json .
+COPY yarn.lock .
+
+RUN yarn install --check-files
+
+# copy all the application files to the container
+COPY . .
+
+# set timezone
+ENV TZ=America/Asuncion
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+COPY entrypoint_sidekiq.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint_sidekiq.sh
+ENTRYPOINT ["entrypoint_sidekiq.sh"]

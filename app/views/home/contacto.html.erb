@@ -1,0 +1,116 @@
+<% content_for :og_fb do %>
+  <meta property="og:url" content="<%= request.original_url %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contacto - Cavallaro S.A.C.e.I." />
+  <meta property="og:description" content="Podés comunicarte con nosotros a través de todos estos medios." />
+<% end %>
+
+<% content_for :page_title do %>
+  Contacto - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+  <div class="block-elements-wrap">
+    <div class="title-elements-content-wrapper blr-header">
+      <%= image_tag "contacto.png" , class: "top-icon-title-element" %>
+      <h1 class="h2-title-elements-content text-red inline-block-vat">CONTACTO</h1>
+      <%= image_tag "barra.png" , class: "bar-top-title-header" %>
+    </div>
+    <div class="elements-grid-wrapper">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-primary">
+          <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="<%= empresa_path%>">La empresa</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Contacto</li>
+        </ol>
+      </nav>
+      <div class="inner-content-wrapper">
+        <p class="p-normal-text align-left text-black">Estamos para servirte. Queremos escuchar
+          tu opinión,
+          comentarios, sugerencias o reclamos.</p>
+        <p class="p-normal-text align-left text-black">Podés comunicarte con nosotros a través
+          de todos estos
+          medios.</p>
+        <div class="info-content-wrapper">
+          <div class="form-box-wrap">
+            <p class="p-normal-title text-red align-left">Escribinos un mensaje</p>
+            <div class="form-wrapper">
+
+              <%= form_with url: send_contact_email_path, method: 'post' ,
+                id: "formContact" , local: true do %>
+                <div class="form-group align-left">
+                  <label class="text-grey label-input-login"
+                    for="input-nombre">Nombre:</label>
+                  <input type="text" class="form-control input-form-normal" id="name"
+                  name="name" aria-describedby="emailHelp" placeholder=""
+                  required>
+                </div>
+                <div class="form-group align-left">
+                  <label class="text-grey label-input-login"
+                    for="input-email">E-mail:</label>
+                  <input type="email" class="form-control input-form-normal"
+                  id="email" name="email" aria-describedby="emailHelp"
+                  placeholder="" required>
+                </div>
+                <div class="form-group align-left">
+                  <label class="text-grey label-input-login"
+                    for="input-asunto">Asunto:</label>
+                  <input type="text" class="form-control input-form-normal"
+                  id="subject" name="subject" aria-describedby="emailHelp"
+                  placeholder="" required>
+                </div>
+                <div class="form-group align-left">
+                  <label class="text-grey label-input-login"
+                    for="mensaje">Mensaje:</label>
+                  <textarea name="message" id="message"
+                    class="form-control text-area-form" rows="5"></textarea>
+                </div>
+
+                <%# if @show_checkbox_recaptcha %>
+                  <%= recaptcha_tags %>
+                <%# else %>
+                  <%#= recaptcha_v3(action: 'contact', site_key: ENV['RECAPTCHA_SITE_KEY_V3']) %>
+                <%# end %>
+
+                <div class="form-group">
+                  <input type="submit"
+                  class="bg-red btn-submit-contact brd0 text-white"
+                  value="ENVIAR">
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="info-box-wrap">
+            <div class="icon-text-info-box align-left">
+              <span class="left-icon-contact inline-block-vat phone-icon" role="img"
+                aria-label="timeline"></span>
+              <div class="text-info-wrapper">
+                <p class="p-text-information text-black"><span
+                    class="text-red">Atenci&oacute;n al
+                    Cliente</span> +59521 588 9000</p>
+                <div class="collapse" id="numeros">
+                  <p class="p-text-information text-black"><span
+                      class="text-red">Atenci&oacute;n al
+                      Cliente</span> +595981 733 001</p>
+                </div>
+                <a class="button-show-more-contact text-red" data-toggle="collapse"
+                  href="#numeros" aria-expanded="false" aria-controls="numeros"
+                  id="show-more-numeros">Ver más</a>
+              </div>
+            </div>
+            <div class="icon-text-info-box align-left">
+              <span class="left-icon-contact inline-block-vat location-icon" role="img"
+                aria-label="timeline"></span>
+              <div class="text-info-wrapper">
+                <p class="p-text-information text-black"><span
+                    class="text-red">F&aacute;brica</span>
+                  Ruta km. 18 Capiat&aacute;, Paraguay</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

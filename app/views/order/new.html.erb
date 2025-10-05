@@ -1,0 +1,304 @@
+<% content_for :event_google_manager do %>
+    <script>
+        var cartItems = JSON.parse("<%= j @allItems.to_json.html_safe %>");
+
+        var gtagData = {};
+
+        if(cartItems.length) {
+            "<% if @cupon.present? %>"
+                gtagData = {
+                    currency: 'PYG',
+                    items: cartItems,
+                    value: 0
+                };
+            "<% else %>"
+                gtagData = {
+                    currency: 'PYG',
+                    items: cartItems,
+                    value: 0
+                };
+            "<% end %>"
+
+            gtag('event', 'begin_checkout', gtagData);
+
+        } else {
+          console.log("Empty array for gtag.");
+        }
+
+    </script>
+<% end %>
+
+<div class="col-12 col-md-11 col-xxl-10 m-0 p-0 mt-5 mb-5 mx-auto pasos_box">
+    <ul class="list-unstyled multi-steps">
+        <li class="is-active">Dirección de env&iacute;o y facturación</li>
+        <li>Resumen de compra</li>
+        <li>Realizar el pago</li>
+        <li>Confirmación de compra</li>
+    </ul>
+</div>
+
+<% content_for :page_title do %>
+Completar pedido - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+    <div class="container">
+
+      <%# Check if user has name, id_number updated %>
+      <% if false %>
+
+        <% if current_user.id_type.nil? || current_user.firstname.nil? || current_user.id_number.nil? %>
+          <p class="warning-checkout-message">Necesitas actualizar tus datos de usuario para poder continuar con la compra, puede hacerlo desde tu <%= link_to "perfil", edit_user_registration_path %>.
+            <br>
+            Datos a actualizar:<br>
+            <% if current_user.id_type.nil? %>
+              - Tipo de documento<br>
+            <% end %>
+
+            <% if current_user.firstname.nil? %>
+              - Nombre / Razón Social<br>
+            <% end %>
+
+            <% if current_user.id_number.nil? %>
+              - Nro. de Documento / RUC<br>
+            <% end %>
+          <p>
+        <% end %>
+      <% end %>
+
+        <%= form_for(@order, url: order_create_path(@order), class: "form-horizontal") do |f| %>
+        <div class="row justify-content-between">
+            <% if @order.errors.any? %>
+            <div id="error_explanation">
+                <h2><%= pluralize(@order.errors.count, "error") %> prohibited this subsubcategory from being saved:
+                </h2>
+
+                <ul>
+                    <% @order.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                </ul>
+            </div>
+            <% end %>
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <h4 class="text-red login-title-top">Datos de entrega</h4>
+
+                <div class="form-group">
+                    <%= f.label :shipping_phone, 'Celular: *', class:"text-grey label-input-login" %>
+                    <%= f.text_field :shipping_phone, class: "form-control input-form-normal", required: true  %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :shipping_address, 'Dirección: *', class:"text-grey label-input-login" %>
+                    <%= f.text_field :shipping_address, id: "address", class: "form-control input-form-normal", required: true %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :shipping_city, 'Ciudad: *', class:"text-grey label-input-login" %>
+                    <%= f.select(:shipping_city, User::CITIES, {include_blank: 'Seleccionar...'}, {:class => 'custom-select', :required => 'true'}) %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :shipping_neighborhood, 'Barrio:', class:"text-grey label-input-login" %>
+                    <%= f.text_field :shipping_neighborhood, class: "form-control input-form-normal"  %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :shipping_observation, 'Observación:', class:"text-grey label-input-login" %>
+                    <%= f.text_field :shipping_observation, class: "form-control input-form-normal"  %>
+                </div>
+                <label class="form-check-label text-grey label-input-login mb-3">
+                    <%= f.check_box :use_different_billing_address,
+                    class:"form-check-input"
+                    %>
+                    Usar otra dirección de facturación.
+                </label>
+                <br />
+                <section id="billing_address" style="display: none;">
+                    <h4 class="text-red login-title-top">Datos de Facturación</h4>
+                    <br />
+                    <div class="form-group">
+                        <%= f.label :billing_address, 'Dirección:', class:"text-grey label-input-login" %>
+                        <%= f.text_field :billing_address, class: "form-control input-form-normal"%>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :billing_neighborhood, 'Barrio:', class:"text-grey label-input-login" %>
+                        <%= f.text_field :billing_neighborhood, class: "form-control input-form-normal"%>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :billing_city, 'Ciudad:', class:"text-grey label-input-login" %>
+                        <%= f.select(:billing_city, User::CITIES, {include_blank: 'Seleccionar...'}, {:class => 'custom-select'})%>
+                    </div>
+
+                    <div class="form-group">
+                        <%= f.label :billing_phone, 'Teléfono:', class:"text-grey label-input-login" %>
+                        <%= f.text_field :billing_phone, class: "form-control input-form-normal"%>
+                    </div>
+
+                    <div class="form-group">
+                        <%= f.label :billing_observation, 'Observación:', class:"text-grey label-input-login" %>
+                        <%= f.text_field :billing_observation, class: "form-control input-form-normal"%>
+                    </div>
+                </section>
+
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-5">
+                <h4 class="text-red login-title-top">Método de Entrega</h4>
+                <% if @cupon.present? %>
+                  <%= f.hidden_field :coupon_code, value: @cupon["cupon"] %>
+                  <%= f.hidden_field :coupon_discount, value: @cupon["descuento"] %>
+                <% end %>
+
+                <div class="form-group">
+                    <%= f.select(:delivery_method_id, DeliveryMethod.where(active: true).collect{|c| [c.name, c.id]}, {}, {:class => 'custom-select'}) %>
+                </div>
+
+                <div class="form-group" id="branch_section" style="display: none;">
+                    <%= f.label :branch_id, 'Sucursal:', class:"text-grey label-input-login" %>
+                    <%= f.select(:branch_id, Branch.where(active: true).collect{|c| [c.name, c.id]}, {}, {:class => 'custom-select'}) %>
+                </div>
+
+                <%= f.hidden_field :id, :value => f.object.id %>
+                <%= f.hidden_field :gross_total, :value => @shopping_cart.gross_total_amount %>
+                <%= f.hidden_field :discount_rate, :value => @shopping_cart.discount_rate %>
+                <%= f.hidden_field :discount_total, :value => @shopping_cart.discount_total %>
+                <%= f.hidden_field :net_total, :value => @shopping_cart.net_total_amount %>
+                <%= f.hidden_field :latitude, :value => f.object.user.latitude %>
+                <%= f.hidden_field :longitude, :value => f.object.user.longitude %>
+
+                <%# if false %>
+                  <h3 class="text-red login-title-top">Completar Pedido</h3>
+                  <div class="form-group">
+                      <%= f.label :tax_number_type, 'Tipo Documento:', class:"text-grey label-input-login" %>
+
+                      <select name="order[tax_number_type]" class="custom-select">
+                        <% User::DOCUMENT_TYPES.collect.each do |doc_type| %>
+                            <% if current_user.id_type.present? && current_user.id_type == doc_type[:value] %>
+                              <option value="<%= doc_type[:value] %>" selected><%= doc_type[:name] %></option>
+                            <% else %>
+                              <option value="<%= doc_type[:value] %>"><%= doc_type[:name] %></option>
+                            <% end %>
+                        <% end %>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <%= f.label :tax_number, 'Número de Documento:', class:"text-grey label-input-login" %>
+                      <% if current_user.id_number.present? %>
+                        <%= f.text_field :tax_number, value: current_user.id_number, class: "form-control input-form-normal", required: true  %>
+                      <% else %>
+                        <%= f.text_field :tax_number, class: "form-control input-form-normal", required: true  %>
+                      <% end %>
+                  </div>
+
+                  <div class="form-group">
+                      <%= f.label :tax_name, 'Nombre o Razón Social:', class:"text-grey label-input-login" %>
+                      <%= f.text_field :tax_name, class: "form-control input-form-normal", required: true  %>
+                  </div>
+                <%# end %>
+
+                <h4 class="text-red login-title-top">Forma de Pago</h4>
+                <div class="form-group">
+                    <%= f.select(:payment_method_id, PaymentMethod.where(active: true).collect{|c| [c[:name], c[:id]]}, {}, {:class => 'custom-select'}) %>
+                </div>
+
+                <div class="form-group" id="payment_section" style="display: none;">
+                    <%= f.label :delivery_payment_method, 'Seleccione un medio de pago:', class:"text-grey label-input-login" %>
+                    <%= f.select(:delivery_payment_method, Order::DELIVERY_PAYMENT_METHODS.collect {|c| [c[:name], c[:value]]}, {}, {:class => 'custom-select'}) %>
+                </div>
+                <div class="form-group" id="bank_transfer_section" style="display: none;">
+                    <%= f.label :bank_transfer_reference, 'Ingrese el numero de transferencia: (Opcional)', class:"text-grey label-input-login" %>
+                    <%= f.text_field :bank_transfer_reference, class: "form-control input-form-normal" %>
+                </div>
+                <br />
+            </div>
+
+            <section id="map_section" style="width: 100%; display: block;">
+                <label class="form-check-label text-grey label-input-login mb-2">
+                    En caso de solicitar delivery, por favor indicanos tu ubicación:
+                </label>
+                <div id="gmap"></div>
+            </section>
+
+            <div class="form-group row" style="width: 100%;">
+                <div class="col-12">
+                    <%= f.submit "Continuar", class: "bg-red btn-submit-login brd0 text-white mt-5" %>
+                    <%= link_to 'Seguir comprando', root_path, class: "bg-grey btn-submit-login brd0 text-white" %>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel" style="color: #CE0003;"><b>Atención!</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       La ubicación seleccionada esta fuera del área de cobertura.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-accept-modal" data-bs-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'maps/index', 'data-turbolinks-eval': 'false' %>
+
+
+<script type="text/javascript" data-turbolinks-eval=false>
+
+    initMap();
+
+    var chk = document.getElementById('order_use_different_billing_address');
+
+    chk.addEventListener('change', (event) => {
+        if (event.target.checked) {
+            document.getElementById('billing_address').style.display = "block";
+        } else {
+            document.getElementById('billing_address').style.display = "none";
+        }
+    })
+
+    var selectDeliveryMethod = document.getElementById('order_delivery_method_id')
+
+    selectDeliveryMethod.addEventListener('change', (event) => {
+        if (event.target.value == 2) {
+            document.getElementById('branch_section').style.display = "block";
+            document.getElementById('map_section').style.display = "none";
+        } else {
+            document.getElementById('map_section').style.display = "block";
+            document.getElementById('branch_section').style.display = "none";
+        }
+    })
+
+    var selectPaymentMethod = document.getElementById('order_payment_method_id')
+
+    selectPaymentMethod.addEventListener('change', (event) => {
+
+        if (event.target.value == 2) {
+
+            document.getElementById('payment_section').style.display = "block";
+        } else {
+            document.getElementById('payment_section').style.display = "none";
+        }
+    })
+
+    var selectDeliveryPaymentMethod = document.getElementById('order_delivery_payment_method')
+
+    selectDeliveryPaymentMethod.addEventListener('change', (event) => {
+
+        if (event.target.value == 'transferencia') {
+
+            document.getElementById('bank_transfer_section').style.display = "block";
+        } else {
+            document.getElementById('bank_transfer_section').style.display = "none";
+        }
+    })
+</script>

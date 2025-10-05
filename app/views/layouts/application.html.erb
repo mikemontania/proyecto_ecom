@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-P94QV3J');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Global site tag (gtag.js) - Google Ads: 10789896343 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10789896343"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+      gtag('config', 'AW-10789896343');
+    </script>
+
+    <%= yield :og_fb %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="facebook-domain-verification" content="jankyx06hp6r24lz2pbw7o16pq3brr" />
+
+    <%= favicon_link_tag 'favicon.png', rel: 'icon', type: 'image/png' %>
+    <title><%= yield :page_title %></title>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'app', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'bxslider', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'flickity.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'magnific-popup', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'slidebars', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+    <%= stylesheet_link_tag 'panel/icons/css/flag.min' , media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <%= yield :custom_style %>
+    <%= yield :top_script %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= javascript_include_tag 'https://maps.google.com/maps/api/js?key=AIzaSyAOz7Z6O9l9lZVwL3irvpmPYSSYxeJrpPQ&libraries=places', 'gmaps', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/d8d2b16a91.js" crossorigin="anonymous"></script>
+
+    <script>
+      !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                    n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t,s)}(window, document,'script',
+                            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '438168060767636');
+            fbq('track', 'PageView');
+    </script>
+
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=438168060767636&ev=PageView&noscript=1"/></noscript>
+    <!-- End Facebook Pixel Code -->
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G8VV1ZFVTT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-G8VV1ZFVTT');
+    </script>
+
+    <!-- Google event manager -->
+    <%= yield :event_google_manager %>
+    <!-- End Google event manager -->
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P94QV3J" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <%= yield :body_pixel_code %>
+    <div class="overlay"></div>
+
+    <script>
+      window.fbAsyncInit = function() {
+              FB.init({
+                      appId      : '618764669132019',
+                      cookie     : true,
+                      xfbml      : true,
+                      version    : 'v12.0'
+                    });
+
+              FB.AppEvents.logPageView();
+
+            };
+
+            (function(d, s, id){
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {return;}
+              js = d.createElement(s); js.id = id;
+              js.src = "https://connect.facebook.net/en_US/sdk.js";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+      <div class="full-global-content-wrapper" id="globalcontent">
+        <!-- The very top header -->
+        <%= render "shared/header" %>
+
+        <h3 id="countdownTimer"></h3>
+
+        <div class="full-container">
+          <%= render "shared/alerts" %>
+          <%= yield :slider %>
+          <div class="content-wrapper">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
+      <%= render "shared/footer" %>
+
+      <!-- Modal WhatsApp -->
+      <div class="modal fade" id="whatsappModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="whatsappModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" style="background: #ce0003;">
+              <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: 600; color: white;">Escribinos al WhatsApp</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 0; opacity: 1; line-height: 1.15;">
+                <span style="font-size: 49px; color: white; padding-right: 20px;">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div class="content-contact-info-fixed-wrapper">
+                <p class="p-text-info-modal-contact-solo text-black">
+                  <a href="https://api.whatsapp.com/send?phone=595215889000&text=Hola%2C%20les%20escribo%20desde%20la%20web%20del%20Grupo%20Cavallaro"
+                     class="whatsapp-icon-modal">
+                     <i class="fab fa-whatsapp" style="margin-left: 6px; font-size: 24px;"></i> Casa Central
+                  </a>
+                </p>
+                <p class="p-text-info-modal-contact-solo text-black">
+                  <a href="https://api.whatsapp.com/send?phone=595981627369&text=Hola%2C%20les%20escribo%20desde%20la%20web%20del%20Grupo%20Cavallaro"
+                     class="whatsapp-icon-modal">
+                    <i class="fab fa-whatsapp" style="margin-left: 6px; font-size: 24px;"></i> Showroom Capiatá
+                  </a>
+                </p>
+                <p class="p-text-info-modal-contact-solo text-black">
+                  <a href="https://api.whatsapp.com/send?phone=595986133183&text=Hola%2C%20les%20escribo%20desde%20la%20web%20del%20Grupo%20Cavallaro"
+                     class="whatsapp-icon-modal">
+                    <i class="fab fa-whatsapp" style="margin-left: 6px; font-size: 24px;"></i> Cavallaro express - Julio Correa
+                  </a>
+                </p>
+                <p class="p-text-info-modal-contact-solo text-black">
+                  <a href="https://api.whatsapp.com/send?phone=595981277318&text=Hola%2C%20les%20escribo%20desde%20la%20web%20del%20Grupo%20Cavallaro"
+                     class="whatsapp-icon-modal">
+                    <i class="fab fa-whatsapp" style="margin-left: 6px; font-size: 24px;"></i> Cavallaro express - Mariano R. Alonso
+                  </a>
+                </p>
+
+                <!-- Icono de whatsapp -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% if false %>
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header" style="background: #ce0003;">
+                <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: 600; color: white;">Datos de contacto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 0; opacity: 1; line-height: 1.15;">
+                  <span style="font-size: 49px; color: white; padding-right: 20px;">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <div class="content-contact-info-fixed-wrapper">
+                  <p class="p-text-info-modal-contact-solo text-black">
+                  <a href="https://api.whatsapp.com/send?phone=595215889000&text=Hola%2C%20les%20escribo%20desde%20la%20web%20del%20Grupo%20Cavallaro"
+                     class="whatsapp-icon-modal">
+                    Escribinos al WhatsApp <i class="fab fa-whatsapp" style="margin-left: 6px; font-size: 24px;"></i>
+                  </a>
+                  </p>
+
+                  <p class="p-text-info-modal-contact text-black"><i class="fas fa-map-marker-alt text-red mrb5"></i><a href="https://goo.gl/maps/Z1fT2KWcT8HABc1w7">578603 Ruta 1
+                    Km 18 - Capiatá - Paraguay</a></p>
+
+                  <p class="p-text-info-modal-contact text-black"><i class="fas fa-phone text-red mrb5"></i>
+                  <span class="text-red">Atenci&oacute;n al Cliente</span>
+                  <a href="tel:+595215889000" class="">+59521 588 9000</a>
+                  </p>
+
+                  <p class="p-text-info-modal-contact text-black"><i class="fas fa-envelope text-red mrb5"></i><a href="mailto:cavallaro@cavallaro.com.py">
+                    cavallaro@cavallaro.com.py</a></p>
+                  <!-- Icono de whatsapp -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <% if cookies[:cookie_accepted].nil? %>
+        <div class="modal fade" id="cookieModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="cookieModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="content-contact-info-fixed-wrapper">
+                  <div class="d-flex justify-content-center">
+                    <div class="cookie-card p-3 cookie text-center"><span>Cavallaro S.A.C.e.I usa cookies propias y de terceros para personalizar el contenido, ofrecer mejor perfomance, funciones de redes sociales y análisis del tráfico.<br></span>
+                      <div class="mt-4 text-center">
+                        <%= link_to "Aceptar cookies", cookie_consent_path(cookies: true), data: { dismiss: "modal" }, remote: true, class: "btn btn-accept-cookie btn-sm" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <button id="myBtn" class="btn-go-top-fixed" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+      <button type="button" class="btn-whatsapp-fixed" title="Escribinos al WhatsApp" data-toggle="modal" data-target="#whatsappModal">
+        <i class="fab fa-whatsapp"></i>
+      </button>
+
+      <% if false %>
+        <button type="button" class="btn-contact-fixed" title="Ver información" data-toggle="modal" data-target="#staticBackdrop">
+          <i class="far fa-envelope"></i>
+        </button>
+      <% end %>
+
+      <%= hidden_field_tag 'toastr', @toastr %>
+      <%= javascript_pack_tag 'custom/toaster', 'data-turbolinks-eval': 'false' %>
+
+      <% if @time.present? %>
+         <script data-turbolinks-eval=false>
+           var element = document.getElementById('countdownTimer');
+
+           countdownTimer('<%= j @time %>');
+         </script>
+      <% end %>
+
+      <script data-turbolinks-eval=false>
+
+          document.addEventListener("turbolinks:load", function () {
+          set_slider();
+      })
+
+    document.addEventListener('stimulus-reflex:after', event => {
+      var toastr_message = document.getElementById('toastr').value;
+      if (toastr_message != '') {
+        console.log(toastr_message);
+        show_toastr(toastr_message);
+      }
+
+      set_slider();
+    })
+      </script>
+
+      <%= yield :scripts %>
+      <%= yield :bottom_script %>
+  </body>
+</html>

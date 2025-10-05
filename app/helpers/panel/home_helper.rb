@@ -1,0 +1,2 @@
+module Panel::HomeHelper
+end

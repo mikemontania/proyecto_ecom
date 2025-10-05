@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="./panel">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Iniciar Sesión | Panel de Control - Cavallaro E-Commerce</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cavallaro - Portal eCommerce">
+    <meta name="author" content="Creadores S.A.">
+
+    <!-- Main styles for this application-->
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= stylesheet_link_tag 'panel/style' , media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_link_tag 'panel/chartjs/css/coreui-chartjs' , media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'panel/icons/css/free.min' , media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+</head>
+
+<body class="c-app-login flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-group">
+                    <div class="card p-4">
+                        <div class="card-body">
+                            <h1>Iniciar Sesión</h1>
+                            <%= render "shared/alerts" %>
+                            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend"><span class="input-group-text">
+                                        <svg class="c-icon">
+                                            <use xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-user">
+                                            </use>
+                                        </svg></span></div>
+                                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email" %>
+                            </div>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend"><span class="input-group-text">
+                                        <svg class="c-icon">
+                                            <use
+                                                xlink:href="<%= image_path("panel/icons/svg/free.svg") %>#cil-lock-locked">
+                                            </use>
+                                        </svg></span></div>
+                                <%= f.password_field :password, autocomplete: "current-password", class:"form-control", placeholder:"Password" %>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <%= f.submit "Ingresar", class:"btn btn-danger px-3" %>
+
+                                </div>
+                                <div class="col-6 text-right">
+                                    <% if devise_mapping.rememberable? %>
+                                    <div class="field">
+                                        <%= f.check_box :remember_me, class: "custom-check" %>
+                                        &nbsp;<%= f.label "Recordarme" %>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <br />
+                            <%#= render "panel/admins/shared/links" %>
+                            <% end %>
+
+                        </div>
+                    </div>
+                    <div class="card text-white bg-danger py-5 d-md-down-none" style="width:44%">
+                        <div class="card-body text-center">
+                            <div>
+                                <h2>Grupo Cavallaro</h2>
+                                <h4>Portal E-Commerce</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <%= javascript_pack_tag 'panel/coreui/coreui-bundle-min', 'data-turbolinks-track': 'reload' %>
+    <!--[if IE]><!-->
+    <%= javascript_pack_tag 'panel/coreui/svgxuse-min', 'data-turbolinks-track': 'reload' %>
+    <!--<![endif]-->
+
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<% if 0 != 0 %>
+    <div class="delivery-dates">
+        <% if @day_name == 0 %>
+            <p><i class="fas fa-shipping-fast"></i> <%= @delivery_info.title %> <%= @delivery_date %> de
+            <%= @delivery_info.weekend_start_hour %> a <%= @delivery_info.weekend_end_hour %> Hs.</p>
+        <% else %>
+            <p><i class="fas fa-shipping-fast"></i> <%= @delivery_info.title %> <%= @delivery_date %> de
+            <%= @delivery_info.week_start_hour %> a <%= @delivery_info.week_end_hour %> Hs.</p>
+        <% end %>
+    </div>
+<% end %>
+
+<div class="footer-wrapper bg-red py-1">
+    <div class="inner-footer-wrapper">
+
+        <div class="newsletter-white-wrapper">
+            <h3>Suscribite</h3>
+            <p>Dejanos tus datos y te mantendremos al dia sobre los nuevos productos y promociones que tenemos para
+            ofrecerle</p>
+
+            <%= form_with url: newsletter_create_path, local: true, method: 'post' do %>
+                <div class="form-group">
+                    <input type="text" name="newsletter[name]" class="form-control input-newsletter" placeholder="Nombre y Apellido" required>
+                    <input type="email" name="newsletter[email]" class="form-control input-newsletter" placeholder="Correo Electr&oacute;nico" required>
+                </div>
+                <div class="form-group">
+                    <%= recaptcha_tags :size => "normal" %>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-subscribe-newsletter" value="SUSCRIBIRME">
+                </div>
+            <% end %>
+        </div>
+
+        <div class="menu-footer-wrapper inline-block-vat">
+            <div class="block-menu-footer-wrapper inline-block-vat">
+                <div class="title-block-menu-footer-wrap">
+                    <%= image_tag "icono-zocalo-1.png", class: "inline-block-vat img-left-block-menu-footer" %>
+
+
+                    <p class="inline-block-vat p-title-block-menu-footer text-white">Nosotros</p>
+                </div>
+                <div class="list-block-menu-footer-wrap">
+                    <ul class="ul-list-block-menu">
+                        <li>
+                            <a href="<%= empresa_path %>" title="La Empresa"
+                                                          class="anchor-link-list-block-menu text-white">La Empresa</a>
+                        </li>
+                        <li>
+                            <a href="<%= quienes_somos_path %>" title="Mision, Vision y Valores"
+                                                                class="anchor-link-list-block-menu text-white">Misión, Visión y Valores</a>
+                        </li>
+                        <li>
+                            <a href="<%= export_path %>" title="Exportación"
+                                                         class="anchor-link-list-block-menu text-white">Exportación</a>
+                        </li>
+                        <li>
+                            <a href="<%= historia_path %>" title="Exportación"
+                                                           class="anchor-link-list-block-menu text-white">Nuestra Historia</a>
+                        </li>
+                        <li>
+                            <a href="<%= contacto_path %>" title="Contáctenos"
+                                                           class="anchor-link-list-block-menu text-white">Cont&aacute;ctenos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="block-menu-footer-wrapper inline-block-vat">
+                <div class="title-block-menu-footer-wrap">
+                    <%= image_tag "icono-zocalo-2.png", class: "inline-block-vat img-left-block-menu-footer" %>
+                    <p class="inline-block-vat p-title-block-menu-footer text-white">Locales</p>
+                </div>
+                <div class="list-block-menu-footer-wrap">
+                    <ul class="ul-list-block-menu">
+                        <% @branches.each do |branch| %>
+                            <li>
+                                <a href="<%= branch_path branch  %>" title="<%= branch.name(@lang) %>"
+                                                                     class="anchor-link-list-block-menu text-white"><%= branch.name(@lang) %></a>
+                            </li>
+                        <% end %>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="block-menu-footer-wrapper inline-block-vat">
+                <div class="title-block-menu-footer-wrap">
+                    <%= image_tag "icono-zocalo-3.png", class: "inline-block-vat img-left-block-menu-footer" %>
+                    <p class="inline-block-vat p-title-block-menu-footer text-white">Ayuda</p>
+                </div>
+                <div class="list-block-menu-footer-wrap">
+                    <ul class="ul-list-block-menu">
+                        <li>
+                            <a href="<%= cobertura_path  %>" title="Area de cobertura" data-turbolinks="false"
+                                                                                       class="anchor-link-list-block-menu text-white">Área de cobertura</a>
+                        </li>
+                        <% @pages.each do |page| %>
+                            <li>
+                                <a href="<%= page_path page  %>" title="<%= page.title(@lang) %>"
+                                                                 class="anchor-link-list-block-menu text-white"><%= page.title(@lang) %>
+                                </a>
+                            </li>
+                        <% end %>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-footer-wrapper inline-block-vat">
+            <div class="icons-socialmedia-footer-wrap">
+                <a href="https://www.facebook.com/cavallarosaci" target="_blank" title=""
+                                                                                 class="icon-socialmedia-anchor inline-block-vat">
+                    <%= image_tag "icon_facebook.png" %>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=595215889000&text=Hola%2C%20les%20escribo%20desde%20la%20web%20del%20Grupo%20Cavallaro"
+                   target="_blank" title="" class="icon-socialmedia-anchor inline-block-vat">
+                    <%= image_tag "icon_whatsapp.png" %>
+                </a>
+                <a href="https://www.instagram.com/cavallarosaci/" target="_blank" title=""
+                                                                                   class="icon-socialmedia-anchor inline-block-vat">
+                    <%= image_tag "icon_instagram.png" %>
+                </a>
+            </div>
+            <div class="text-info-wrap">
+                <p class="p-text-info text-white">Tel: <a href="tel:+595215889000" class="phone-anchor">+59521
+                    5889000</a></p>
+                <p class="p-text-info text-white"><a href="https://goo.gl/maps/Z1fT2KWcT8HABc1w7" target="_blank"
+                                                                                                  class="link-email-to">Ruta 1 Km 18 - Capiatá - Paraguay</a></p>
+                <p class="p-text-info text-white">¿Querés ser parte de nuestro equipo?</p>
+                <p class="p-text-info text-white">Envianos tu CV <a href="mailto:seleccion@cavallaro.com.py"
+                                                                    target="_blank" class="link-email-to">seleccion@cavallaro.com.py</a></p>
+                <p class="p-text-info text-white">©2020 Cavallaro S.A.C.e.I.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="developed-by-wrapper">
+        <p>Desarrollado por: </p>
+        <%= link_to "https://www.creadores.com.py", alt: "Creadores S.A - Desarrollo Web y Aplicaciones Móviles", title: "Creadores S.A - Desarrollo Web y Aplicaciones Móviles", target: "_blank" do %>
+            <%= image_tag "logo-creadores.png", alt: "Creadores S.A - Desarrollo Web y Aplicaciones Móviles" %>
+        <% end %>
+    </div>
+</div>

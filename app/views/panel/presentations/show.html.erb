@@ -1,0 +1,31 @@
+<p>
+    <strong>Nombre: <i class="c-icon cif-py"></i></strong>
+    <%= @presentation.name_es %>
+</p>
+
+<p>
+    <strong>Nombre: <i class="c-icon cif-us"></i></strong>
+    <%= @presentation.name_en %>
+</p>
+
+<p>
+    <strong>Nombre: <i class="c-icon cif-br"></i></strong>
+    <%= @presentation.name_br %>
+</p>
+
+<p>
+    <strong>Icono:</strong>
+    <%= @presentation.icon %>
+    </>
+
+<p>
+    <strong>Estado:</strong>
+    <%if @presentation.active %>
+    <span class="badge badge-pill badge-success">Activo</span>
+    <%else%>
+    <span class="badge badge-pill badge-secondary">Inactivo</span>
+    <%end%>
+</p>
+
+<%= link_to 'Editar', edit_panel_presentation_path(@presentation), class: "btn btn-danger m-5" %>
+<%= link_to 'Volver', panel_presentations_path, class: "btn btn-secondary m-5" %>

@@ -1,0 +1,21 @@
+<% content_for :page_title do %>
+  Mis Cupones - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="title-elements-content-wrapper blr-header brd-bottom-title">
+  <h1 class="h2-title-elements-content text-red inline-block-vat">Mis cupones</h1>
+</div>
+
+<div class="orders-wrapper">
+  <div class="order-list-wrapper">
+
+    <% if @coupon_list.present? %>
+      <%= @coupon_list.each do |c| %>
+        <%= c %>
+      <% end %>
+    <% else %>
+      <p>No tiene cupones para canjear.</p>
+    <% end %>
+
+  </div>
+</div>

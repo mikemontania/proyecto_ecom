@@ -1,0 +1,19 @@
+<div id="slider-desktop-container-permanent" class="slider-top-wrapper" data-reflex-permanent>
+    <ul class="bxslider" id='slider-desktop'>
+        <% slider_images.each do |slider| %>
+            <li class="normal-img-slider">
+                <% if slider.link.present? %>
+                    <%= link_to slider.link do %>
+                        <% if slider.image_desktop.attached? %>
+                            <%= image_tag slider.image_desktop %>
+                        <% end %>
+                    <% end %>
+                <% else %>
+                    <% if slider.image_desktop.attached? %>
+                        <%= image_tag slider.image_desktop %>
+                    <% end %>
+                <% end %>
+            </li>
+        <% end %>
+    </ul>
+</div>

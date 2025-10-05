@@ -1,0 +1,92 @@
+<% content_for :og_fb do %>
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<%= @category.name(@lang) %> - Cavallaro S.A.C.e.I." />
+<meta property="og:description" content="Productos de la categoría <%= @category.name(@lang) %>" />
+<% end %>
+
+<% content_for :page_title do %>
+<%= @category.name(@lang) %> - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper" data-turbolinks="false">
+  <div class="block-elements-wrap">
+    <div class="title-elements-content-wrapper bg-red no-border">
+      <% if @category.icon.attached? %>
+      <%= image_tag @category.icon, class: "top-icon-title-element", alt: @category.name(@lang) %>
+      <% end %>
+      <h2 class="h2-title-elements-content text-white inline-block-vat"><%= @category.name(@lang) %></h2>
+    </div>
+    <div class="elements-grid-wrapper">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-primary">
+          <li class="breadcrumb-item"><a href="<%= root_path %>">Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= @category.name(@lang) %></li>
+        </ol>
+      </nav>
+
+      <div class="container mb-4">
+        <div class="row justify-content-md-center">
+          <div class="col-sm-12 col-md-6 col-lg-4 select-filter-wrapper">
+
+            <select id='category-filter' class="form-select form-control-lg" style="width: 100%;"
+              data-reflex='change->CategoryReflex#filter_subcategory' data-category-id='<%= @category.id %>'
+              data-brand-id='<%= @selected_brand.id if @selected_brand.present? %>'>
+              <option value='0' selected>Todas las subcategorías</option>
+              <% @subcategory_list.each do |subcat| %>
+
+              <% if @selected_subcategory && @selected_subcategory.id == subcat.id %>
+              <option value='<%= subcat.id %>' selected> <%= subcat.name(@lang) %></option>
+              <% else %>
+              <option value='<%= subcat.id %>'><%= subcat.name(@lang) %></option>
+              <% end %>
+
+              <% end %>
+            </select>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4 select-filters-wrapper">
+
+            <select id='brand-filter' class="form-select form-control-lg" style="width: 100%;"
+              data-reflex='change->CategoryReflex#filter_brand'
+              data-subcategory-id='<%= @selected_subcategory.id if @selected_subcategory.present? %>'
+              data-category-id='<%= @category.id %>'>
+              <option value='0' selected>Todas las marcas</option>
+              <% @brands.each do |brand| %>
+
+                <% if @selected_brand && @selected_brand.id == brand.id %>
+                <option value='<%= brand.id %>' selected> <%= brand.name %></option>
+                <% else %>
+                <option value='<%= brand.id %>'><%= brand.name %></option>
+                <% end %>
+
+              <% end %>
+            </select>
+
+            <%= javascript_pack_tag 'custom/filters', 'data-turbolinks-eval': 'false' %>
+            <script type="text/javascript" data-turbolinks-eval=false>
+              document.addEventListener('stimulus-reflex:after', event => {
+                set_filter_select();
+              })
+            </script>
+
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <%= image_tag "loader.gif", class: "gif-preloader", id: "preloader" %>
+
+        <div id="contentPreload">
+          <% @product_list.each do |product| %>
+          <%= render "partials/product_grid_item",  product: product,
+            :cart_id => (@shopping_cart.nil? ? 0 : @shopping_cart.id),
+            :selected_brand => (@selected_brand.present? ? @selected_brand.id : 0),
+            :selected_subcategory => (@selected_subcategory.present? ? @selected_subcategory.id : 0),
+            :category_id => (@category.id)  %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

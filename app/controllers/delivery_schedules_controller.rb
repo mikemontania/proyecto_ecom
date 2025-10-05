@@ -1,0 +1,2 @@
+class DeliverySchedulesController < ApplicationController
+end

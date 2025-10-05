@@ -1,0 +1,87 @@
+<% content_for :page_title do %>
+  Mi Carrito - Cavallaro S.A.C.e.I.
+<% end %>
+
+<div class="elements-content-wrapper">
+  <div class="block-elements-wrap">
+    <div class="title-elements-content-wrapper blr-header">
+      <%= image_tag "carrito.png" , class: "top-icon-title-element" %>
+      <h1 class="h2-title-elements-content text-red inline-block-vat">MI CARRITO</h1>
+      <div class="empty-cart-button-wrapper">
+        <%= link_to shopping_cart_clear_path(@shopping_cart.id) , method: "delete",
+          data:{title: 'Confirmación',
+                confirm: "¿Está seguro/a que desea vaciar su carrito?",
+                commit: 'Si, vaciar' , cancel: "Cancelar",
+                disable_with: "Vaciando..." },
+                class: "empty-cart-button" do %>
+                  <i class="far fa-trash-alt"></i>
+                  Vaciar Carrito
+              <% end %>
+      </div>
+      <%= image_tag "barra.png" , class: "bar-top-title-header" %>
+    </div>
+    <div class="elements-grid-wrapper">
+      <div class="inner-content-wrapper">
+        <% if @shopping_cart.no_items? %>
+          <div class="item-cart-wrapper">
+            <div class="desc-prod-cart-wrapper">
+              <div class="text-desc-prod-cart-wrap">
+                <p class="p-normal-text text-grey align-left">No has agregado productos al
+                  carrito.</p>
+              </div>
+            </div>
+
+          </div>
+        <% else %>
+          <% @shopping_cart.cart_items.order(:id).each do |item| %>
+            <%= render "shopping_cart/partials/cart_items" , item: item, shopping_cart: @shopping_cart %>
+          <% end %>
+
+          <div class="col-12 no-gutters mb-5 p-0">
+
+            <div class="row no-gutters resumen-precio">
+              <div class="col-6 col-md-9 normal-resume-text-cart">Sub-total</div>
+              <div class="col-6 col-md-3 normal-resume-text-cart">
+                <%= number_to_currency(@shopping_cart.gross_total_amount, unit: 'GS' , format: '%n %u' , precision: 0, delimiter: '.', separator: ',' ) %>
+              </div>
+            </div>
+
+            <div class="row no-gutters resumen-precio">
+              <div class="col-6 col-md-9 normal-resume-text-cart">Descuento total</div>
+              <div class="col-6 col-md-3 text-right normal-resume-text-cart">
+                <%= number_to_currency(@shopping_cart.discount_total, unit: 'GS', format: '%n %u' , precision: 0, delimiter: '.' , separator: ',' ) %>
+              </div>
+            </div>
+
+            <div class="row no-gutters resumen-precio total">
+              <div class="col-6 col-md-9 total-resume-text-cart">Total a pagar</div>
+              <div class="col-6 col-md-3 text-right total-resume-text-cart" id="totalPrice">
+                <%= number_to_currency(@shopping_cart.net_total_amount, unit: 'GS' , format: '%n %u' , precision: 0, delimiter: '.', separator: ',' ) %>
+              </div>
+            </div>
+          </div>
+
+        <div class="form-group button-cart-wrapper">
+
+          <%= form_with url: order_new_path, local:true, method: 'get' do %>
+            <div class="form-group col-sm-12 col-xl-4" style="margin: 0 auto 20px;">
+              <p style="margin-bottom: 6px;"><b>Ingresá tu cupón de descuento</b></p>
+              <%= text_field_tag :cupon, "", class: 'form-control' %>
+            </div>
+
+            <button type="submit" class="button-submit-shoppingcart" style="margin: 0 auto; display: block;">
+              <div class="button-prod-submit mr-0">
+                <div class="img-submit-prod-wrap bg-red inline-block-vat">
+                  <%= image_tag "carrito-grande-en-blanco.png" , class: "img-icon-submit-prod" , alt: "Finalizar compra" %>
+                </div>
+                <span class="text-submit-button-prod inline-block-vat">PAGAR COMPRA</span>
+              </div>
+            </button>
+          <% end %>
+        </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

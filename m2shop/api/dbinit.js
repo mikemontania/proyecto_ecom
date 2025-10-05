@@ -115,14 +115,17 @@ async function populateDB() {
     // Intentar importar catálogo completo desde data/catalog.json si existe
     const imported = await importCatalogIfPresent();
     if (!imported && categoriesCount === 0) {
-      const catElectronics = await Category.create({ name: 'Electronics', slug: 'electronics', description: 'Electronic devices and gadgets', image_url: 'https://picsum.photos/seed/electronics/800/400', display_order: 1 });
-      const catFashion = await Category.create({ name: 'Fashion', slug: 'fashion', description: 'Clothing and accessories', image_url: 'https://picsum.photos/seed/fashion/800/400', display_order: 2 });
+      // Minimal seed aligned to Rails seeds.rb structure
+      const catCare = await Category.create({ name: 'Cuidado de las Prendas', slug: 'cuidado-de-las-prendas', description: '', display_order: 1 });
+      await Category.create({ name: 'Higiene Personal', slug: 'higiene-personal', description: '', display_order: 2 });
+      await Category.create({ name: 'Limpieza y Desinfeccion del Hogar', slug: 'limpieza-y-desinfeccion-del-hogar', description: '', display_order: 3 });
 
       await Product.bulkCreate([
-        { name: 'Smartphone X', slug: 'smartphone-x', description: '6.5" OLED, 128GB', recommended_uses: 'Uso diario, fotografía, redes sociales', properties: 'Pantalla OLED, 128GB, 5G', price: 699.99, image_url: 'https://picsum.photos/seed/phone/600/600', stock: 50, category_id: catElectronics.id, is_featured: true, is_new: true },
-        { name: 'Wireless Headphones', slug: 'wireless-headphones', description: 'Noise cancelling', recommended_uses: 'Viajes, oficina, gimnasio', properties: 'Bluetooth 5.2, ANC', price: 149.99, image_url: 'https://picsum.photos/seed/headphones/600/600', stock: 120, category_id: catElectronics.id, is_featured: true },
-        { name: 'T-Shirt Basic', slug: 'tshirt-basic', description: 'Cotton, unisex', recommended_uses: 'Diario, casual', properties: '100% algodón, varias tallas', price: 19.99, image_url: 'https://picsum.photos/seed/tshirt/600/600', stock: 200, category_id: catFashion.id, is_new: true }
+        { id: 300000624, name: 'JABON LIQUIDO PARA LAVAR LA ROPA COCO CAVALLARO 1', slug: 'jabon-liquido-coco-cavallaro-1', price: 46000, image_url: 'https://cdn.cavallaro.com.py/productos/300000624.jpg', stock: 100, category_id: catCare.id, is_featured: true },
+        { id: 300000623, name: 'JABON LIQUIDO PARA LAVAR LA ROPA COCO CAVALLARO 2', slug: 'jabon-liquido-coco-cavallaro-2', price: 46000, image_url: 'https://cdn.cavallaro.com.py/productos/300000623.jpg', stock: 100, category_id: catCare.id, is_new: true },
+        { id: 300000231, name: 'JABON PARA LAVAR LA ROPA AGRICULTOR', slug: 'jabon-lavar-ropa-agricultor', price: 71280, image_url: 'https://cdn.cavallaro.com.py/productos/300000231.jpg', stock: 100, category_id: catCare.id },
       ]);
+      await sequelize.query("SELECT setval(pg_get_serial_sequence('products','id'), (SELECT MAX(id) FROM products));");
     }
 
     // Descuentos: intentar importar desde data/discounts.json; si no, seed por defecto

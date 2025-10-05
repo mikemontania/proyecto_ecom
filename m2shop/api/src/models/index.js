@@ -27,6 +27,10 @@ Order.belongsTo(Customer, { foreignKey: { name: 'customer_id', allowNull: true }
 Order.belongsToMany(Product, { through: OrderItem, foreignKey: 'order_id', otherKey: 'product_id' });
 Product.belongsToMany(Order, { through: OrderItem, foreignKey: 'product_id', otherKey: 'order_id' });
 
+// Explicit belongsTo to enable include on items
+OrderItem.belongsTo(Order, { foreignKey: { name: 'order_id', allowNull: false } });
+OrderItem.belongsTo(Product, { foreignKey: { name: 'product_id', allowNull: false } });
+
 module.exports = {
   sequelize,
   Category,

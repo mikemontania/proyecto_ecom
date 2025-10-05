@@ -20,6 +20,11 @@ app.get("/health", (_req, res) => {
 
 // Rutas
  
+// API routes
+app.use("/api/categories", require("./src/routes/category.routes"));
+app.use("/api/discounts", require("./src/routes/discount.routes"));
+app.use("/api/orders", require("./src/routes/order.routes"));
+app.use("/api/auth", require("./src/routes/auth.routes"));
 app.use("/api/products", require("./src/routes/product.routes"));
  
 const dbSetup = async () => {

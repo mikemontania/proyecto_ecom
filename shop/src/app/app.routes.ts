@@ -19,4 +19,8 @@ export const routes: Routes = [
     path: 'producto/:slug',
     loadComponent: () => import('./pages/product-detail/product-detail.component').then(m => m.ProductDetailComponent)
   },
+  {
+    path: 'carrito',
+    loadComponent: () => import('./pages/cart/cart.component').then(m => m.CartComponent)
+  },
 ];

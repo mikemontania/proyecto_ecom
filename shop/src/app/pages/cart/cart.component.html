@@ -1,0 +1,13 @@
+<section class="cart">
+  <div class="container">
+    <h1>Carrito</h1>
+    <div *ngIf="!cart.items?.length">Tu carrito está vacío.</div>
+    <div *ngIf="cart.items?.length">
+      <div class="row" *ngFor="let it of cart.items">
+        <div class="col">{{ it.internal_product_id }}</div>
+        <div class="col">x {{ it.quantity }}</div>
+        <div class="col">{{ it.net_total | number:'1.0-0' }} Gs</div>
+      </div>
+    </div>
+  </div>
+</section>

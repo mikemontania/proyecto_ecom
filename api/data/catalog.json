@@ -1,0 +1,13 @@
+{
+  "defaults": {"product_image_url": "https://picsum.photos/seed/product/600/600"},
+  "categories": [
+    {"name": "Cuidado de las Prendas", "slug": "cuidado-de-las-prendas", "display_order": 1},
+    {"name": "Higiene Personal", "slug": "higiene-personal", "display_order": 2},
+    {"name": "Limpieza y Desinfeccion del Hogar", "slug": "limpieza-y-desinfeccion-del-hogar", "display_order": 3}
+  ],
+  "products": [
+    {"id": 300000624, "name": "JABON LIQUIDO PARA LAVAR LA ROPA COCO CAVALLARO 1", "slug": "jabon-liquido-coco-cavallaro-1", "category_slug": "cuidado-de-las-prendas", "price": 46000},
+    {"id": 300000623, "name": "JABON LIQUIDO PARA LAVAR LA ROPA COCO CAVALLARO 2", "slug": "jabon-liquido-coco-cavallaro-2", "category_slug": "cuidado-de-las-prendas", "price": 46000},
+    {"id": 300000231, "name": "JABON PARA LAVAR LA ROPA AGRICULTOR", "slug": "jabon-lavar-ropa-agricultor", "category_slug": "cuidado-de-las-prendas", "price": 71280}
+  ]
+}

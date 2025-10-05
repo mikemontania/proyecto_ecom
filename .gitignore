@@ -22,8 +22,10 @@ db/schema.rb
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /db/*.sqlite3-*
-.env
-.env.*
+# Keep API env file tracked
+/.env
+/.env.*
+!/api/.env
 
 # Ignore all logfiles and tempfiles.
 /log/*

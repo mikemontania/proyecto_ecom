@@ -34,9 +34,10 @@ async function importCatalogIfPresent() {
   const { Subcategory } = require('./src/models');
   const catToSubcatId = new Map();
   for (const c of cats) {
+    const generalSlug = `general-${c.slug}`;
     const [sub] = await Subcategory.findOrCreate({
-      where: { slug: 'general', category_id: c.id },
-      defaults: { name_es: 'General', slug: 'general', active: true, category_id: c.id },
+      where: { slug: generalSlug },
+      defaults: { name_es: 'General', slug: generalSlug, active: true, category_id: c.id },
     });
     catToSubcatId.set(c.slug, sub.id);
   }

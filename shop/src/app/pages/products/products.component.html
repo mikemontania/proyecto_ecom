@@ -1,0 +1,11 @@
+<section class="products">
+  <div class="container">
+    <h1>Productos</h1>
+    <div class="grid">
+      <a *ngFor="let p of products" [routerLink]="['/producto', p.slug]" class="card">
+        <h3>{{ p.name }}</h3>
+        <p *ngIf="p.description">{{ p.description }}</p>
+      </a>
+    </div>
+  </div>
+</section>

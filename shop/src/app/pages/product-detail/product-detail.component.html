@@ -1,0 +1,17 @@
+<section class="product-detail" *ngIf="product">
+  <div class="container">
+    <h1>{{ product.name }}</h1>
+    <p *ngIf="product.description">{{ product.description }}</p>
+
+    <div class="variants" *ngIf="product.variants?.length">
+      <h3>Variantes</h3>
+      <ul>
+        <li *ngFor="let v of product.variants">
+          <strong>{{ v.internal_code }}</strong>
+          <span> - {{ v.presentation?.name }} {{ v.variety?.name }}</span>
+          <span> - {{ v.price | number:'1.0-0' }} Gs</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

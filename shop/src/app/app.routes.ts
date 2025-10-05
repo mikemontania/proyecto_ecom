@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
 export const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
   {
     path: 'cms/:slug',
     loadComponent: () => import('./pages/cms/page/page.component').then(m => m.CmsPageComponent)
@@ -23,4 +23,5 @@ export const routes: Routes = [
     path: 'carrito',
     loadComponent: () => import('./pages/cart/cart.component').then(m => m.CartComponent)
   },
+  { path: '**', redirectTo: '' },
 ];

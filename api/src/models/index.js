@@ -18,6 +18,8 @@ const defineCartItem = require('./models.cart_item');
 const defineCustomer = require('./models.customer');
 const defineAmountDiscount = require('./models.amount_discount');
 const defineProductDiscount = require('./models.product_discount');
+const definePaymentMethod = require('./models.payment_method');
+const defineDeliveryMethod = require('./models.delivery_method');
 
 // Initialize models
 const Category = defineCategory(sequelize, DataTypes);
@@ -36,6 +38,8 @@ const CartItem = defineCartItem(sequelize, DataTypes);
 const Customer = defineCustomer(sequelize, DataTypes);
 const AmountDiscount = defineAmountDiscount(sequelize, DataTypes);
 const ProductDiscount = defineProductDiscount(sequelize, DataTypes);
+const PaymentMethod = definePaymentMethod(sequelize, DataTypes);
+const DeliveryMethod = defineDeliveryMethod(sequelize, DataTypes);
 
 // Associations (Rails-like)
 Category.hasMany(Subcategory, { foreignKey: { name: 'category_id', allowNull: false }, onDelete: 'RESTRICT' });
@@ -94,4 +98,6 @@ module.exports = {
   Customer,
   AmountDiscount,
   ProductDiscount,
+  PaymentMethod,
+  DeliveryMethod,
 };

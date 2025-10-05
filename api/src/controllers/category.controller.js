@@ -2,8 +2,17 @@ const { Category, Subcategory, InternalProduct, Product, Presentation, Variety, 
 const { Op } = require('sequelize');
 
 async function list(_req, res) {
-  const categories = await Category.findAll({ order: [['name_es', 'ASC']] });
-  res.json(categories);
+  const categories = await Category.findAll({ order: [['display_order', 'ASC'], ['name_es', 'ASC']] });
+  const shaped = categories.map(c => ({
+    id: c.id,
+    name: c.name_es,
+    slug: c.slug,
+    description: c.description,
+    image_url: c.image_url,
+    display_order: c.display_order,
+    active: c.active,
+  }));
+  res.json(shaped);
 }
 
 async function show(req, res) {
@@ -30,7 +39,17 @@ async function show(req, res) {
   const brands = await Brand.findAll({ where: { active: true, id: { [Op.in]: category && (await Product.findAll({ attributes: ['brand_id'], where: { category_id: category.id } })).map(p => p.brand_id) } } });
   const subcategories = await Subcategory.findAll({ where: { category_id: category.id, active: true } });
 
-  res.json({ category, products, brands, subcategories });
+  const shapedCategory = {
+    id: category.id,
+    name: category.name_es,
+    slug: category.slug,
+    description: category.description,
+    image_url: category.image_url,
+    display_order: category.display_order,
+    active: category.active,
+  };
+
+  res.json({ category: shapedCategory, products, brands, subcategories });
 }
 
 module.exports = { list, show };

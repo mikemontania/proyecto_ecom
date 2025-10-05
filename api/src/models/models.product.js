@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     properties_es: { type: DataTypes.TEXT },
     properties_en: { type: DataTypes.TEXT },
     properties_br: { type: DataTypes.TEXT },
+    slug: { type: DataTypes.STRING, unique: true },
     active: { type: DataTypes.BOOLEAN, defaultValue: true },
     featured: { type: DataTypes.BOOLEAN, defaultValue: false },
     category_id: { type: DataTypes.INTEGER, allowNull: false },

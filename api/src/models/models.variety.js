@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     name_br: { type: DataTypes.STRING },
     active: { type: DataTypes.BOOLEAN, defaultValue: true },
     icon: { type: DataTypes.STRING },
+    color: { type: DataTypes.STRING },
   }, {
     tableName: 'varieties',
     timestamps: true,

@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     name_en: { type: DataTypes.STRING },
     name_br: { type: DataTypes.STRING },
     active: { type: DataTypes.BOOLEAN, defaultValue: true },
+    size: { type: DataTypes.STRING },
     icon: { type: DataTypes.STRING },
   }, {
     tableName: 'presentations',

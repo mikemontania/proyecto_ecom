@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../../api/dbconfig');
+const { sequelize } = require('../../dbconfig');
 
 // Define model factories
 const defineCategory = require('./models.category');

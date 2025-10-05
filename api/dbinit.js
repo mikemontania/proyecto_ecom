@@ -17,60 +17,64 @@ async function importCatalogIfPresent() {
       await Category.findOrCreate({
         where: { slug: c.slug },
         defaults: {
-          name: c.name,
+          name_es: c.name_es,
           slug: c.slug,
           description: c.description || null,
           image_url: c.image_url || null,
           display_order: c.display_order || 0,
+          active: c.active ?? true,
         },
       });
     }
   }
 
-  // Map categories by slug
+  // Map categories by slug and ensure a default subcategory per category
   const cats = await Category.findAll();
   const slugToCategoryId = new Map(cats.map(c => [c.slug, c.id]));
+  const { Subcategory } = require('./src/models');
+  const catToSubcatId = new Map();
+  for (const c of cats) {
+    const [sub] = await Subcategory.findOrCreate({
+      where: { slug: 'general', category_id: c.id },
+      defaults: { name_es: 'General', slug: 'general', active: true, category_id: c.id },
+    });
+    catToSubcatId.set(c.slug, sub.id);
+  }
 
-  // Import products; use provided id as SKU (product id)
-  const defaultImage = data.defaults?.product_image_url || null;
+  // Import products; use provided id as primary id and assign default subcategory when missing
   if (Array.isArray(data.products)) {
     for (const p of data.products) {
       const category_id = slugToCategoryId.get(p.category_slug);
       if (!category_id) continue;
+      const subcategory_id = p.subcategory_slug
+        ? (await Subcategory.findOne({ where: { slug: p.subcategory_slug, category_id } }))?.id || catToSubcatId.get(p.category_slug)
+        : catToSubcatId.get(p.category_slug);
       // Upsert by id (SKU)
       const [record] = await Product.findOrCreate({
         where: { id: p.id },
         defaults: {
           id: p.id,
-          name: p.name,
+          name_es: p.name_es || p.name,
           slug: p.slug,
-          description: p.description || null,
-          recommended_uses: p.recommended_uses || null,
-          properties: p.properties || null,
-          price: p.price,
-          iva: p.iva ?? 10,
-          image_url: p.image_url || defaultImage,
-          stock: p.stock ?? 0,
+          description_es: p.description_es || p.description || null,
+          uses_es: p.uses_es || p.recommended_uses || null,
+          properties_es: p.properties_es || p.properties || null,
           category_id,
-          is_featured: !!p.is_featured,
-          is_new: !!p.is_new,
+          subcategory_id,
+          featured: !!p.featured || !!p.is_featured,
         },
       });
       // Optionally update if exists
       if (record && p._update === true) {
         await record.update({
-          name: p.name,
+          name_es: p.name_es || p.name,
           slug: p.slug,
-          description: p.description || null,
-          recommended_uses: p.recommended_uses || null,
-          properties: p.properties || null,
-          price: p.price,
-          iva: p.iva ?? record.iva ?? 10,
-          image_url: p.image_url || defaultImage,
-          stock: p.stock ?? record.stock,
+          description_es: p.description_es || p.description || null,
+          uses_es: p.uses_es || p.recommended_uses || null,
+          properties_es: p.properties_es || p.properties || null,
           category_id,
-          is_featured: !!p.is_featured,
-          is_new: !!p.is_new,
+          subcategory_id,
+          featured: !!p.featured || !!p.is_featured,
         });
       }
     }

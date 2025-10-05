@@ -24,6 +24,15 @@ async function list(req, res) {
       { name_es: { [Op.iLike]: `%${search}%` } },
       { name_en: { [Op.iLike]: `%${search}%` } },
       { name_br: { [Op.iLike]: `%${search}%` } },
+      { description_es: { [Op.iLike]: `%${search}%` } },
+      { description_en: { [Op.iLike]: `%${search}%` } },
+      { description_br: { [Op.iLike]: `%${search}%` } },
+      { uses_es: { [Op.iLike]: `%${search}%` } },
+      { uses_en: { [Op.iLike]: `%${search}%` } },
+      { uses_br: { [Op.iLike]: `%${search}%` } },
+      { properties_es: { [Op.iLike]: `%${search}%` } },
+      { properties_en: { [Op.iLike]: `%${search}%` } },
+      { properties_br: { [Op.iLike]: `%${search}%` } },
     ];
   }
 

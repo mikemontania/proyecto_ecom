@@ -1,4 +1,4 @@
-const { Category, Product, Discount } = require('./src/models');
+const { Category, Product, Discount, Page } = require('./src/models');
 const { sequelize } = require('./dbconfig');
 const fs = require('fs');
 const path = require('path');
@@ -126,6 +126,12 @@ async function populateDB() {
         { id: 300000231, name: 'JABON PARA LAVAR LA ROPA AGRICULTOR', slug: 'jabon-lavar-ropa-agricultor', price: 71280, image_url: 'https://cdn.cavallaro.com.py/productos/300000231.jpg', stock: 100, category_id: catCare.id },
       ]);
       await sequelize.query("SELECT setval(pg_get_serial_sequence('products','id'), (SELECT MAX(id) FROM products));");
+
+      // Minimal CMS pages to test Angular
+      await Page.bulkCreate([
+        { title_es: 'Empresa', slug: 'empresa', content_es: '<p>Sobre la empresa Cavallaro.</p>', order: 1, active: true },
+        { title_es: 'Contacto', slug: 'contacto', content_es: '<p>Formulario de contacto.</p>', order: 2, active: true },
+      ]);
     }
 
     // Descuentos: intentar importar desde data/discounts.json; si no, seed por defecto

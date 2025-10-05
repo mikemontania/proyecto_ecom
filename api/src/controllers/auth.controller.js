@@ -29,7 +29,8 @@ async function login(req, res) {
   res.json({ token, customer });
 }
 
-async function me(_req, res) {
+async function me(req, res) {
+  // Simple echo - in real setup, decode JWT
   res.json({ ok: true });
 }
 

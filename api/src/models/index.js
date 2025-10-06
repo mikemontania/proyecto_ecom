@@ -16,8 +16,7 @@ const definePage = require('./models.page');
 const defineShoppingCart = require('./models.shopping_cart');
 const defineCartItem = require('./models.cart_item');
 const defineCustomer = require('./models.customer');
-const defineAmountDiscount = require('./models.amount_discount');
-const defineProductDiscount = require('./models.product_discount');
+const defineDiscount = require('./models.discount');
 const definePaymentMethod = require('./models.payment_method');
 const defineDeliveryMethod = require('./models.delivery_method');
 
@@ -36,8 +35,7 @@ const Page = definePage(sequelize, DataTypes);
 const ShoppingCart = defineShoppingCart(sequelize, DataTypes);
 const CartItem = defineCartItem(sequelize, DataTypes);
 const Customer = defineCustomer(sequelize, DataTypes);
-const AmountDiscount = defineAmountDiscount(sequelize, DataTypes);
-const ProductDiscount = defineProductDiscount(sequelize, DataTypes);
+const Discount = defineDiscount(sequelize, DataTypes);
 const PaymentMethod = definePaymentMethod(sequelize, DataTypes);
 const DeliveryMethod = defineDeliveryMethod(sequelize, DataTypes);
 
@@ -96,8 +94,7 @@ module.exports = {
   ShoppingCart,
   CartItem,
   Customer,
-  AmountDiscount,
-  ProductDiscount,
+  Discount,
   PaymentMethod,
   DeliveryMethod,
 };

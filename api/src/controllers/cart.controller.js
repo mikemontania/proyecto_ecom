@@ -1,4 +1,4 @@
-const { ShoppingCart, CartItem, InternalProduct, ProductDiscount, AmountDiscount } = require('../models');
+const { ShoppingCart, CartItem, InternalProduct, Discount } = require('../models');
 const { Op } = require('sequelize');
 
 async function ensureCart(req) {
@@ -60,12 +60,13 @@ async function recalcCart(cartId) {
   for (const it of items) {
     const ip = it.InternalProduct;
     // Product promo?
-    const pd = await ProductDiscount.findOne({
+    const pd = await Discount.findOne({
       where: {
-        internal_product_id: ip.id,
-        min_quantity: { [Op.lte]: it.quantity },
-        max_quantity: { [Op.gte]: it.quantity },
-        begin_date: { [Op.lte]: dateStr },
+        type: 'PRODUCT',
+        product_id: ip.id,
+        qty_from: { [Op.lte]: it.quantity },
+        qty_to: { [Op.gte]: it.quantity },
+        start_date: { [Op.lte]: dateStr },
         end_date: { [Op.gte]: dateStr },
       }
     });
@@ -83,7 +84,7 @@ async function recalcCart(cartId) {
   }
 
   if (eligibleSum > 0) {
-    const ad = await AmountDiscount.findOne({ where: { min_amount: { [Op.lte]: eligibleSum }, max_amount: { [Op.gte]: eligibleSum } } });
+    const ad = await Discount.findOne({ where: { type: 'AMOUNT', qty_from: { [Op.lte]: eligibleSum }, qty_to: { [Op.gte]: eligibleSum } } });
     if (ad) {
       const percent = Number(ad.discount_rate);
       const totalDiscount = Math.round(eligibleSum * (percent / 100));

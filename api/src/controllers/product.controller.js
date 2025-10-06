@@ -1,4 +1,4 @@
-const { Product, Category, Subcategory, Brand, InternalProduct, Presentation, Variety, ProductDiscount } = require('../models');
+const { Product, Category, Subcategory, Brand, InternalProduct, Presentation, Variety, Discount } = require('../models');
 const { Op } = require('sequelize');
 
 function applyLang(record, lang) {

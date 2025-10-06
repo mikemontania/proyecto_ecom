@@ -8,6 +8,13 @@ const DetallePedido = sequelize.define('DetallePedido', {
   id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true, allowNull: false },
   orderId: { type: DataTypes.BIGINT, allowNull: false }, // order_id
   internalProductId: { type: DataTypes.BIGINT, allowNull: false }, // internal_product_id
+  quantity: { type: DataTypes.DECIMAL }, // quantity
+  unitPrice: { type: DataTypes.DECIMAL }, // unit_price
+  grossTotal: { type: DataTypes.DECIMAL }, // gross_total
+  discountRate: { type: DataTypes.DECIMAL }, // discount_rate
+  discountAmount: { type: DataTypes.DECIMAL }, // discount_amount
+  netTotal: { type: DataTypes.DECIMAL }, // net_total
+  discountType: { type: DataTypes.STRING }, // discount_type
 }, {
   tableName: 'order_details',
   timestamps: true,

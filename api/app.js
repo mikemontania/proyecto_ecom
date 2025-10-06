@@ -28,6 +28,10 @@ app.use("/api/orders", require("./src/routes/order.routes"));
 app.use("/api/cart", require("./src/routes/cart.routes"));
 app.use("/api/auth", require("./src/routes/auth.routes"));
 app.use("/api/products", require("./src/routes/product.routes"));
+// 404 and errors
+const { notFound, errorHandler } = require('./src/middlewares/error.middleware');
+app.use(notFound);
+app.use(errorHandler);
  
 const dbSetup = async () => {
   await dbConnection();

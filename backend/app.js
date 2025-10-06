@@ -11,6 +11,11 @@ app.use(express.json());
 
 app.get('/health', (_req, res) => res.json({ ok: true, service: 'backend' }));
 
+// middlewares de error
+const { notFound, errorHandler } = require('./src/middlewares/error.middleware');
+app.use(notFound);
+app.use(errorHandler);
+
 (async () => {
   try {
     await sequelize.authenticate();

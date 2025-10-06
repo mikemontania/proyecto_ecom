@@ -1,0 +1,20 @@
+<section class="home">
+  <div class="container">
+    <h1>Inicio</h1>
+
+    <div class="search">
+      <input [(ngModel)]="search" placeholder="Buscar productos..." />
+      <a [routerLink]="['/productos']" [queryParams]="{ search }" class="btn">Buscar</a>
+    </div>
+
+    <h2>Categorías</h2>
+    <div class="cats">
+      <a *ngFor="let c of categories" [routerLink]="['/categoria', c.slug]" class="cat">{{ c.name_es || c.name }}</a>
+    </div>
+
+    <h2>Destacados</h2>
+    <div class="grid">
+      <a *ngFor="let p of featured" [routerLink]="['/producto', p.slug]" class="card">{{ p.name }}</a>
+    </div>
+  </div>
+</section>

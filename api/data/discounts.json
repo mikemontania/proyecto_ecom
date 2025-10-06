@@ -1,0 +1,4 @@
+[
+  {"type": "AMOUNT", "qty_from": 20000, "qty_to": 65000, "value": 5, "start_date": "2025-04-01", "end_date": "9999-01-01"},
+  {"type": "PRODUCT", "product_id": 300000231, "value": 20, "start_date": "2025-04-02", "end_date": "9999-01-02"}
+]
